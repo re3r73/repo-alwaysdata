@@ -80,6 +80,9 @@ Grâce au fichier **CICD.yml** dans `.github/workflows/`, chaque modification de
 
 2. À chaque commit, GitHub exécutera automatiquement le script pour mettre à jour votre hébergement.
 
+### Travail demandé :
+✅ Configurez vos secrets GitHub pour permettre l’automatisation des déploiements.
+
 ### Notions acquises :
 - Utilisation des GitHub Actions pour l’automatisation
 - Sécurisation des identifiants grâce aux Secrets GitHub
@@ -98,55 +101,3 @@ Remplacez la ligne du titre par :
 ```html
 <h1>Ceci est mon Site Internet by Jérémie</h1>
 
-Effectuez un commit pour publier les changements 🚀
-
-### Travail demandé :
-✅ Modifiez et validez votre page d’accueil pour voir les changements en ligne.
-
-### Notions acquises :
-- Modification de fichiers directement depuis GitHub
-- Déploiement automatique via GitHub Actions
-
----
-
-## Séquence 5 : Bonus - Ajouter une application Python sur Alwaysdata 🐍
-
-**Objectif :** Mettre en ligne une application Python sur Alwaysdata  
-**Difficulté :** Moyenne (~15 minutes)
-
-Alwaysdata permet non seulement d’héberger des sites web statiques ou PHP, mais aussi des applications Python grâce à ce que l’on appelle le protocole WSGI.
-
-Cette séquence vous permettra de créer un petit script Python de test, et de l’exécuter en ligne depuis votre hébergement Alwaysdata.
-
-### Procédure :
-
-1° - Créez un fichier Python dans votre répertoire `www/`  
-Nommez-le par exemple `sample.py`.  
-Copiez le code suivant dans ce fichier :
-
-```python
-def application(environ, start_response):
-    status = '200 OK'
-    headers = [('Content-type', 'text/html; charset=utf-8')]
-    start_response(status, headers)
-
-    response = """
-    <html>
-        <head><title>Exemple Python sur Alwaysdata</title></head>
-        <body style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 40px;'>
-            <h1>Bonjour depuis un script Python sur Alwaysdata 🎉</h1>
-            <p>Votre application Python fonctionne correctement.</p>
-            <h2>Variables d'environnement :</h2>
-            <ul>
-    """
-
-    for key, value in environ.items():
-        response += f"<li><strong>{key}</strong>: {value}</li>"
-
-    response += """
-            </ul>
-        </body>
-    </html>
-    """
-
-    return [response.encode('utf-8')]
