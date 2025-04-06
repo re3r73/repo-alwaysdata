@@ -11,6 +11,7 @@ Vous allez :
 - Découvrir les Actions et les Secrets GitHub
 - Automatiser le déploiement de votre site via GitHub Actions
 - Et même faire tourner une application Python sur Alwaysdata 🎉
+- Bonus : Faire tourner une application Node.js 🚀
 
 Large programme, mais tout à fait accessible ! Pas besoin de prérequis techniques, il suffit d’un peu d’observation et de rigueur.
 
@@ -124,7 +125,8 @@ Alwaysdata permet d’exécuter des applications Python facilement sur votre hé
 1. **Créez un fichier Python dans votre repository**, par exemple `app.py` avec le contenu suivant :
 
 ```python
-print("Hello depuis Alwaysdata 🚀")
+print("Content-Type: text/html\n")
+print("<h1>Hello depuis Alwaysdata 🚀</h1>")
 ```
 
 2. **Configurez Alwaysdata pour exécuter votre application Python :**
@@ -137,7 +139,7 @@ print("Hello depuis Alwaysdata 🚀")
      - **Type** : "Application personnalisée (Python)"
    - Enregistrez
 
-3. (Optionnel) Si besoin, vérifiez les **logs** dans la section **Journaux > Sites** pour débugger.
+3. (Optionnel) Vérifiez les **logs** dans la section **Journaux > Sites** pour déboguer.
 
 ### Travail demandé :
 ✅ Créez votre fichier Python, configurez Alwaysdata pour exécuter votre script, et **postez l’URL publique de votre application dans la discussion**.
@@ -146,3 +148,57 @@ print("Hello depuis Alwaysdata 🚀")
 - Exécution d’une application Python sur un serveur web
 - Paramétrage d’application personnalisée sur Alwaysdata
 - Lecture des logs pour le débogage
+
+---
+
+## Séquence 6 : Exécuter une application Node.js sur Alwaysdata
+
+**Objectif :** Faire tourner un serveur Node.js sur votre hébergement Alwaysdata  
+**Difficulté :** Moyenne (~15 minutes)
+
+Alwaysdata permet d’exécuter des applications Node.js facilement sur votre hébergement.
+
+### Étapes :
+
+1. **Créez un fichier `app.js` dans le dossier `node/` dans votre repository** avec le contenu suivant :
+
+```javascript
+const http = require('http');
+
+const hostname = '::'; // Obligatoire pour Alwaysdata
+const port = process.env.PORT; // Alwaysdata injecte le port automatiquement
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end('<h1>Hello depuis Alwaysdata avec Node.js 🟢</h1>');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`🚀 Server running at http://[${hostname}]:${port}/`);
+});
+```
+
+2. **Configurez Alwaysdata pour exécuter votre application Node.js :**
+   - Connectez-vous à votre interface Alwaysdata
+   - Allez dans **Sites > Ajouter un site**
+   - Choisissez **Application personnalisée**
+   - Remplissez les champs :
+     - **Commande** : `/usr/bin/node node/app.js`
+     - **Répertoire de travail** : `/home/jeremiepoujol/www/`
+     - **Adresse du site** : `/node`
+   - Enregistrez
+
+3. **Redémarrez manuellement votre application Node.js** via l'interface Alwaysdata après avoir déployé ou mis à jour votre code.
+
+4. Vérifiez les **logs** dans la section **Journaux > Sites** pour voir le message de démarrage ou corriger d’éventuelles erreurs.
+
+### Travail demandé :
+✅ Créez votre fichier Node.js, configurez Alwaysdata, redémarrez l’application, et **postez l’URL publique de votre application dans la discussion**.
+
+### Notions acquises :
+- Exécution d’une application Node.js sur un serveur web
+- Utilisation d'Alwaysdata pour des applications dynamiques
+- Importance du redémarrage manuel après déploiement
+- Lecture des logs pour le débogage
+
+---
