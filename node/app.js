@@ -2,8 +2,8 @@
 
 const http = require('http');
 
-const hostname = '::'; // Obligatoire pour Alwaysdata
-const port = process.env.PORT; // Alwaysdata injecte PORT
+const hostname = '::'; // ✅ Obligatoire pour Alwaysdata
+const port = process.env.PORT; // ✅ Pas de fallback, Alwaysdata injecte le bon port
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
