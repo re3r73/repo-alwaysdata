@@ -1,3 +1,4 @@
+
 # Atelier Alwaysdata + GitHub Actions 🚀
 
 ## Installation de votre environnement de travail
@@ -100,4 +101,48 @@ Remplacez la ligne du titre par :
 
 ```html
 <h1>Ceci est mon Site Internet by Jérémie</h1>
+```
 
+### Travail demandé :
+✅ Modifiez votre page d’accueil et **postez l’URL de votre site personnalisé dans la discussion publique**.
+
+### Notions acquises :
+- Modification d’un fichier HTML
+- Personnalisation de la page d’accueil
+
+---
+
+## Séquence 5 : Exécuter une application Python sur Alwaysdata
+
+**Objectif :** Faire tourner un script Python sur votre hébergement Alwaysdata  
+**Difficulté :** Moyenne (~15 minutes)
+
+Alwaysdata permet d’exécuter des applications Python facilement sur votre hébergement.
+
+### Étapes :
+
+1. **Créez un fichier Python dans votre repository**, par exemple `app.py` avec le contenu suivant :
+
+```python
+print("Hello depuis Alwaysdata 🚀")
+```
+
+2. **Configurez Alwaysdata pour exécuter votre application Python :**
+   - Connectez-vous à votre interface Alwaysdata
+   - Allez dans **Sites > Ajouter un site**
+   - Choisissez **Application personnalisée**
+   - Remplissez les champs :
+     - **Chemin** : `/www/app.py`
+     - **Commande** : `/usr/bin/python3 %(path)s`
+     - **Type** : "Application personnalisée (Python)"
+   - Enregistrez
+
+3. (Optionnel) Si besoin, vérifiez les **logs** dans la section **Journaux > Sites** pour débugger.
+
+### Travail demandé :
+✅ Créez votre fichier Python, configurez Alwaysdata pour exécuter votre script, et **postez l’URL publique de votre application dans la discussion**.
+
+### Notions acquises :
+- Exécution d’une application Python sur un serveur web
+- Paramétrage d’application personnalisée sur Alwaysdata
+- Lecture des logs pour le débogage
