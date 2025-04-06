@@ -98,18 +98,27 @@ Remplacez la ligne du titre par :
 ```html
 <h1>Ceci est mon Site Internet by Jérémie</h1>
 
----------------------------------------------------------------------------------------------
-Séquence 5 : Bonus - Ajouter une application Python sur Alwaysdata
----------------------------------------------------------------------------------------------
-Objectif : Mettre en ligne une application Python sur Alwaysdata
-Difficulté : Moyenne (~15 minutes)
----------------------------------------------------------------------------------------------
+Effectuez un commit pour publier les changements 🚀
+
+### Travail demandé :
+✅ Modifiez et validez votre page d’accueil pour voir les changements en ligne.
+
+### Notions acquises :
+- Modification de fichiers directement depuis GitHub
+- Déploiement automatique via GitHub Actions
+
+---
+
+## Séquence 5 : Bonus - Ajouter une application Python sur Alwaysdata 🐍
+
+**Objectif :** Mettre en ligne une application Python sur Alwaysdata  
+**Difficulté :** Moyenne (~15 minutes)
 
 Alwaysdata permet non seulement d’héberger des sites web statiques ou PHP, mais aussi des applications Python grâce à ce que l’on appelle le protocole WSGI.
 
 Cette séquence vous permettra de créer un petit script Python de test, et de l’exécuter en ligne depuis votre hébergement Alwaysdata.
 
-**Procédure :**
+### Procédure :
 
 1° - Créez un fichier Python dans votre répertoire `www/`  
 Nommez-le par exemple `sample.py`.  
