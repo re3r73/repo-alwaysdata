@@ -2,8 +2,8 @@
 
 const http = require('http');
 
-const hostname = '0.0.0.0';
-const port = process.env.PORT || 3000;
+const hostname = '::'; // Obligatoire pour Alwaysdata
+const port = process.env.PORT; // Alwaysdata injecte PORT
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -61,5 +61,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, hostname, () => {
-  console.log(`🚀 Server running at http://${hostname}:${port}/`);
+  console.log(`🚀 Server running at http://[${hostname}]:${port}/`);
 });
