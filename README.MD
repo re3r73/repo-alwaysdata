@@ -11,9 +11,10 @@ Vous allez apprendre à :
 - Automatiser les déploiements avec GitHub Actions
 - Exécuter plusieurs types d’applications sur Alwaysdata :
   - Une page HTML personnalisée
+  - Une application PHP dans le dossier `/php/`
   - Une application Python dans le dossier `/python/`
   - Une application Node.js dans le dossier `/node/`
-  - Et d’autres langages si vous le souhaitez (PHP, Ruby, Java...)
+  - Et d’autres langages si vous le souhaitez (Ruby, Java...)
 
 ## Structure du repository
 
@@ -23,7 +24,8 @@ Votre repository est organisé par langages pour plus de clarté :
 www/
 ├── index.html          # Page d'accueil du projet
 ├── sample.html         # Exemple de page HTML
-├── sample.php          # Exemple de page PHP
+├── php/
+│   └── index.php       # Application PHP
 ├── node/
 │   └── app.js          # Application Node.js
 └── python/
@@ -38,7 +40,7 @@ Chaque dossier est associé à une application personnalisée Alwaysdata.
 - Avoir un compte Alwaysdata
 - Avoir forké ce repository sur votre propre GitHub
 
-## Etapes clés de l’atelier
+## Étapes clés de l’atelier
 
 ### 1. GitHub
 
@@ -65,14 +67,29 @@ Chaque dossier est associé à une application personnalisée Alwaysdata.
 
 ---
 
-### 4. Application Python
+### 4. Application PHP
+
+✅ Placez votre fichier dans `/php/index.php`  
+✅ Configurez Alwaysdata :
+
+- **Type de site :** PHP natif
+- **Répertoire racine :** `/home/UTILISATEUR/www/php/`
+- **Adresse du site :** `/php/`
+
+✅ Accédez à votre application PHP à l’adresse publique correspondante.
+
+> Postez l’URL publique de votre application PHP dans la discussion.
+
+---
+
+### 5. Application Python
 
 ✅ Placez votre fichier dans `/python/app.py`  
 ✅ Configurez Alwaysdata :
 
 - **Commande :** `/usr/bin/python3 python/app.py`
 - **Répertoire de travail :** `/home/UTILISATEUR/www/`
-- **Adresse du site :** `/python`
+- **Adresse du site :** `/python/`
 
 ✅ Redémarrez le site Python après déploiement.
 
@@ -80,14 +97,14 @@ Chaque dossier est associé à une application personnalisée Alwaysdata.
 
 ---
 
-### 5. Application Node.js
+### 6. Application Node.js
 
 ✅ Placez votre fichier dans `/node/app.js`  
 ✅ Configurez Alwaysdata :
 
 - **Commande :** `/usr/bin/node node/app.js`
 - **Répertoire de travail :** `/home/UTILISATEUR/www/`
-- **Adresse du site :** `/node`
+- **Adresse du site :** `/node/`
 
 ✅ Redémarrez le site Node.js après déploiement.
 
@@ -111,9 +128,9 @@ Vous pourrez accéder aux différentes démos via la page d’accueil :
 ## Prolongements possibles
 
 🎯 Vous pouvez aller plus loin :
-- Ajouter PHP dans son propre dossier `/php/`
-- Tester Ruby ou Java
+- Tester Ruby ou Java dans leur propre dossier
 - Installer des packages Python ou Node.js avec `pip install --user` ou `npm install`
+- Ajouter des routes supplémentaires dans vos applications Python ou Node.js
 
 ---
 
