@@ -34,87 +34,90 @@ www/
 
 Chaque dossier est associé à une application personnalisée Alwaysdata.
 
-## Prérequis
+---
 
-- Avoir un compte GitHub
-- Avoir un compte Alwaysdata
-- Avoir forké ce repository sur votre propre GitHub
+## Étape 1 : Créer votre compte GitHub
 
-## Étapes clés de l’atelier
+1. Rendez-vous sur [https://github.com/](https://github.com/)
+2. Créez un compte avec une adresse e-mail valide (évitez les e-mails temporaires).
+3. Confirmez votre adresse e-mail.
 
-### 1. GitHub
-
-✅ Créez votre compte GitHub  
-✅ Forkez ce repository
-
-> Postez l’URL de votre repository dans la discussion publique.
+> Tutoriel vidéo recommandé : [Créer un compte GitHub](https://docs.github.com/fr/get-started/onboarding/getting-started-with-your-github-account)
 
 ---
 
-### 2. Alwaysdata
+## Étape 2 : Forker le repository de base
 
-✅ Créez votre compte Alwaysdata  
-✅ Activez l’accès SSH
+1. Connectez-vous à votre compte GitHub.
+2. Rendez-vous sur le repository suivant :  
+   [https://github.com/jeremiepoujol/repo-alwaysdata.git](https://github.com/jeremiepoujol/repo-alwaysdata.git)
+3. Cliquez sur le bouton **Fork** en haut à droite pour créer une copie de ce projet dans votre propre compte GitHub.
 
-> Postez l’URL de votre site principal dans la discussion publique.
-
----
-
-### 3. Automatisation du déploiement
-
-✅ Créez vos **secrets GitHub** (`alwaysdata_username` et `alwaysdata_password`)  
-✅ GitHub Actions mettra à jour automatiquement votre hébergement à chaque push.
+> Tutoriel vidéo recommandé : [Forker un projet sur GitHub](https://youtu.be/p33-7XQ29zQ)
 
 ---
 
-### 4. Application PHP
+## Étape 3 : Créer votre compte Alwaysdata
 
-✅ Placez votre fichier dans `/php/index.php`  
-✅ Configurez Alwaysdata :
+1. Rendez-vous sur [https://www.alwaysdata.com/fr/](https://www.alwaysdata.com/fr/)
+2. Créez un compte gratuit.
+3. Activez l'accès SSH :
+   - Connectez-vous à l’interface d'administration Alwaysdata.
+   - Allez dans **SSH (Accès distant)**.
+   - Modifiez votre utilisateur et cochez **Activer la connexion par mot de passe**.
 
-- **Type de site :** PHP natif
-- **Répertoire racine :** `/home/UTILISATEUR/www/php/`
-- **Adresse du site :** `/php/`
-
-✅ Accédez à votre application PHP à l’adresse publique correspondante.
-
-> Postez l’URL publique de votre application PHP dans la discussion.
+> Tutoriel vidéo recommandé : [Créer un compte Alwaysdata](https://youtu.be/6jJiqv_ZCHg)
 
 ---
 
-### 5. Application Python
+## Étape 4 : Configurer l’automatisation avec GitHub Actions
 
-✅ Placez votre fichier dans `/python/app.py`  
-✅ Configurez Alwaysdata :
+1. Dans votre repository forké, allez dans **Settings > Secrets and variables > Actions**.
+2. Créez deux secrets :
+   - `alwaysdata_username` : votre identifiant Alwaysdata (login SSH).
+   - `alwaysdata_password` : votre mot de passe SSH Alwaysdata.
 
-- **Commande :** `/usr/bin/python3 python/app.py`
-- **Répertoire de travail :** `/home/UTILISATEUR/www/`
-- **Adresse du site :** `/python/`
+> Tutoriel vidéo recommandé : [Créer des secrets GitHub](https://youtu.be/Rv5X5-qbvqA)
 
-✅ Redémarrez le site Python après déploiement.
-
-> Postez l’URL publique de votre application Python dans la discussion.
+3. À chaque commit, GitHub exécutera automatiquement le script pour mettre à jour votre hébergement sur Alwaysdata.
 
 ---
 
-### 6. Application Node.js
+## Étape 5 : Ajouter et configurer les applications
 
-✅ Placez votre fichier dans `/node/app.js`  
-✅ Configurez Alwaysdata :
+### 1. Application PHP
 
-- **Commande :** `/usr/bin/node node/app.js`
-- **Répertoire de travail :** `/home/UTILISATEUR/www/`
-- **Adresse du site :** `/node/`
+- Créez le fichier `/php/index.php`
+- Sur Alwaysdata, ajoutez un nouveau site :
+  - **Type de site :** PHP natif
+  - **Répertoire racine :** `/home/UTILISATEUR/www/php/`
+  - **Adresse du site :** `/php/`
 
-✅ Redémarrez le site Node.js après déploiement.
+### 2. Application Python
 
-> Postez l’URL publique de votre application Node.js dans la discussion.
+- Créez le fichier `/python/app.py`
+- Sur Alwaysdata, ajoutez un nouveau site :
+  - **Type de site :** Application personnalisée
+  - **Commande :** `/usr/bin/python3 python/app.py`
+  - **Répertoire de travail :** `/home/UTILISATEUR/www/`
+  - **Adresse du site :** `/python/`
+- N’oubliez pas de **redémarrer** l’application après chaque modification de fichier.
+
+### 3. Application Node.js
+
+- Créez le fichier `/node/app.js`
+- Sur Alwaysdata, ajoutez un nouveau site :
+  - **Type de site :** Application personnalisée
+  - **Commande :** `/usr/bin/node node/app.js`
+  - **Répertoire de travail :** `/home/UTILISATEUR/www/`
+  - **Adresse du site :** `/node/`
+- N’oubliez pas de **redémarrer** l’application après chaque modification de fichier.
 
 ---
 
 ## Navigation finale
 
-Vous pourrez accéder aux différentes démos via la page d’accueil :
+Grâce à la page `index.html`, vous pourrez accéder facilement aux différentes démonstrations :
 
 - 🌐 Exemple de page HTML
 - 🐘 Exemple de page PHP
@@ -131,12 +134,13 @@ Vous pourrez accéder aux différentes démos via la page d’accueil :
 - Tester Ruby ou Java dans leur propre dossier
 - Installer des packages Python ou Node.js avec `pip install --user` ou `npm install`
 - Ajouter des routes supplémentaires dans vos applications Python ou Node.js
+- Explorer la personnalisation d’Alwaysdata (logs, SSL, variables d’environnement…)
 
 ---
 
 ## Support
 
-Pour toute question, n’hésitez pas à utiliser le canal de discussion publique de l’atelier. Bon courage et amusez-vous bien ! 🎉
+Pour toute question, référez-vous au support d'Alwaysdata, à la documentation GitHub ou contactez votre formateur.
 
 ---
 
