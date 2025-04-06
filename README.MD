@@ -21,7 +21,7 @@ Si besoin, une vidéo pour vous aider à créer votre propre compte GitHUB : [Cr
 A noter que **si vous possédez déjà un compte GitHUB, vous pouvez le conserver pour réaliser cet atelier**. Pas besion d'en créer un nouveau.  
 Remarque importante : **Lors de votre inscription, utilisez une adresse mail valide. GitHUB n'accepte pas les adresses mails temporaires**  
 
-2° - Faites un Fork du Repository suivant : [https://github.com/OpenRSI/NFA040_Seance1.git](https://github.com/OpenRSI/NFA040_Seance1.git)  
+2° - Faites un Fork du Repository suivant : [https://github.com/jeremiepoujol/repo-alwaysdata.git](https://github.com/jeremiepoujol/repo-alwaysdata.git)  
 Voici une vidéo d'accompagnement pour vous aider dans les "Forks" : [Forker ce projet](https://youtu.be/p33-7XQ29zQ)    
   
 **Travail demandé :** Créé votre compte GitHUB, faites le fork de ce projet et **copier l'URL de votre Repository GitHUB dans la discussion public**.
@@ -84,7 +84,7 @@ Votre solution est à présent opérationnelle.
 Vous allez à présent modifier votre fichier index.html dans votre Repository afin de customiser votre page d'accueil.
 
 **Travail demandé :** Depuis GitHUB, modifiez votre fichier index.html et remplacer le code de la ligne 8 par celui-ci :  
-```<h1>Ceci est mon Site Internet NFA040 </h1>```  
+```<h1>Ceci est mon Site Internet by Jeremie </h1>```  
 Enregistrez vos modifications via un "Commit" (le gros boutton vert) et observez le résultat en ligne.  
 
 Notions acquises de cette séquence :  
