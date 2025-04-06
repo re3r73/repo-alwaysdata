@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemple HTML - Serveur de Jérémie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #007BFF;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bienvenue sur la page d'exemple HTML</h1>
+    <p>Voici quelques éléments de démonstration en HTML pour le serveur Alwaysdata de Jérémie.</p>
+
+    <h2>Liste des langages web</h2>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>PHP</li>
+    </ul>
+
+    <h2>Tableau d'exemple</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Langage</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>HTML</td>
+                <td>Structure de la page</td>
+            </tr>
+            <tr>
+                <td>CSS</td>
+                <td>Design & mise en forme</td>
+            </tr>
+            <tr>
+                <td>JavaScript</td>
+                <td>Interactivité</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Formulaire de contact (exemple)</h2>
+    <form onsubmit="return envoyerFormulaire();">
+        <label for="nom">Nom :</label><br>
+        <input type="text" id="nom" name="nom" required><br><br>
+
+        <label for="message">Message :</label><br>
+        <textarea id="message" name="message" required></textarea><br><br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+        function envoyerFormulaire() {
+            const nom = document.getElementById('nom').value;
+            const message = document.getElementById('message').value;
+
+            alert(`Merci ${nom} ! Votre message a bien été reçu : "${message}"`);
+            return false; // Empêche l'envoi réel du formulaire
+        }
+    </script>
+
+</body>
+</html>
