@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Tableau pédagogique HTML interactif</title>
+    <title>Tableau pédagogique HTML interactif - Version débutant</title>
     <style>
         table {
             width: 100%;
@@ -20,9 +20,9 @@
     </style>
     <script>
         function exerciceBase(n, target) {
-            let resultat = "";
-            for (let j = 0; j < n; j++) {
-                for (let i = 0; i < n; i++) {
+            var resultat = "";
+            for (var j = 0; j < n; j++) {
+                for (var i = 0; i < n; i++) {
                     resultat += "*";
                 }
                 resultat += "<br/>";
@@ -31,9 +31,9 @@
         }
 
         function exercice1(n, target) {
-            let resultat = "";
-            for (let j = 0; j < n; j++) {
-                for (let i = 0; i <= j; i++) {
+            var resultat = "";
+            for (var j = 0; j < n; j++) {
+                for (var i = 0; i <= j; i++) {
                     resultat += "*";
                 }
                 resultat += "<br/>";
@@ -42,9 +42,9 @@
         }
 
         function exercice2(n, target) {
-            let resultat = "";
-            for (let j = n; j > 0; j--) {
-                for (let i = 0; i < j; i++) {
+            var resultat = "";
+            for (var j = n; j > 0; j--) {
+                for (var i = 0; i < j; i++) {
                     resultat += "*";
                 }
                 resultat += "<br/>";
@@ -53,12 +53,12 @@
         }
 
         function exercice3(n, target) {
-            let resultat = "";
-            for (let j = 0; j < n; j++) {
-                for (let i = 0; i < (n - j); i++) {
+            var resultat = "";
+            for (var j = 0; j < n; j++) {
+                for (var i = 0; i < (n - j); i++) {
                     resultat += "+";
                 }
-                for (let k = 0; k <= j; k++) {
+                for (var k = 0; k <= j; k++) {
                     resultat += "*";
                 }
                 resultat += "<br/>";
@@ -68,7 +68,7 @@
     </script>
 </head>
 <body>
-    <h1>Tableau pédagogique interactif : rendu + saisie + code source</h1>
+    <h1>Tableau pédagogique interactif (version débutant)</h1>
 
     <table>
         <tr>
@@ -93,8 +93,8 @@
             <td>
 <pre>
 &lt;!-- Carré d'étoiles plein --&gt;
-for (let j = 0; j &lt; n; j++) {
-    for (let i = 0; i &lt; n; i++) {
+for (var j = 0; j &lt; n; j++) {
+    for (var i = 0; i &lt; n; i++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
@@ -115,9 +115,8 @@ for (let j = 0; j &lt; n; j++) {
             <td>
 <pre>
 &lt;!-- Triangle d'étoiles --&gt;
-for (let j = 0; j &lt; n; j++) {
-    // Une étoile de plus par ligne
-    for (let i = 0; i &lt;= j; i++) {
+for (var j = 0; j &lt; n; j++) {
+    for (var i = 0; i &lt;= j; i++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
@@ -138,9 +137,8 @@ for (let j = 0; j &lt; n; j++) {
             <td>
 <pre>
 &lt;!-- Triangle inversé --&gt;
-for (let j = n; j &gt; 0; j--) {
-    // Une étoile de moins par ligne
-    for (let i = 0; i &lt; j; i++) {
+for (var j = n; j &gt; 0; j--) {
+    for (var i = 0; i &lt; j; i++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
@@ -161,13 +159,13 @@ for (let j = n; j &gt; 0; j--) {
             <td>
 <pre>
 &lt;!-- Double triangles --&gt;
-for (let j = 0; j &lt; n; j++) {
+for (var j = 0; j &lt; n; j++) {
     // Triangle des +
-    for (let i = 0; i &lt; (n - j); i++) {
+    for (var i = 0; i &lt; (n - j); i++) {
         resultat += "+";
     }
     // Triangle des *
-    for (let k = 0; k &lt;= j; k++) {
+    for (var k = 0; k &lt;= j; k++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
