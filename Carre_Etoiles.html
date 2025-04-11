@@ -49,14 +49,14 @@
         document.getElementById('result2').innerHTML = resultat;
     }
 
-    // Exercice 3 : Double triangles
+    // Exercice 3 : Double triangles (corrigé !)
     function exercice3() {
         var saisie = parseInt(document.getElementById('V3').value);
         var resultat = ""; 
         
         for (var j = 0; j < saisie; j++) {
             // Triangle des +
-            for (var i = 0; i < (saisie - 1 - j); i++) {
+            for (var i = 0; i < (saisie - j); i++) {
                 resultat += "+";
             }
             // Triangle des *
@@ -99,7 +99,7 @@
     <hr/>
 
     <!-- Exercice 3 -->
-    <h2>Exercice 3 : Double triangles</h2>
+    <h2>Exercice 3 : Double triangles (corrigé)</h2>
     <p>Saisir un chiffre : <input id="V3"/></p>
     <button onclick="exercice3()">Afficher</button>
     <div id="result3"></div>
