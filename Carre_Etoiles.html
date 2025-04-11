@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Tableau pédagogique HTML interactif - Version débutant</title>
+    <title>Tableau pédagogique HTML interactif - Version débutant enrichie</title>
     <style>
         table {
             width: 100%;
@@ -16,6 +16,15 @@
         }
         pre {
             margin: 0;
+            font-family: monospace;
+        }
+        .intro {
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .intro strong {
+            color: darkblue;
         }
     </style>
     <script>
@@ -68,13 +77,32 @@
     </script>
 </head>
 <body>
-    <h1>Tableau pédagogique interactif (version débutant)</h1>
+
+    <h1>Comprendre les boucles <code>for</code> en JavaScript</h1>
+
+    <div class="intro">
+        <p>La boucle <code>for</code> permet de répéter une série d'instructions plusieurs fois. Elle est composée de trois parties :</p>
+        <ul>
+            <li><strong>Initialisation</strong> : on commence par définir la valeur de départ de notre compteur (<code>var i = 0;</code>).</li>
+            <li><strong>Condition</strong> : tant que cette condition est vraie, la boucle continue (<code>i &lt; n;</code>).</li>
+            <li><strong>Incrémentation</strong> : à chaque passage, on augmente ou diminue notre compteur (<code>i++;</code> signifie <code>i = i + 1;</code>).</li>
+        </ul>
+        <p>Exemple simple :</p>
+        <pre>for (var i = 0; i &lt; 5; i++) {
+    console.log(i);
+}</pre>
+        <p>Cette boucle affichera : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>.</p>
+
+        <p><strong>Important :</strong> On peut <strong>imbriquer des boucles</strong> pour créer des effets plus complexes comme des formes avec des caractères : un triangle ou un carré d'étoiles ⭐️.</p>
+    </div>
+
+    <h2>Tableau pédagogique interactif</h2>
 
     <table>
         <tr>
             <th>Résultat interprété</th>
             <th>Zone de saisie interactive</th>
-            <th>Code source affiché (échappé)</th>
+            <th>Code source affiché (échappé et commenté)</th>
         </tr>
 
         <!-- Ligne 1 : Exercice de base -->
@@ -93,11 +121,13 @@
             <td>
 <pre>
 &lt;!-- Carré d'étoiles plein --&gt;
-for (var j = 0; j &lt; n; j++) {
-    for (var i = 0; i &lt; n; i++) {
+for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) { 
+    // Boucle pour chaque ligne
+    for (<b>var i = 0;</b> <b>i &lt; n;</b> <b>i++</b>) { 
+        // Boucle pour chaque colonne
         resultat += "*";
     }
-    resultat += "&lt;br/&gt;";
+    resultat += "&lt;br/&gt;"; // Retour à la ligne
 }
 </pre>
             </td>
@@ -115,8 +145,9 @@ for (var j = 0; j &lt; n; j++) {
             <td>
 <pre>
 &lt;!-- Triangle d'étoiles --&gt;
-for (var j = 0; j &lt; n; j++) {
-    for (var i = 0; i &lt;= j; i++) {
+for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) {
+    // À chaque ligne on ajoute plus d'étoiles
+    for (<b>var i = 0;</b> <b>i &lt;= j;</b> <b>i++</b>) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
@@ -137,8 +168,9 @@ for (var j = 0; j &lt; n; j++) {
             <td>
 <pre>
 &lt;!-- Triangle inversé --&gt;
-for (var j = n; j &gt; 0; j--) {
-    for (var i = 0; i &lt; j; i++) {
+for (<b>var j = n;</b> <b>j &gt; 0;</b> <b>j--</b>) {
+    // On commence avec beaucoup d'étoiles
+    for (<b>var i = 0;</b> <b>i &lt; j;</b> <b>i++</b>) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
@@ -159,13 +191,13 @@ for (var j = n; j &gt; 0; j--) {
             <td>
 <pre>
 &lt;!-- Double triangles --&gt;
-for (var j = 0; j &lt; n; j++) {
-    // Triangle des +
-    for (var i = 0; i &lt; (n - j); i++) {
+for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) {
+    // Première boucle pour les "+"
+    for (<b>var i = 0;</b> <b>i &lt; (n - j);</b> <b>i++</b>) {
         resultat += "+";
     }
-    // Triangle des *
-    for (var k = 0; k &lt;= j; k++) {
+    // Deuxième boucle imbriquée pour les "*"
+    for (<b>var k = 0;</b> <b>k &lt;= j;</b> <b>k++</b>) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
