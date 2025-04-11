@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Tableau pédagogique HTML</title>
+    <title>Tableau pédagogique HTML interactif</title>
     <style>
         table {
             width: 100%;
@@ -18,19 +18,68 @@
             margin: 0;
         }
     </style>
+    <script>
+        function exerciceBase(n, target) {
+            let resultat = "";
+            for (let j = 0; j < n; j++) {
+                for (let i = 0; i < n; i++) {
+                    resultat += "*";
+                }
+                resultat += "<br/>";
+            }
+            document.getElementById(target).innerHTML = resultat;
+        }
+
+        function exercice1(n, target) {
+            let resultat = "";
+            for (let j = 0; j < n; j++) {
+                for (let i = 0; i <= j; i++) {
+                    resultat += "*";
+                }
+                resultat += "<br/>";
+            }
+            document.getElementById(target).innerHTML = resultat;
+        }
+
+        function exercice2(n, target) {
+            let resultat = "";
+            for (let j = n; j > 0; j--) {
+                for (let i = 0; i < j; i++) {
+                    resultat += "*";
+                }
+                resultat += "<br/>";
+            }
+            document.getElementById(target).innerHTML = resultat;
+        }
+
+        function exercice3(n, target) {
+            let resultat = "";
+            for (let j = 0; j < n; j++) {
+                for (let i = 0; i < (n - j); i++) {
+                    resultat += "+";
+                }
+                for (let k = 0; k <= j; k++) {
+                    resultat += "*";
+                }
+                resultat += "<br/>";
+            }
+            document.getElementById(target).innerHTML = resultat;
+        }
+    </script>
 </head>
 <body>
-    <h1>Tableau pédagogique : Interprétation vs Code HTML affiché</h1>
+    <h1>Tableau pédagogique interactif : rendu + saisie + code source</h1>
 
     <table>
         <tr>
             <th>Résultat interprété</th>
+            <th>Zone de saisie interactive</th>
             <th>Code source affiché (échappé)</th>
         </tr>
 
         <!-- Ligne 1 : Exercice de base -->
         <tr>
-            <td>
+            <td id="output0">
                 *****
                 <br>*****
                 <br>*****
@@ -38,86 +87,95 @@
                 <br>*****
             </td>
             <td>
+                <input type="number" id="input0" value="5">
+                <button onclick="exerciceBase(parseInt(document.getElementById('input0').value), 'output0')">Afficher</button>
+            </td>
+            <td>
 <pre>
 &lt;!-- Carré d'étoiles plein --&gt;
-&lt;script&gt;
-for (var j = 0; j &lt; saisie; j++) {
-    for (var i = 0; i &lt; saisie; i++) {
+for (let j = 0; j &lt; n; j++) {
+    for (let i = 0; i &lt; n; i++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
 }
-&lt;/script&gt;
 </pre>
             </td>
         </tr>
 
         <!-- Ligne 2 : Exercice 1 -->
         <tr>
-            <td>
+            <td id="output1">
                 *<br>**<br>***<br>****<br>*****
+            </td>
+            <td>
+                <input type="number" id="input1" value="5">
+                <button onclick="exercice1(parseInt(document.getElementById('input1').value), 'output1')">Afficher</button>
             </td>
             <td>
 <pre>
 &lt;!-- Triangle d'étoiles --&gt;
-&lt;script&gt;
-for (var j = 0; j &lt; saisie; j++) {
-    // À chaque ligne, on ajoute une étoile de plus
-    for (var i = 0; i &lt;= j; i++) {
+for (let j = 0; j &lt; n; j++) {
+    // Une étoile de plus par ligne
+    for (let i = 0; i &lt;= j; i++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
 }
-&lt;/script&gt;
 </pre>
             </td>
         </tr>
 
         <!-- Ligne 3 : Exercice 2 -->
         <tr>
-            <td>
+            <td id="output2">
                 *****<br>****<br>***<br>**<br>*
+            </td>
+            <td>
+                <input type="number" id="input2" value="5">
+                <button onclick="exercice2(parseInt(document.getElementById('input2').value), 'output2')">Afficher</button>
             </td>
             <td>
 <pre>
 &lt;!-- Triangle inversé --&gt;
-&lt;script&gt;
-for (var j = saisie; j &gt; 0; j--) {
-    // À chaque ligne, on enlève une étoile
-    for (var i = 0; i &lt; j; i++) {
+for (let j = n; j &gt; 0; j--) {
+    // Une étoile de moins par ligne
+    for (let i = 0; i &lt; j; i++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
 }
-&lt;/script&gt;
 </pre>
             </td>
         </tr>
 
         <!-- Ligne 4 : Exercice 3 -->
         <tr>
-            <td>
+            <td id="output3">
                 +++++*<br>++++**<br>+++***<br>++****<br>+*****
+            </td>
+            <td>
+                <input type="number" id="input3" value="5">
+                <button onclick="exercice3(parseInt(document.getElementById('input3').value), 'output3')">Afficher</button>
             </td>
             <td>
 <pre>
 &lt;!-- Double triangles --&gt;
-&lt;script&gt;
-for (var j = 0; j &lt; saisie; j++) {
+for (let j = 0; j &lt; n; j++) {
     // Triangle des +
-    for (var i = 0; i &lt; (saisie - j); i++) {
+    for (let i = 0; i &lt; (n - j); i++) {
         resultat += "+";
     }
     // Triangle des *
-    for (var k = 0; k &lt;= j; k++) {
+    for (let k = 0; k &lt;= j; k++) {
         resultat += "*";
     }
     resultat += "&lt;br/&gt;";
 }
-&lt;/script&gt;
 </pre>
             </td>
         </tr>
+
     </table>
 
 </body>
