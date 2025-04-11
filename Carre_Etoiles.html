@@ -2,107 +2,123 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mon Exercice JS N°2 - Tous les exercices</title>
-    <script>
-    // Exercice de base : Carré d'étoiles plein
-    function exerciceBase() {
-        var saisie = parseInt(document.getElementById('V0').value);
-        var resultat = ""; 
-        
-        for (var j = 0; j < saisie; j++) {
-            for (var i = 0; i < saisie; i++) {
-                resultat += "*";
-            }
-            resultat += "<br/>";
+    <title>Tableau pédagogique HTML</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: monospace;
         }
-        
-        document.getElementById('result0').innerHTML = resultat;
-    }
-
-    // Exercice 1 : Triangle d'étoiles
-    function exercice1() {
-        var saisie = parseInt(document.getElementById('V1').value);
-        var resultat = ""; 
-        
-        for (var j = 0; j < saisie; j++) {
-            for (var i = 0; i <= j; i++) {
-                resultat += "*";
-            }
-            resultat += "<br/>";
+        td, th {
+            border: 1px solid black;
+            padding: 10px;
+            vertical-align: top;
         }
-        
-        document.getElementById('result1').innerHTML = resultat;
-    }
-
-    // Exercice 2 : Triangle inversé
-    function exercice2() {
-        var saisie = parseInt(document.getElementById('V2').value);
-        var resultat = ""; 
-        
-        for (var j = saisie; j > 0; j--) {
-            for (var i = 0; i < j; i++) {
-                resultat += "*";
-            }
-            resultat += "<br/>";
+        pre {
+            margin: 0;
         }
-        
-        document.getElementById('result2').innerHTML = resultat;
-    }
-
-    // Exercice 3 : Double triangles (corrigé !)
-    function exercice3() {
-        var saisie = parseInt(document.getElementById('V3').value);
-        var resultat = ""; 
-        
-        for (var j = 0; j < saisie; j++) {
-            // Triangle des +
-            for (var i = 0; i < (saisie - j); i++) {
-                resultat += "+";
-            }
-            // Triangle des *
-            for (var k = 0; k <= j; k++) {
-                resultat += "*";
-            }
-            resultat += "<br/>";
-        }
-        
-        document.getElementById('result3').innerHTML = resultat;
-    }
-    </script>
+    </style>
 </head>
-
 <body>
-    <h1>Les étoiles - Exercices JS</h1>
+    <h1>Tableau pédagogique : Interprétation vs Code HTML affiché</h1>
 
-    <!-- Exercice de base -->
-    <h2>Exercice de base : Carré d'étoiles plein</h2>
-    <p>Saisir un chiffre : <input id="V0"/></p>
-    <button onclick="exerciceBase()">Afficher</button>
-    <div id="result0"></div>
+    <table>
+        <tr>
+            <th>Résultat interprété</th>
+            <th>Code source affiché (échappé)</th>
+        </tr>
 
-    <hr/>
+        <!-- Ligne 1 : Exercice de base -->
+        <tr>
+            <td>
+                *****
+                <br>*****
+                <br>*****
+                <br>*****
+                <br>*****
+            </td>
+            <td>
+<pre>
+&lt;!-- Carré d'étoiles plein --&gt;
+&lt;script&gt;
+for (var j = 0; j &lt; saisie; j++) {
+    for (var i = 0; i &lt; saisie; i++) {
+        resultat += "*";
+    }
+    resultat += "&lt;br/&gt;";
+}
+&lt;/script&gt;
+</pre>
+            </td>
+        </tr>
 
-    <!-- Exercice 1 -->
-    <h2>Exercice 1 : Triangle d'étoiles</h2>
-    <p>Saisir un chiffre : <input id="V1"/></p>
-    <button onclick="exercice1()">Afficher</button>
-    <div id="result1"></div>
+        <!-- Ligne 2 : Exercice 1 -->
+        <tr>
+            <td>
+                *<br>**<br>***<br>****<br>*****
+            </td>
+            <td>
+<pre>
+&lt;!-- Triangle d'étoiles --&gt;
+&lt;script&gt;
+for (var j = 0; j &lt; saisie; j++) {
+    // À chaque ligne, on ajoute une étoile de plus
+    for (var i = 0; i &lt;= j; i++) {
+        resultat += "*";
+    }
+    resultat += "&lt;br/&gt;";
+}
+&lt;/script&gt;
+</pre>
+            </td>
+        </tr>
 
-    <hr/>
+        <!-- Ligne 3 : Exercice 2 -->
+        <tr>
+            <td>
+                *****<br>****<br>***<br>**<br>*
+            </td>
+            <td>
+<pre>
+&lt;!-- Triangle inversé --&gt;
+&lt;script&gt;
+for (var j = saisie; j &gt; 0; j--) {
+    // À chaque ligne, on enlève une étoile
+    for (var i = 0; i &lt; j; i++) {
+        resultat += "*";
+    }
+    resultat += "&lt;br/&gt;";
+}
+&lt;/script&gt;
+</pre>
+            </td>
+        </tr>
 
-    <!-- Exercice 2 -->
-    <h2>Exercice 2 : Triangle inversé</h2>
-    <p>Saisir un chiffre : <input id="V2"/></p>
-    <button onclick="exercice2()">Afficher</button>
-    <div id="result2"></div>
-
-    <hr/>
-
-    <!-- Exercice 3 -->
-    <h2>Exercice 3 : Double triangles (corrigé)</h2>
-    <p>Saisir un chiffre : <input id="V3"/></p>
-    <button onclick="exercice3()">Afficher</button>
-    <div id="result3"></div>
+        <!-- Ligne 4 : Exercice 3 -->
+        <tr>
+            <td>
+                +++++*<br>++++**<br>+++***<br>++****<br>+*****
+            </td>
+            <td>
+<pre>
+&lt;!-- Double triangles --&gt;
+&lt;script&gt;
+for (var j = 0; j &lt; saisie; j++) {
+    // Triangle des +
+    for (var i = 0; i &lt; (saisie - j); i++) {
+        resultat += "+";
+    }
+    // Triangle des *
+    for (var k = 0; k &lt;= j; k++) {
+        resultat += "*";
+    }
+    resultat += "&lt;br/&gt;";
+}
+&lt;/script&gt;
+</pre>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>
