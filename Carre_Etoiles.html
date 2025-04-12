@@ -28,10 +28,10 @@
         }
     </style>
     <script>
-        function exerciceBase(n, target) {
+        function exerciceBase(saisie, target) {
             var resultat = "";
-            for (var j = 0; j < n; j++) {
-                for (var i = 0; i < n; i++) {
+            for (var j = 0; j < saisie; j++) {
+                for (var i = 0; i < saisie; i++) {
                     resultat += "*";
                 }
                 resultat += "<br/>";
@@ -39,9 +39,9 @@
             document.getElementById(target).innerHTML = resultat;
         }
 
-        function exercice1(n, target) {
+        function exercice1(saisie, target) {
             var resultat = "";
-            for (var j = 0; j < n; j++) {
+            for (var j = 0; j < saisie; j++) {
                 for (var i = 0; i <= j; i++) {
                     resultat += "*";
                 }
@@ -50,9 +50,9 @@
             document.getElementById(target).innerHTML = resultat;
         }
 
-        function exercice2(n, target) {
+        function exercice2(saisie, target) {
             var resultat = "";
-            for (var j = n; j > 0; j--) {
+            for (var j = saisie; j > 0; j--) {
                 for (var i = 0; i < j; i++) {
                     resultat += "*";
                 }
@@ -61,10 +61,10 @@
             document.getElementById(target).innerHTML = resultat;
         }
 
-        function exercice3(n, target) {
+        function exercice3(saisie, target) {
             var resultat = "";
-            for (var j = 0; j < n; j++) {
-                for (var i = 0; i < (n - j); i++) {
+            for (var j = 0; j < saisie; j++) {
+                for (var i = 0; i < (saisie - j); i++) {
                     resultat += "+";
                 }
                 for (var k = 0; k <= j; k++) {
@@ -84,7 +84,7 @@
         <p>La boucle <code>for</code> permet de répéter une série d'instructions plusieurs fois. Elle est composée de trois parties :</p>
         <ul>
             <li><strong>Initialisation</strong> : on commence par définir la valeur de départ de notre compteur (<code>var i = 0;</code>).</li>
-            <li><strong>Condition</strong> : tant que cette condition est vraie, la boucle continue (<code>i &lt; n;</code>).</li>
+            <li><strong>Condition</strong> : tant que cette condition est vraie, la boucle continue (<code>i &lt; saisie;</code>).</li>
             <li><strong>Incrémentation</strong> : à chaque passage, on augmente ou diminue notre compteur (<code>i++;</code> signifie <code>i = i + 1;</code>).</li>
         </ul>
         <p>Exemple simple :</p>
@@ -121,9 +121,9 @@
             <td>
 <pre>
 &lt;!-- Carré d'étoiles plein --&gt;
-for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) { 
+for (<b>var j = 0;</b> <b>j &lt; saisie;</b> <b>j++</b>) { 
     // Boucle pour chaque ligne
-    for (<b>var i = 0;</b> <b>i &lt; n;</b> <b>i++</b>) { 
+    for (<b>var i = 0;</b> <b>i &lt; saisie;</b> <b>i++</b>) { 
         // Boucle pour chaque colonne
         resultat += "*";
     }
@@ -145,7 +145,7 @@ for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) {
             <td>
 <pre>
 &lt;!-- Triangle d'étoiles --&gt;
-for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) {
+for (<b>var j = 0;</b> <b>j &lt; saisie;</b> <b>j++</b>) {
     // À chaque ligne on ajoute plus d'étoiles
     for (<b>var i = 0;</b> <b>i &lt;= j;</b> <b>i++</b>) {
         resultat += "*";
@@ -168,7 +168,7 @@ for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) {
             <td>
 <pre>
 &lt;!-- Triangle inversé --&gt;
-for (<b>var j = n;</b> <b>j &gt; 0;</b> <b>j--</b>) {
+for (<b>var j = saisie;</b> <b>j &gt; 0;</b> <b>j--</b>) {
     // On commence avec beaucoup d'étoiles
     for (<b>var i = 0;</b> <b>i &lt; j;</b> <b>i++</b>) {
         resultat += "*";
@@ -191,9 +191,9 @@ for (<b>var j = n;</b> <b>j &gt; 0;</b> <b>j--</b>) {
             <td>
 <pre>
 &lt;!-- Double triangles --&gt;
-for (<b>var j = 0;</b> <b>j &lt; n;</b> <b>j++</b>) {
+for (<b>var j = 0;</b> <b>j &lt; saisie;</b> <b>j++</b>) {
     // Première boucle pour les "+"
-    for (<b>var i = 0;</b> <b>i &lt; (n - j);</b> <b>i++</b>) {
+    for (<b>var i = 0;</b> <b>i &lt; (saisie - j);</b> <b>i++</b>) {
         resultat += "+";
     }
     // Deuxième boucle imbriquée pour les "*"
