@@ -1,1 +1,31 @@
+<section>
+  <h2>Utiliser PowerShell pour interagir avec l'API GitHub</h2>
+  <p>Il est possible d'utiliser PowerShell pour automatiser la gestion de vos dépôts GitHub. Cela inclut :</p>
+  <ul>
+    <li>Créer, modifier ou supprimer des fichiers dans un dépôt GitHub</li>
+    <li>Créer et gérer des GitHub Pages (puisque ce sont des fichiers dans une branche dédiée)</li>
+    <li>Automatiser les commits et les pushes de contenu web statique</li>
+  </ul>
+
+  <h3>Exemple de requête API avec PowerShell</h3>
+  <pre><code>$token = 'ghp_votreTokenIci'
+$headers = @{
+    Authorization = "token $token"
+    Accept        = "application/vnd.github.v3+json"
+}
+$repo = "utilisateur/nom-du-repo"
+$url = "https://api.github.com/repos/$repo/contents/"
+
+Invoke-RestMethod -Uri $url -Headers $headers -Method Get
+</code></pre>
+
+  <h3>Étapes pour démarrer</h3>
+  <ol>
+    <li>Créer un <strong>Personal Access Token (PAT)</strong> sur GitHub avec les permissions nécessaires.</li>
+    <li>Installer PowerShell sur votre machine si ce n'est pas déjà fait.</li>
+    <li>Utiliser PowerShell pour envoyer des requêtes vers l'API GitHub et gérer votre contenu.</li>
+  </ol>
+
+  <p>Pour aller plus loin, pensez à utiliser le module <code>PowerShellForGitHub</code> pour simplifier les appels API !</p>
+</section>
 
