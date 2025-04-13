@@ -1,16 +1,104 @@
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Guide PowerShell & API GitHub</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-<section>
-  <h2>Utiliser PowerShell pour interagir avec l'API GitHub</h2>
-  <p>Il est possible d'utiliser PowerShell pour automatiser la gestion de vos dépôts GitHub. Cela inclut :</p>
-  <ul>
-    <li>Créer, modifier ou supprimer des fichiers dans un dépôt GitHub</li>
-    <li>Créer et gérer des GitHub Pages (puisque ce sont des fichiers dans une branche dédiée)</li>
-    <li>Automatiser les commits et les pushes de contenu web statique</li>
-  </ul>
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
 
-  <h3>Exemple de requête API avec PowerShell</h3>
-  <pre><code>$token = 'ghp_votreTokenIci'
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: monospace;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        button.copy-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        button.copy-button:hover {
+            background-color: #0056b3;
+        }
+
+        .emoji {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚙️ Guide PowerShell pour GitHub API</h1>
+
+    <div class="section">
+        <h2>🔑 1. Créez votre token GitHub (PAT)</h2>
+        <ul>
+            <li>Rendez-vous dans <strong>GitHub > Settings > Developer Settings > Personal Access Tokens</strong></li>
+            <li>Cliquez sur <strong>Generate new token</strong></li>
+            <li>Sélectionnez les scopes nécessaires :
+                <ul>
+                    <li><code>repo</code> : pour accéder aux dépôts</li>
+                    <li><code>workflow</code> : pour gérer les actions (optionnel)</li>
+                </ul>
+            </li>
+            <li>Copiez le token généré et gardez-le précieusement.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🖥️ 2. Configurez PowerShell</h2>
+        <ul>
+            <li>Si PowerShell n'est pas installé :
+                <ul>
+                    <li><strong>Windows</strong> : déjà préinstallé</li>
+                    <li><strong>Mac / Linux</strong> : installez PowerShell Core via <a href="https://github.com/PowerShell/PowerShell">GitHub PowerShell</a></li>
+                </ul>
+            </li>
+            <li>Optionnel : installez le module PowerShellForGitHub pour simplifier les commandes :
+                <pre><code>Install-Module PowerShellForGitHub</code></pre>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📂 3. Exemple : Lister les fichiers d'un dépôt</h2>
+        <button class="copy-button" onclick="copyToClipboard('code1')">Copier le code</button>
+        <pre><code id="code1">$token = 'ghp_votreTokenIci'
 $headers = @{
     Authorization = "token $token"
     Accept        = "application/vnd.github.v3+json"
@@ -20,14 +108,42 @@ $url = "https://api.github.com/repos/$repo/contents/"
 
 Invoke-RestMethod -Uri $url -Headers $headers -Method Get
 </code></pre>
+    </div>
 
-  <h3>Étapes pour démarrer</h3>
-  <ol>
-    <li>Créer un <strong>Personal Access Token (PAT)</strong> sur GitHub avec les permissions nécessaires.</li>
-    <li>Installer PowerShell sur votre machine si ce n'est pas déjà fait.</li>
-    <li>Utiliser PowerShell pour envoyer des requêtes vers l'API GitHub et gérer votre contenu.</li>
-  </ol>
+    <div class="section">
+        <h2>✍️ 4. Exemple : Créer ou modifier un fichier</h2>
+        <button class="copy-button" onclick="copyToClipboard('code2')">Copier le code</button>
+        <pre><code id="code2">$content = Get-Content -Path "C:\chemin\vers\index.html" -Raw -Encoding UTF8
+$encodedContent = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($content))
 
-  <p>Pour aller plus loin, pensez à utiliser le module <code>PowerShellForGitHub</code> pour simplifier les appels API !</p>
-</section>
+$body = @{
+    message = "Ajout ou modification du fichier via API"
+    content = $encodedContent
+} | ConvertTo-Json -Depth 10
 
+Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/contents/chemin/du/fichier.html" -Headers $headers -Method Put -Body $body
+</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>🚀 5. Astuce : Poussez un site vers GitHub Pages</h2>
+        <ul>
+            <li>GitHub Pages est basé sur une branche spéciale : <strong>gh-pages</strong> ou le dossier <strong>/docs</strong>.</li>
+            <li>Créez votre fichier <code>index.html</code> et poussez-le dans la branche prévue.</li>
+            <li>Vous pouvez automatiser cette étape avec le script ci-dessus pour publier votre site statique.</li>
+        </ul>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const code = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(code).then(function () {
+                alert('Code copié dans le presse-papiers !');
+            }, function (err) {
+                alert('Erreur lors de la copie : ' + err);
+            });
+        }
+    </script>
+
+</body>
+</html>
