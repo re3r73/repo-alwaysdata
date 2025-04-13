@@ -67,9 +67,14 @@
         $blagues = [
             "Pourquoi les développeurs n'aiment pas la nature ? — Parce qu'il y a trop de bugs 🐛",
             "Combien de programmeurs faut-il pour changer une ampoule ? — Aucun, c'est un problème hardware 💡",
-            "J'ai un problème de récursivité... Attendez, je vous explique après. 🔄",
-            "Pourquoi Java a-t-il du mal à faire des relations ? — Trop de classes abstraites ☕"
+            "Pourquoi Java a-t-il du mal à faire des relations ? — Trop de classes abstraites ☕",
+            "Pourquoi les développeurs détestent l'heure d'été ? — Parce que ça provoque des décalages 😅",
+            "Comment un développeur drague-t-il ? — Tu veux voir mon backend ? 😏",
+            "Pourquoi le CSS est-il jaloux du HTML ? — Parce que le HTML a du style 😎",
+            "Pourquoi le serveur est allé chez le psy ? — Il en avait marre de toutes ces requêtes 🙃",
+            "Quel est le plat préféré des développeurs ? — Les *Spaghetti code* 🍝"
         ];
+
         $blagueAleatoire = $blagues[array_rand($blagues)];
         echo "<h2>😂 Une petite blague de dev :</h2>";
         echo "<p>$blagueAleatoire</p>";
