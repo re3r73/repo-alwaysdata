@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"> <!-- Déclaration du jeu de caractères UTF-8 pour supporter tous les caractères spéciaux -->
+  <title>Table de multiplication dynamique</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
+</head>
+<body>
+  <h2>Générateur de table de multiplication</h2> <!-- Titre principal affiché sur la page -->
+
+  <!-- Étiquette pour le champ de saisie -->
+  <label for="nombre">Choisis un nombre :</label>
+
+  <!-- Champ de saisie pour entrer le nombre choisi par l'utilisateur -->
+  <input type="number" id="nombre" value="5" min="0">
+  <!-- 
+    - type="number" : permet de saisir uniquement des nombres
+    - id="nombre" : identifiant pour récupérer la valeur dans le script
+    - value="5" : valeur par défaut affichée dans le champ
+    - min="0" : empêche de saisir des nombres négatifs
+  -->
+
+  <!-- Div vide qui va contenir dynamiquement la table de multiplication -->
+  <div id="resultat"></div>
+
+  <!-- Début du script JavaScript -->
+  <script>
+    // On récupère l'élément input et la div qui affichera les résultats
+    const inputNombre = document.getElementById('nombre');
+    const resultatDiv = document.getElementById('resultat');
+
+    // Déclaration de la fonction qui génère la table de multiplication
+    function genererTable() {
+      // On lit la valeur entrée par l'utilisateur dans le champ input
+      const nombre = parseInt(inputNombre.value);
+
+      // On vide le contenu précédent pour ne pas accumuler les résultats
+      resultatDiv.innerHTML = '';
+
+      // On crée une boucle pour générer la table de multiplication de 0 à 10
+      for (let i = 0; i <= 10; i++) {
+        // On calcule le résultat de la multiplication
+        const resultat = nombre * i;
+
+        // On crée un nouvel élément paragraphe pour afficher ce résultat
+        const p = document.createElement('p');
+
+        // On définit le texte du paragraphe avec la multiplication et le résultat
+        p.textContent = `${nombre} × ${i} = ${resultat}`;
+
+        // On ajoute ce paragraphe à la div de résultats
+        resultatDiv.appendChild(p);
+      }
+    }
+
+    // On appelle la fonction une première fois pour afficher la table au chargement initial de la page
+    genererTable();
+
+    // On ajoute un écouteur d'événement pour détecter les changements dans le champ input
+    inputNombre.addEventListener('input', genererTable);
+    // 
+    // À chaque fois que l'utilisateur change la valeur du champ (ajoute ou enlève un chiffre),
+    // la fonction genererTable() est automatiquement appelée pour mettre à jour les résultats.
+  </script>
+</body>
+</html>
