@@ -173,8 +173,6 @@ function afficher() {
     console.log(i);
 }</pre>
         <p>Cette boucle affichera : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>.</p>
-
-        <p><strong>Important :</strong> On peut <strong>imbriquer des boucles</strong> pour créer des effets visuels avec des caractères.</p>
     </div>
 
     <h2>Tableau pédagogique interactif</h2>
@@ -269,7 +267,36 @@ for (var j = 0; j &lt; saisie; j++) {
             </td>
         </tr>
 
-        <!-- Exercice 4 : Carré magique -->
+    </table>
+
+    <h2>Comprendre les conditions <code>if</code> en JavaScript</h2>
+
+    <div class="intro">
+        <p>La condition <code>if</code> permet d'exécuter un bloc de code uniquement si une certaine condition est remplie.</p>
+        <p><strong>Exemple de base :</strong></p>
+        <pre>
+var nombre = 5;
+if (nombre > 3) {
+    console.log("Le nombre est plus grand que 3");
+}
+        </pre>
+        <p>On peut aussi combiner plusieurs conditions avec :</p>
+        <ul>
+            <li><strong>&amp;&amp;</strong> (ET logique) : toutes les conditions doivent être vraies.</li>
+            <li><strong>||</strong> (OU logique) : au moins une des conditions doit être vraie.</li>
+            <li><strong>!</strong> (NON logique) : inverse la condition.</li>
+        </ul>
+    </div>
+
+    <h2>Application pratique : Exercice "Carré magique"</h2>
+
+    <table>
+        <tr>
+            <th>Résultat interprété</th>
+            <th>Zone de saisie interactive</th>
+            <th>Code source affiché (échappé et commenté)</th>
+        </tr>
+
         <tr>
             <td id="output4">*****<br>*ooo*<br>*ooo*<br>*ooo*<br>*****</td>
             <td>
@@ -295,26 +322,6 @@ for (var j = 0; j &lt; saisie; j++) {
         </tr>
 
     </table>
-
-    <h2>Comprendre les conditions <code>if</code> en JavaScript</h2>
-
-    <div class="intro">
-        <p>La condition <code>if</code> permet d'exécuter un bloc de code uniquement si une certaine condition est remplie.</p>
-        <p><strong>Exemple de base :</strong></p>
-        <pre>
-var nombre = 5;
-if (nombre > 3) {
-    console.log("Le nombre est plus grand que 3");
-}
-        </pre>
-        <p>Ici, si la variable <code>nombre</code> est supérieure à 3, le message sera affiché.</p>
-        <p>On peut aussi combiner plusieurs conditions avec :</p>
-        <ul>
-            <li><strong>&amp;&amp;</strong> (ET logique) : les deux conditions doivent être vraies.</li>
-            <li><strong>||</strong> (OU logique) : au moins une des deux conditions doit être vraie.</li>
-            <li><strong>!</strong> (NON logique) : inverse la condition.</li>
-        </ul>
-    </div>
 
 </body>
 </html>
