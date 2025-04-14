@@ -16,6 +16,7 @@
             width: 100%;
             border-collapse: collapse;
             font-family: monospace;
+            margin-bottom: 20px;
         }
         td, th {
             border: 1px solid black;
@@ -35,6 +36,10 @@
         }
         input[type="number"] {
             width: 60px;
+        }
+        button {
+            margin-top: 5px;
+            padding: 5px 10px;
         }
     </style>
     <script>
@@ -103,9 +108,39 @@
 <body>
 
     <h1>Exercice d'origine : carré d'étoiles simple</h1>
-    <p>Saisir un chiffre : <input type="number" id="V1" value="5"/></p>
-    <button onclick="afficher()">Afficher</button>
-    <div id="result"></div>
+
+    <table>
+        <tr>
+            <th>Résultat interprété</th>
+            <th>Code source de la fonction (échappé)</th>
+        </tr>
+        <tr>
+            <td>
+                <p>Saisir un chiffre :</p>
+                <input type="number" id="V1" value="5" />
+                <br>
+                <button onclick="afficher()">Afficher</button>
+                <div id="result" style="margin-top: 10px;">*****<br>*****<br>*****<br>*****<br>*****</div>
+            </td>
+            <td>
+<pre>
+function afficher() {
+    var saisie = parseInt(
+        document.getElementById('V1').value
+    );
+    var resultat = "";
+    for (var j = 0; j &lt; saisie; j++) {
+        for (var i = 0; i &lt; saisie; i++) {
+            resultat += "*";
+        }
+        resultat += "&lt;/br&gt;";
+    }
+    document.getElementById('result').innerHTML = resultat;
+}
+</pre>
+            </td>
+        </tr>
+    </table>
 
     <hr>
 
