@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Table de multiplication personnalisée</title>
+</head>
+<body>
+  <h2>Générateur de table de multiplication personnalisée</h2>
+
+  <!-- Champ pour entrer le nombre de base de la table -->
+  <label for="nombreBase">Nombre de base :</label>
+  <input type="number" id="nombreBase" value="5" min="0">
+
+  <br><br> <!-- Simple saut de ligne pour aérer -->
+
+  <!-- Champ pour entrer la limite supérieure de la table -->
+  <label for="limite">Jusqu'à :</label>
+  <input type="number" id="limite" value="11" min="1">
+
+  <br><br>
+
+  <!-- Div qui va contenir le résultat généré dynamiquement -->
+  <div id="resultat"></div>
+
+  <script>
+    // On récupère les éléments input et la div de résultat
+    const inputNombreBase = document.getElementById('nombreBase');
+    const inputLimite = document.getElementById('limite');
+    const resultatDiv = document.getElementById('resultat');
+
+    // Fonction pour générer la table de multiplication
+    function genererTable() {
+      // Lecture des valeurs des champs input
+      const nombreBase = parseInt(inputNombreBase.value);
+      const limite = parseInt(inputLimite.value);
+
+      // On vide le contenu précédent
+      resultatDiv.innerHTML = '';
+
+      // Boucle de 1 jusqu'à la limite définie par l'utilisateur
+      for (let i = 1; i <= limite; i++) {
+        const resultat = nombreBase * i;
+
+        // Création d'un paragraphe pour chaque ligne de la table
+        const p = document.createElement('p');
+        p.textContent = `${nombreBase} × ${i} = ${resultat}`;
+
+        // Ajout du paragraphe dans la div résultat
+        resultatDiv.appendChild(p);
+      }
+    }
+
+    // Appel initial pour afficher une première table au chargement de la page
+    genererTable();
+
+    // Ajout des écouteurs d'événements sur les deux champs input
+    inputNombreBase.addEventListener('input', genererTable);
+    inputLimite.addEventListener('input', genererTable);
+
+    // À chaque modification dans l'un des deux champs, la fonction est appelée automatiquement
+  </script>
+</body>
+</html>
