@@ -43,7 +43,7 @@
         }
     </style>
     <script>
-        // ✅ Ta fonction d'origine exactement comme tu l'avais écrite
+        // ✅ Fonction d'origine
         function afficher() {
             var saisie = parseInt(document.getElementById('V1').value);
             var resultat = "";
@@ -56,7 +56,7 @@
             document.getElementById('result').innerHTML = resultat;
         }
 
-        // ✅ Tes fonctions pédagogiques existantes
+        // ✅ Fonctions des exercices
         function exerciceBase(saisie, target) {
             var resultat = "";
             for (var j = 0; j < saisie; j++) {
@@ -98,6 +98,21 @@
                 }
                 for (var k = 0; k <= j; k++) {
                     resultat += "*";
+                }
+                resultat += "<br/>";
+            }
+            document.getElementById(target).innerHTML = resultat;
+        }
+
+        function exercice4(saisie, target) {
+            var resultat = "";
+            for (var j = 0; j < saisie; j++) {
+                for (var i = 0; i < saisie; i++) {
+                    if (i == 0 || i == (saisie - 1) || j == 0 || j == (saisie - 1)) {
+                        resultat += "*";
+                    } else {
+                        resultat += "o";
+                    }
                 }
                 resultat += "<br/>";
             }
@@ -149,9 +164,9 @@ function afficher() {
     <div class="intro">
         <p>La boucle <code>for</code> permet de répéter une série d'instructions plusieurs fois. Elle est composée de trois parties :</p>
         <ul>
-            <li><strong>Initialisation</strong> : on commence par définir la valeur de départ de notre compteur (<code>var i = 0;</code>).</li>
-            <li><strong>Condition</strong> : tant que cette condition est vraie, la boucle continue (<code>i &lt; saisie;</code>).</li>
-            <li><strong>Incrémentation</strong> : à chaque passage, on augmente ou diminue notre compteur (<code>i++;</code> signifie <code>i = i + 1;</code>).</li>
+            <li><strong>Initialisation</strong> : définir la valeur de départ du compteur (<code>var i = 0;</code>).</li>
+            <li><strong>Condition</strong> : tant que la condition est vraie, la boucle continue (<code>i &lt; saisie;</code>).</li>
+            <li><strong>Incrémentation</strong> : à chaque tour, on met à jour la variable (<code>i++;</code> signifie <code>i = i + 1;</code>).</li>
         </ul>
         <p>Exemple simple :</p>
         <pre>for (var i = 0; i &lt; 5; i++) {
@@ -159,7 +174,7 @@ function afficher() {
 }</pre>
         <p>Cette boucle affichera : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>.</p>
 
-        <p><strong>Important :</strong> On peut <strong>imbriquer des boucles</strong> pour créer des effets plus complexes comme des formes avec des caractères : un triangle ou un carré d'étoiles ⭐️.</p>
+        <p><strong>Important :</strong> On peut <strong>imbriquer des boucles</strong> pour créer des effets visuels avec des caractères.</p>
     </div>
 
     <h2>Tableau pédagogique interactif</h2>
@@ -171,7 +186,7 @@ function afficher() {
             <th>Code source affiché (échappé et commenté)</th>
         </tr>
 
-        <!-- Ligne 1 : Exercice de base -->
+        <!-- Exercice de base -->
         <tr>
             <td id="output0">*****<br>*****<br>*****<br>*****<br>*****</td>
             <td>
@@ -191,7 +206,7 @@ for (var j = 0; j &lt; saisie; j++) {
             </td>
         </tr>
 
-        <!-- Ligne 2 : Exercice 1 -->
+        <!-- Exercice 1 -->
         <tr>
             <td id="output1">*<br>**<br>***<br>****<br>*****</td>
             <td>
@@ -211,7 +226,7 @@ for (var j = 0; j &lt; saisie; j++) {
             </td>
         </tr>
 
-        <!-- Ligne 3 : Exercice 2 -->
+        <!-- Exercice 2 -->
         <tr>
             <td id="output2">*****<br>****<br>***<br>**<br>*</td>
             <td>
@@ -231,7 +246,7 @@ for (var j = saisie; j &gt; 0; j--) {
             </td>
         </tr>
 
-        <!-- Ligne 4 : Exercice 3 -->
+        <!-- Exercice 3 -->
         <tr>
             <td id="output3">+++++*<br>++++**<br>+++***<br>++****<br>+*****</td>
             <td>
@@ -254,7 +269,52 @@ for (var j = 0; j &lt; saisie; j++) {
             </td>
         </tr>
 
+        <!-- Exercice 4 : Carré magique -->
+        <tr>
+            <td id="output4">*****<br>*ooo*<br>*ooo*<br>*ooo*<br>*****</td>
+            <td>
+                <input type="number" id="input4" value="5">
+                <button onclick="exercice4(parseInt(document.getElementById('input4').value), 'output4')">Afficher</button>
+            </td>
+            <td>
+<pre>
+&lt;!-- Carré magique avec conditions --&gt;
+for (var j = 0; j &lt; saisie; j++) {
+    for (var i = 0; i &lt; saisie; i++) {
+        if (i == 0 || i == (saisie - 1) ||
+            j == 0 || j == (saisie - 1)) {
+            resultat += "*";
+        } else {
+            resultat += "o";
+        }
+    }
+    resultat += "&lt;br/&gt;";
+}
+</pre>
+            </td>
+        </tr>
+
     </table>
+
+    <h2>Comprendre les conditions <code>if</code> en JavaScript</h2>
+
+    <div class="intro">
+        <p>La condition <code>if</code> permet d'exécuter un bloc de code uniquement si une certaine condition est remplie.</p>
+        <p><strong>Exemple de base :</strong></p>
+        <pre>
+var nombre = 5;
+if (nombre > 3) {
+    console.log("Le nombre est plus grand que 3");
+}
+        </pre>
+        <p>Ici, si la variable <code>nombre</code> est supérieure à 3, le message sera affiché.</p>
+        <p>On peut aussi combiner plusieurs conditions avec :</p>
+        <ul>
+            <li><strong>&amp;&amp;</strong> (ET logique) : les deux conditions doivent être vraies.</li>
+            <li><strong>||</strong> (OU logique) : au moins une des deux conditions doit être vraie.</li>
+            <li><strong>!</strong> (NON logique) : inverse la condition.</li>
+        </ul>
+    </div>
 
 </body>
 </html>
