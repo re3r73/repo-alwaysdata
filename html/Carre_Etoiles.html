@@ -124,6 +124,19 @@
             var somme = saisie1 + saisie2;
             document.getElementById('result5').innerHTML = somme;
         }
+
+        function exercice6() {
+            var saisie1 = parseInt(document.getElementById('input6a').value);
+            var saisie2 = parseInt(document.getElementById('input6b').value);
+            var resultat = "";
+        
+            for (var j = 1; j <= saisie2; j++) {
+                resultat += saisie1 + " * " + j + " = " + (saisie1 * j) + "<br/>";
+            }
+        
+            document.getElementById('result6').innerHTML = resultat;
+        }
+
     </script>
 </head>
 <body>
@@ -353,6 +366,57 @@ function exercice5() {
             </td>
         </tr>
     </table>
+<h2>Comprendre les boucles pour les tables de multiplication</h2>
+
+<div class="intro">
+    <p>Pour réaliser une table de multiplication, on utilise une boucle <code>for</code> pour multiplier une valeur de départ par chaque nombre jusqu'à la limite choisie.</p>
+    <p>Exemple si l'utilisateur saisit <strong>Valeur 1 = 5</strong> et <strong>Valeur 2 = 6</strong> :</p>
+    <pre>
+5 * 1 = 5
+5 * 2 = 10
+5 * 3 = 15
+5 * 4 = 20
+5 * 5 = 25
+5 * 6 = 30
+    </pre>
+    <p>Ici, on commence à 1 et on répète la multiplication jusqu'à la valeur limite.</p>
+</div>
+
+<h2>Exercice pratique : Table de multiplication</h2>
+
+<table>
+    <tr>
+        <th>Résultat interprété</th>
+        <th>Zone de saisie interactive</th>
+        <th>Code source affiché (échappé et commenté)</th>
+    </tr>
+    <tr>
+        <td>
+            <p>Saisir la valeur à multiplier :</p>
+            <input type="number" id="input6a" value="5" />
+            <p>Saisir la limite :</p>
+            <input type="number" id="input6b" value="6" /><br>
+            <button onclick="exercice6()">Afficher la table</button>
+            <div id="result6" style="margin-top: 10px;">5 * 1 = 5<br>5 * 2 = 10<br>5 * 3 = 15<br>5 * 4 = 20<br>5 * 5 = 25<br>5 * 6 = 30</div>
+        </td>
+        <td colspan="2">
+<pre>
+function exercice6() {
+    var saisie1 = parseInt(document.getElementById('input6a').value);
+    var saisie2 = parseInt(document.getElementById('input6b').value);
+    var resultat = "";
+
+    for (var j = 1; j &lt;= saisie2; j++) {
+        resultat += saisie1 + " * " + j + " = " + (saisie1 * j) + "&lt;br/&gt;";
+    }
+
+    document.getElementById('result6').innerHTML = resultat;
+}
+</pre>
+        </td>
+    </tr>
+</table>
+
 
 </body>
 </html>
