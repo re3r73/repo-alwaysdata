@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Table de multiplication de 5</title>
+</head>
+<body>
+  <h2>Table de multiplication de 5</h2>
+  <p>5 × 0 = 0</p>
+  <p>5 × 1 = 5</p>
+  <p>5 × 2 = 10</p>
+  <p>5 × 3 = 15</p>
+  <p>5 × 4 = 20</p>
+  <p>5 × 5 = 25</p>
+  <p>5 × 6 = 30</p>
+  <p>5 × 7 = 35</p>
+  <p>5 × 8 = 40</p>
+  <p>5 × 9 = 45</p>
+  <p>5 × 10 = 50</p>
+</body>
+</html>
