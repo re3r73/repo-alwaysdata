@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 02</title>
+</head>
+<body>
+
+  <h2>Addition de deux nombres</h2>
+
+  <input type="number" id="nombre1" placeholder="Nombre 1">
+  <input type="number" id="nombre2" placeholder="Nombre 2">
+  <button onclick="addition()">Additionner</button>
+
+  <p>Résultat : <span id="resultat">0</span></p>
+
+  <p><a href="exo-02_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    function addition() {
+      const n1 = parseFloat(document.getElementById('nombre1').value);
+      const n2 = parseFloat(document.getElementById('nombre2').value);
+      const resultat = n1 + n2;
+      document.getElementById('resultat').textContent = resultat;
+    }
+  </script>
+
+</body>
+</html>
