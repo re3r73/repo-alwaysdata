@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction – Exo 06</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #28a745;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      margin: 10px;
+      width: 100px;
+      text-align: center;
+    }
+    .resultat p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+    .button-container {
+      margin-top: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Correction – Exercice 06</h1>
+  <div class="container">
+    <h2>Table de multiplication personnalisée</h2>
+
+    <input type="number" id="nombre" value="5" min="0">
+    <input type="number" id="limite" value="10" min="1">
+
+    <div class="resultat" id="resultat"></div>
+
+    <div class="button-container">
+      <a href="exo-06_consignes.html" class="button">← Retour à la consigne</a>
+    </div>
+  </div>
+
+  <script>
+    const baseInput = document.getElementById('nombre');
+    const limiteInput = document.getElementById('limite');
+    const resultat = document.getElementById('resultat');
+
+    function genererTable() {
+      const base = parseInt(baseInput.value);
+      const limite = parseInt(limiteInput.value);
+      resultat.innerHTML = '';
+
+      for (let i = 1; i <= limite; i++) {
+        const p = document.createElement('p');
+        p.textContent = `${base} × ${i} = ${base * i}`;
+        resultat.appendChild(p);
+      }
+    }
+
+    baseInput.addEventListener('input', genererTable);
+    limiteInput.addEventListener('input', genererTable);
+    genererTable();
+  </script>
+
+</body>
+</html>
