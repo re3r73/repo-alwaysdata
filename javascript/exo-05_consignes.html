@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exo 05 – Table réactive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .note {
+      background-color: #e7f3ff;
+      border-left: 5px solid #007BFF;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 5px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚡ Exercice 05 – Table réactive</h1>
+  <div class="container">
+    <h2>🎯 Objectif : mettre à jour automatiquement une table de multiplication à chaque saisie</h2>
+
+    <p>Instructions :</p>
+    <ul>
+      <li>Crée une page HTML avec un champ <code>&lt;input type="number"&gt;</code>.</li>
+      <li>Lorsqu’on change la valeur, la table de multiplication (de 0 à 10) doit se mettre à jour **en temps réel**, sans bouton.</li>
+      <li>Utilise <code>addEventListener</code> avec l’événement <code>"input"</code>.</li>
+      <li>Affiche le résultat dans une <code>&lt;div&gt;</code>.</li>
+    </ul>
+
+    <div class="note">
+      💡 Astuce : pense à appeler la fonction une première fois au chargement pour afficher une table par défaut (par exemple celle de 5).
+    </div>
+
+    <div class="button-container">
+      <a href="exo-05_correction.html" class="button">Voir la correction stylée</a>
+      <a href="exo-05_correction_brute.html" class="button">Voir la correction brute</a>
+    </div>
+  </div>
+
+</body>
+</html>
