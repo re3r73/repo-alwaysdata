@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exo 09 – Ampoules interactives</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f9f9f9;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .note {
+      background: #e7f3ff;
+      padding: 15px;
+      margin-top: 20px;
+      border-left: 5px solid #007BFF;
+      border-radius: 5px;
+    }
+    .illustration {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .illustration img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>💡 Exercice 09 – Contrôle d’ampoules avec JavaScript</h1>
+  <div class="container">
+    <h2>🎯 Objectif : gérer l’état d’ampoules en JS</h2>
+
+    <p>Tu dois gérer <strong>3 ampoules indépendantes</strong> avec JavaScript :</p>
+    <ul>
+      <li>Chaque ampoule commence <strong>éteinte et visible</strong>.</li>
+      <li>Ajoute deux boutons pour <strong>chaque ampoule</strong> :
+        <ul>
+          <li>Un bouton pour <strong>Afficher/Masquer</strong> l’image</li>
+          <li>Un bouton pour <strong>Allumer/Éteindre</strong> l’ampoule (changer son image)</li>
+        </ul>
+      </li>
+      <li>L’image utilisée pour une ampoule :
+        <ul>
+          <li>Éteinte : <code>ampoule_off.png</code></li>
+          <li>Allumée : <code>ampoule_on.png</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="note">
+      💡 Astuce : tu peux modifier le <code>style.display</code> pour masquer une image, et le <code>src</code> pour changer d’état.
+    </div>
+
+    <div class="illustration">
+      <img src="https://raw.githubusercontent.com/jeremiepoujol/repo-alwaysdata/main/javascript/images/consignes_ampoules.png" alt="Illustration des ampoules interactives">
+    </div>
+
+    <div style="text-align: center;">
+      <a href="exo-09_correction.html" class="button">Voir la correction stylée</a><br>
+      <a href="exo-09_correction_brute.html" class="button">Voir la correction brute</a>
+    </div>
+  </div>
+</body>
+</html>
