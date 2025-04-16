@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 03</title>
+</head>
+<body>
+
+  <h2>Table de multiplication de 5</h2>
+  <div id="table5"></div>
+
+  <p><a href="exo-03_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    const container = document.getElementById('table5');
+
+    for (let i = 0; i <= 10; i++) {
+      const p = document.createElement('p');
+      p.textContent = `5 × ${i} = ${5 * i}`;
+      container.appendChild(p);
+    }
+  </script>
+
+</body>
+</html>
