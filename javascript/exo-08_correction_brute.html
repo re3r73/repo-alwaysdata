@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 08</title>
+</head>
+<body>
+
+  <h2>Mini-calculatrice</h2>
+
+  <input type="number" id="a" placeholder="Nombre 1">
+  <select id="operation">
+    <option value="+">+</option>
+    <option value="-">−</option>
+    <option value="*">×</option>
+    <option value="/">÷</option>
+  </select>
+  <input type="number" id="b" placeholder="Nombre 2">
+  <button onclick="calculer()">Calculer</button>
+
+  <p>Résultat : <span id="resultat">...</span></p>
+
+  <p><a href="exo-08_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    function calculer() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const op = document.getElementById('operation').value;
+      let resultat;
+
+      if (op === '+') {
+        resultat = a + b;
+      } else if (op === '-') {
+        resultat = a - b;
+      } else if (op === '*') {
+        resultat = a * b;
+      } else if (op === '/') {
+        if (b === 0) {
+          resultat = "Erreur : division par zéro";
+        } else {
+          resultat = a / b;
+        }
+      }
+
+      document.getElementById('resultat').textContent = resultat;
+    }
+  </script>
+
+</body>
+</html>
