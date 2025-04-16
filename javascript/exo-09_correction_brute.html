@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 09</title>
+</head>
+<body>
+
+  <h2>Gestion des ampoules</h2>
+
+  <div>
+    <p>Ampoule 1</p>
+    <img id="amp1" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png">
+    <br>
+    <button onclick="toggleVisibility('amp1')">Afficher/Masquer</button>
+    <button onclick="toggleLight('amp1')">Allumer/Éteindre</button>
+  </div>
+
+  <div>
+    <p>Ampoule 2</p>
+    <img id="amp2" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png">
+    <br>
+    <button onclick="toggleVisibility('amp2')">Afficher/Masquer</button>
+    <button onclick="toggleLight('amp2')">Allumer/Éteindre</button>
+  </div>
+
+  <div>
+    <p>Ampoule 3</p>
+    <img id="amp3" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png">
+    <br>
+    <button onclick="toggleVisibility('amp3')">Afficher/Masquer</button>
+    <button onclick="toggleLight('amp3')">Allumer/Éteindre</button>
+  </div>
+
+  <p><a href="exo-09_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    const urlOn = "https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_on.png";
+    const urlOff = "https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png";
+
+    function toggleVisibility(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+
+    function toggleLight(id) {
+      const el = document.getElementById(id);
+      el.src = (el.src.includes("off")) ? urlOn : urlOff;
+    }
+  </script>
+
+</body>
+</html>
