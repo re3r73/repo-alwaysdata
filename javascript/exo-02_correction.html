@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction – Exo 02</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #28a745;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      margin: 10px;
+      width: 100px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .button-container {
+      margin-top: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Correction – Exercice 02</h1>
+
+  <div class="container">
+    <h2>Addition de deux nombres</h2>
+
+    <input type="number" id="nombre1" placeholder="Nombre 1">
+    <input type="number" id="nombre2" placeholder="Nombre 2">
+    <br>
+    <button onclick="addition()">Additionner</button>
+
+    <div class="result">
+      Résultat : <span id="resultat">0</span>
+    </div>
+
+    <div class="button-container">
+      <a href="exo-02_consignes.html" class="button">← Retour à la consigne</a>
+    </div>
+  </div>
+
+  <script>
+    function addition() {
+      const n1 = parseFloat(document.getElementById('nombre1').value);
+      const n2 = parseFloat(document.getElementById('nombre2').value);
+      const resultat = n1 + n2;
+      document.getElementById('resultat').textContent = resultat;
+    }
+  </script>
+
+</body>
+</html>
