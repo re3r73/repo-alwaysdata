@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 04</title>
+</head>
+<body>
+
+  <h2>Générateur de table de multiplication</h2>
+
+  <input type="number" id="nombre" value="5">
+  <button onclick="genererTable()">Générer la table</button>
+
+  <div id="resultat"></div>
+
+  <p><a href="exo-04_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    function genererTable() {
+      const nombre = parseInt(document.getElementById('nombre').value);
+      const resultatDiv = document.getElementById('resultat');
+      resultatDiv.innerHTML = '';
+
+      for (let i = 0; i <= 10; i++) {
+        const p = document.createElement('p');
+        p.textContent = `${nombre} × ${i} = ${nombre * i}`;
+        resultatDiv.appendChild(p);
+      }
+    }
+  </script>
+
+</body>
+</html>
