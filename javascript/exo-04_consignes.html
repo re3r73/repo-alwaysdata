@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exo 04 – Table avec saisie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .note {
+      background: #e7f3ff;
+      padding: 15px;
+      margin-top: 20px;
+      border-left: 5px solid #007BFF;
+      border-radius: 5px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔢 Exercice 04 – Table avec saisie</h1>
+  <div class="container">
+    <h2>🎯 Objectif : générer une table de multiplication selon une saisie utilisateur</h2>
+
+    <p>Dans cet exercice, tu dois permettre à l'utilisateur de :</p>
+    <ul>
+      <li>Saisir un nombre dans un champ <code>&lt;input&gt;</code></li>
+      <li>Cliquer sur un bouton pour générer sa table de multiplication</li>
+      <li>Afficher dynamiquement les résultats dans une zone dédiée</li>
+    </ul>
+
+    <div class="note">
+      💡 Astuce : pense à utiliser <code>parseInt()</code> pour convertir la saisie, et <code>innerHTML = ''</code> pour vider le résultat avant chaque génération.
+    </div>
+
+    <div class="button-container">
+      <a href="exo-04_correction.html" class="button">Voir la correction stylée</a><br><br>
+      <a href="exo-04_correction_brute.html" class="button">Voir la correction brute</a>
+    </div>
+  </div>
+
+</body>
+</html>
