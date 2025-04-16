@@ -56,10 +56,6 @@
     button:hover {
       background-color: #0056b3;
     }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
     .button-container {
       margin-top: 30px;
     }
@@ -90,31 +86,28 @@
       <!-- Ampoule 1 -->
       <div class="ampoule-box">
         <h3>Ampoule 1</h3>
-        <label><input type="checkbox" onclick="toggleVisibility('amp1')"> Afficher</label>
         <img id="amp1" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 1">
         <br>
-        <button onclick="switchOn('amp1')">Allumer</button>
-        <button onclick="switchOff('amp1')">Masquer</button>
+        <button onclick="toggleLight('amp1')">Allumer/Éteindre</button>
+        <button onclick="toggleVisibility('amp1')">Afficher/Masquer</button>
       </div>
 
       <!-- Ampoule 2 -->
       <div class="ampoule-box">
         <h3>Ampoule 2</h3>
-        <label><input type="checkbox" onclick="toggleVisibility('amp2')"> Afficher</label>
         <img id="amp2" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 2">
         <br>
-        <button onclick="switchOn('amp2')">Allumer</button>
-        <button onclick="switchOff('amp2')">Masquer</button>
+        <button onclick="toggleLight('amp2')">Allumer/Éteindre</button>
+        <button onclick="toggleVisibility('amp2')">Afficher/Masquer</button>
       </div>
 
       <!-- Ampoule 3 -->
       <div class="ampoule-box">
         <h3>Ampoule 3</h3>
-        <label><input type="checkbox" onclick="toggleVisibility('amp3')"> Afficher</label>
         <img id="amp3" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 3">
         <br>
-        <button onclick="switchOn('amp3')">Allumer</button>
-        <button onclick="switchOff('amp3')">Masquer</button>
+        <button onclick="toggleLight('amp3')">Allumer/Éteindre</button>
+        <button onclick="toggleVisibility('amp3')">Afficher/Masquer</button>
       </div>
 
     </div>
@@ -128,20 +121,14 @@
     const urlOn = "https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_on.png";
     const urlOff = "https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png";
 
+    function toggleLight(id) {
+      const img = document.getElementById(id);
+      img.src = img.src.includes("off") ? urlOn : urlOff;
+    }
+
     function toggleVisibility(id) {
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === "none" || el.style.display === "") ? "block" : "none";
-    }
-
-    function switchOn(id) {
-      const el = document.getElementById(id);
-      el.src = urlOn;
-      el.style.display = "block";
-    }
-
-    function switchOff(id) {
-      const el = document.getElementById(id);
-      el.src = urlOff;
+      const img = document.getElementById(id);
+      img.style.display = (img.style.display === "none" || img.style.display === "") ? "block" : "none";
     }
   </script>
 
