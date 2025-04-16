@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exo 03 – Table JS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .note {
+      background-color: #e7f3ff;
+      border-left: 5px solid #007BFF;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 5px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧮 Exercice 03 – Générer une table en JavaScript</h1>
+  <div class="container">
+    <h2>🎯 Objectif : générer dynamiquement la table de multiplication de 5 avec JavaScript</h2>
+
+    <p>Crée une page HTML avec :</p>
+    <ul>
+      <li>Un <code>&lt;div&gt;</code> vide identifié par un <code>id</code> (par exemple <code>table5</code>).</li>
+      <li>Un script JavaScript contenant une boucle <code>for</code> allant de 0 à 10.</li>
+      <li>À chaque tour de boucle, crée un paragraphe (<code>&lt;p&gt;</code>) avec le calcul de 5 × i.</li>
+      <li>Ajoute dynamiquement ces paragraphes dans la <code>&lt;div&gt;</code> grâce au DOM.</li>
+    </ul>
+
+    <div class="note">
+      💡 Astuce : tu peux utiliser <code>createElement</code> et <code>appendChild</code> pour insérer les éléments.
+    </div>
+
+    <div class="button-container">
+      <a href="exo-03_correction.html" class="button">Voir la correction stylée</a>
+      <a href="exo-03_correction_brute.html" class="button">Voir la correction brute</a>
+    </div>
+  </div>
+
+</body>
+</html>
