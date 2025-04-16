@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exo 02 – Addition simple</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .note {
+      background-color: #e7f3ff;
+      border-left: 5px solid #007BFF;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 5px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧮 Exercice 02 – Addition simple</h1>
+  <div class="container">
+    <h2>🎯 Objectif : additionner deux nombres saisis par l'utilisateur</h2>
+
+    <p>Crée une page HTML avec :</p>
+    <ul>
+      <li>Deux champs de saisie (type <code>number</code>), un pour chaque nombre.</li>
+      <li>Un bouton qui déclenche le calcul de l’addition.</li>
+      <li>Un élément HTML (ex : <code>&lt;span&gt;</code>) où s’affichera le résultat.</li>
+    </ul>
+
+    <p>Le calcul se fait en JavaScript lorsque l’utilisateur clique sur le bouton. Tu utiliseras <code>getElementById</code>, <code>parseFloat</code>, et <code>textContent</code>.</p>
+
+    <div class="note">
+      💡 Astuce : pense à bien vérifier que les valeurs récupérées soient des nombres (grâce à <code>parseFloat()</code>) pour éviter les concaténations.
+    </div>
+
+    <div class="button-container">
+      <a href="exo-02_correction.html" class="button">Voir la correction</a>
+    </div>
+  </div>
+
+</body>
+</html>
