@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Consigne – Exercice HTML : Table de multiplication</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #007BFF;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .note {
+      background-color: #e7f3ff;
+      border-left: 5px solid #007BFF;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 5px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧪 Exercice HTML</h1>
+  <div class="container">
+    <h2>🎯 Objectif : Créer une table de multiplication en HTML</h2>
+
+    <p>Dans cet exercice, tu dois créer une page HTML qui affiche la table de multiplication du nombre <strong>5</strong>.</p>
+
+    <ul>
+      <li>La page doit contenir une structure HTML valide (<code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>).</li>
+      <li>Ajoute un titre dans l’onglet du navigateur (<code>&lt;title&gt;</code>).</li>
+      <li>Dans le corps de la page, affiche la table de 5 (de 5 × 0 jusqu’à 5 × 10).</li>
+      <li>Chaque ligne doit être écrite dans une balise <code>&lt;p&gt;</code>.</li>
+    </ul>
+
+    <div class="note">
+      💡 Astuce : tu peux écrire les calculs directement à la main. L’objectif ici est uniquement de te familiariser avec la syntaxe HTML. On verra ensuite comment automatiser ça avec JavaScript !
+    </div>
+
+    <div class="button-container">
+      <a href="correction.html" class="button">Voir la correction</a>
+    </div>
+  </div>
+
+</body>
+</html>
