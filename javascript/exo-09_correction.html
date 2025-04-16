@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction – Exo 09</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #28a745;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .ampoule-box {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .ampoule-box img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 14px;
+      margin: 5px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .button-container {
+      margin-top: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Correction – Exercice 09</h1>
+
+  <div class="container">
+    <h2>Contrôle d’ampoules</h2>
+
+    <!-- Ampoule 1 -->
+    <div class="ampoule-box">
+      <p>Ampoule 1</p>
+      <img id="amp1" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 1">
+      <br>
+      <button onclick="toggleVisibility('amp1')">Afficher/Masquer</button>
+      <button onclick="toggleLight('amp1')">Allumer/Éteindre</button>
+    </div>
+
+    <!-- Ampoule 2 -->
+    <div class="ampoule-box">
+      <p>Ampoule 2</p>
+      <img id="amp2" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 2">
+      <br>
+      <button onclick="toggleVisibility('amp2')">Afficher/Masquer</button>
+      <button onclick="toggleLight('amp2')">Allumer/Éteindre</button>
+    </div>
+
+    <!-- Ampoule 3 -->
+    <div class="ampoule-box">
+      <p>Ampoule 3</p>
+      <img id="amp3" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 3">
+      <br>
+      <button onclick="toggleVisibility('amp3')">Afficher/Masquer</button>
+      <button onclick="toggleLight('amp3')">Allumer/Éteindre</button>
+    </div>
+
+    <div class="button-container">
+      <a href="exo-09_consignes.html" class="button">← Retour à la consigne</a>
+    </div>
+  </div>
+
+  <script>
+    const urlOn = "https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_on.png";
+    const urlOff = "https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png";
+
+    function toggleVisibility(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+
+    function toggleLight(id) {
+      const el = document.getElementById(id);
+      el.src = el.src.includes("off") ? urlOn : urlOff;
+    }
+  </script>
+
+</body>
+</html>
