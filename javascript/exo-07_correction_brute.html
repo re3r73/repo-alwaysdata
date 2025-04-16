@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 07</title>
+</head>
+<body>
+
+  <h2>Calcul au choix</h2>
+
+  <input type="number" id="nombre1" placeholder="Nombre 1">
+  <select id="operation">
+    <option value="+">+</option>
+    <option value="*">×</option>
+  </select>
+  <input type="number" id="nombre2" placeholder="Nombre 2">
+  <button onclick="calculer()">Calculer</button>
+
+  <p>Résultat : <span id="resultat">...</span></p>
+
+  <p><a href="exo-07_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    function calculer() {
+      const n1 = parseFloat(document.getElementById('nombre1').value);
+      const n2 = parseFloat(document.getElementById('nombre2').value);
+      const op = document.getElementById('operation').value;
+      let resultat = '';
+
+      if (op === '+') {
+        resultat = n1 + n2;
+      } else if (op === '*') {
+        resultat = n1 * n2;
+      }
+
+      document.getElementById('resultat').textContent = resultat;
+    }
+  </script>
+
+</body>
+</html>
