@@ -15,7 +15,7 @@
       text-align: center;
     }
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
       background-color: #fff;
       border-radius: 8px;
@@ -23,17 +23,25 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
+    .grid {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
     .ampoule-box {
+      flex: 1;
+      min-width: 250px;
       border: 1px solid #ddd;
-      border-radius: 6px;
+      border-radius: 8px;
       padding: 20px;
-      margin-bottom: 20px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .ampoule-box img {
       width: 100px;
       height: auto;
-      margin-bottom: 10px;
+      margin: 20px 0;
     }
     button {
       padding: 8px 14px;
@@ -47,6 +55,10 @@
     }
     button:hover {
       background-color: #0056b3;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
     }
     .button-container {
       margin-top: 30px;
@@ -73,31 +85,38 @@
   <div class="container">
     <h2>Contrôle d’ampoules</h2>
 
-    <!-- Ampoule 1 -->
-    <div class="ampoule-box">
-      <p>Ampoule 1</p>
-      <img id="amp1" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 1">
-      <br>
-      <button onclick="toggleVisibility('amp1')">Afficher/Masquer</button>
-      <button onclick="toggleLight('amp1')">Allumer/Éteindre</button>
-    </div>
+    <div class="grid">
 
-    <!-- Ampoule 2 -->
-    <div class="ampoule-box">
-      <p>Ampoule 2</p>
-      <img id="amp2" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 2">
-      <br>
-      <button onclick="toggleVisibility('amp2')">Afficher/Masquer</button>
-      <button onclick="toggleLight('amp2')">Allumer/Éteindre</button>
-    </div>
+      <!-- Ampoule 1 -->
+      <div class="ampoule-box">
+        <h3>Ampoule 1</h3>
+        <label><input type="checkbox" onclick="toggleVisibility('amp1')"> Afficher</label>
+        <img id="amp1" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 1">
+        <br>
+        <button onclick="switchOn('amp1')">Allumer</button>
+        <button onclick="switchOff('amp1')">Masquer</button>
+      </div>
 
-    <!-- Ampoule 3 -->
-    <div class="ampoule-box">
-      <p>Ampoule 3</p>
-      <img id="amp3" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 3">
-      <br>
-      <button onclick="toggleVisibility('amp3')">Afficher/Masquer</button>
-      <button onclick="toggleLight('amp3')">Allumer/Éteindre</button>
+      <!-- Ampoule 2 -->
+      <div class="ampoule-box">
+        <h3>Ampoule 2</h3>
+        <label><input type="checkbox" onclick="toggleVisibility('amp2')"> Afficher</label>
+        <img id="amp2" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 2">
+        <br>
+        <button onclick="switchOn('amp2')">Allumer</button>
+        <button onclick="switchOff('amp2')">Masquer</button>
+      </div>
+
+      <!-- Ampoule 3 -->
+      <div class="ampoule-box">
+        <h3>Ampoule 3</h3>
+        <label><input type="checkbox" onclick="toggleVisibility('amp3')"> Afficher</label>
+        <img id="amp3" src="https://jeremiepoujol.alwaysdata.net/javascript/images/ampoule_off.png" alt="Ampoule 3">
+        <br>
+        <button onclick="switchOn('amp3')">Allumer</button>
+        <button onclick="switchOff('amp3')">Masquer</button>
+      </div>
+
     </div>
 
     <div class="button-container">
@@ -111,12 +130,18 @@
 
     function toggleVisibility(id) {
       const el = document.getElementById(id);
-      el.style.display = (el.style.display === "none") ? "block" : "none";
+      el.style.display = (el.style.display === "none" || el.style.display === "") ? "block" : "none";
     }
 
-    function toggleLight(id) {
+    function switchOn(id) {
       const el = document.getElementById(id);
-      el.src = el.src.includes("off") ? urlOn : urlOff;
+      el.src = urlOn;
+      el.style.display = "block";
+    }
+
+    function switchOff(id) {
+      const el = document.getElementById(id);
+      el.src = urlOff;
     }
   </script>
 
