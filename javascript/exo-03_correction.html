@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction – Exo 03</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #28a745;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .resultat p {
+      font-size: 18px;
+      text-align: center;
+      margin: 5px 0;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Correction – Exercice 03</h1>
+  <div class="container">
+    <h2>Table de multiplication de 5</h2>
+    <div class="resultat" id="table5"></div>
+
+    <div class="button-container">
+      <a href="exo-03_consignes.html" class="button">← Retour à la consigne</a>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('table5');
+
+    for (let i = 0; i <= 10; i++) {
+      const p = document.createElement('p');
+      p.textContent = `5 × ${i} = ${5 * i}`;
+      container.appendChild(p);
+    }
+  </script>
+
+</body>
+</html>
