@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 05</title>
+</head>
+<body>
+
+  <h2>Table de multiplication dynamique</h2>
+
+  <label for="nombre">Choisis un nombre :</label>
+  <input type="number" id="nombre" value="5" min="0">
+
+  <div id="resultat"></div>
+
+  <p><a href="exo-05_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    const input = document.getElementById('nombre');
+    const resultat = document.getElementById('resultat');
+
+    function genererTable() {
+      const n = parseInt(input.value);
+      resultat.innerHTML = '';
+
+      for (let i = 0; i <= 10; i++) {
+        const p = document.createElement('p');
+        p.textContent = `${n} × ${i} = ${n * i}`;
+        resultat.appendChild(p);
+      }
+    }
+
+    input.addEventListener('input', genererTable);
+    genererTable(); // Affichage initial
+  </script>
+
+</body>
+</html>
