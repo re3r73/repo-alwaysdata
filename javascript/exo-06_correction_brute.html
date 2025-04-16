@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction brute – Exo 06</title>
+</head>
+<body>
+
+  <h2>Table personnalisée</h2>
+
+  <label for="nombre">Nombre de base :</label>
+  <input type="number" id="nombre" value="5" min="0">
+
+  <label for="limite">Jusqu’à :</label>
+  <input type="number" id="limite" value="10" min="1">
+
+  <div id="resultat"></div>
+
+  <p><a href="exo-06_consignes.html">← Retour à la consigne</a></p>
+
+  <script>
+    const baseInput = document.getElementById('nombre');
+    const limiteInput = document.getElementById('limite');
+    const resultat = document.getElementById('resultat');
+
+    function genererTable() {
+      const base = parseInt(baseInput.value);
+      const limite = parseInt(limiteInput.value);
+      resultat.innerHTML = '';
+
+      for (let i = 1; i <= limite; i++) {
+        const p = document.createElement('p');
+        p.textContent = `${base} × ${i} = ${base * i}`;
+        resultat.appendChild(p);
+      }
+    }
+
+    baseInput.addEventListener('input', genererTable);
+    limiteInput.addEventListener('input', genererTable);
+    genererTable(); // Initialisation
+  </script>
+
+</body>
+</html>
