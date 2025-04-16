@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Correction – Exo 04</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 40px;
+    }
+    h1, h2 {
+      color: #28a745;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      width: 80px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #resultat p {
+      margin: 5px 0;
+    }
+    .button-container {
+      margin-top: 30px;
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Correction – Exercice 04</h1>
+
+  <div class="container">
+    <h2>Générateur de table de multiplication</h2>
+
+    <input type="number" id="nombre" value="5">
+    <button onclick="genererTable()">Générer la table</button>
+
+    <div id="resultat"></div>
+
+    <div class="button-container">
+      <a href="exo-04_consignes.html" class="button">← Retour à la consigne</a>
+    </div>
+  </div>
+
+  <script>
+    function genererTable() {
+      const nombre = parseInt(document.getElementById('nombre').value);
+      const resultatDiv = document.getElementById('resultat');
+      resultatDiv.innerHTML = '';
+
+      for (let i = 0; i <= 10; i++) {
+        const p = document.createElement('p');
+        p.textContent = `${nombre} × ${i} = ${nombre * i}`;
+        resultatDiv.appendChild(p);
+      }
+    }
+  </script>
+
+</body>
+</html>
