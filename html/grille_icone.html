@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Grille d'icônes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .icon-box {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: transform 0.2s;
+    }
+
+    .icon-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #0073e6;
+    }
+
+    .label {
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+
+  <!-- Icônes FontAwesome (optionnel) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <h1>Ma grille d'icônes</h1>
+
+  <div class="grid">
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-user"></i></div>
+      <div class="label">Profil</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-envelope"></i></div>
+      <div class="label">Messages</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-cog"></i></div>
+      <div class="label">Paramètres</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-calendar"></i></div>
+      <div class="label">Agenda</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-chart-bar"></i></div>
+      <div class="label">Stats</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-folder"></i></div>
+      <div class="label">Dossiers</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-comments"></i></div>
+      <div class="label">Chat</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-bell"></i></div>
+      <div class="label">Notifications</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
+      <div class="label">Déconnexion</div>
+    </div>
+  </div>
+
+</body>
+</html>
