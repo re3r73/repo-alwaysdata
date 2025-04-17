@@ -40,10 +40,36 @@
         button {
             margin-top: 5px;
             padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-button {
+            display: block;
+            margin: 30px auto 60px;
+            text-align: center;
+        }
+        .back-button a {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button a:hover {
+            background-color: #0056b3;
         }
     </style>
     <script>
-        // Fonctions pour chaque exercice
         function afficher() {
             var saisie = parseInt(document.getElementById('V1').value);
             var resultat = "";
@@ -129,14 +155,13 @@
             var saisie1 = parseInt(document.getElementById('input6a').value);
             var saisie2 = parseInt(document.getElementById('input6b').value);
             var resultat = "";
-        
+
             for (var j = 1; j <= saisie2; j++) {
                 resultat += saisie1 + " * " + j + " = " + (saisie1 * j) + "<br/>";
             }
-        
+
             document.getElementById('result6').innerHTML = resultat;
         }
-
     </script>
 </head>
 <body>
@@ -417,6 +442,10 @@ function exercice6() {
     </tr>
 </table>
 
+
+    <div class="back-button">
+        <a href="https://jeremiepoujol.alwaysdata.net/javascript/">&#8592; Retour à la page principale</a>
+    </div>
 
 </body>
 </html>
