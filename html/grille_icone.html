@@ -2,96 +2,88 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Grille d'icônes FontAwesome</title>
+  <title>9 Icônes - Hover Orange</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      padding: 40px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
     }
 
-    .grid {
+    .grid-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 600px;
-      margin: 0 auto;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 20px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .icon-box {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 20px;
-      transition: transform 0.2s;
+      text-align: center;
       cursor: pointer;
     }
 
-    .icon-box:hover {
-      transform: translateY(-5px);
-    }
-
-    .icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-      color: #007BFF; /* bleu par défaut */
+    .icon-box i {
+      font-size: 36px;
+      color: #1d4ed8; /* bleu */
       transition: color 0.3s ease;
     }
 
-    .icon-box:hover .icon {
-      color: #FF6600; /* orange au hover */
+    .icon-box i:hover {
+      color: #f26e21; /* orange */
     }
 
-    .label {
-      font-size: 16px;
+    .icon-label {
+      margin-top: 8px;
+      font-size: 14px;
       color: #333;
     }
   </style>
-
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <h1>Ma grille d'icônes</h1>
-
-  <div class="grid">
+  <div class="grid-container">
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-user"></i></div>
-      <div class="label">Profil</div>
+      <i class="fas fa-user"></i>
+      <div class="icon-label">Utilisateur</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-envelope"></i></div>
-      <div class="label">Messages</div>
+      <i class="fas fa-cogs"></i>
+      <div class="icon-label">Paramètres</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-cog"></i></div>
-      <div class="label">Paramètres</div>
+      <i class="fas fa-chart-line"></i>
+      <div class="icon-label">Statistiques</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-calendar-alt"></i></div>
-      <div class="label">Agenda</div>
+      <i class="fas fa-envelope"></i>
+      <div class="icon-label">Messages</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-chart-bar"></i></div>
-      <div class="label">Statistiques</div>
+      <i class="fas fa-bell"></i>
+      <div class="icon-label">Notifications</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-folder"></i></div>
-      <div class="label">Documents</div>
+      <i class="fas fa-calendar-alt"></i>
+      <div class="icon-label">Agenda</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-comments"></i></div>
-      <div class="label">Discussion</div>
+      <i class="fas fa-file-alt"></i>
+      <div class="icon-label">Documents</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-bell"></i></div>
-      <div class="label">Alertes</div>
+      <i class="fas fa-comments"></i>
+      <div class="icon-label">Discussion</div>
     </div>
     <div class="icon-box">
-      <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
-      <div class="label">Déconnexion</div>
+      <i class="fas fa-sign-out-alt"></i>
+      <div class="icon-label">Déconnexion</div>
     </div>
   </div>
 
