@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Déclaration du jeu de caractères utilisé (UTF-8 prend en charge les caractères accentués) -->
   <meta charset="UTF-8">
+  
+  <!-- Titre de la page affiché dans l’onglet du navigateur -->
   <title>Correction brute – Exo 02</title>
 </head>
-<body>
 
+<!-- Début du script JavaScript -->
+<script>
+  // Déclaration de la fonction "addition", appelée quand on clique sur le bouton
+  function addition() {
+    // Récupère la valeur saisie dans l'input ayant l'ID "nombre1", puis la convertit en nombre décimal
+    const n1 = parseFloat(document.getElementById('nombre1').value);
+
+    // Récupère la valeur saisie dans l'input ayant l'ID "nombre2", puis la convertit aussi en nombre décimal
+    const n2 = parseFloat(document.getElementById('nombre2').value);
+
+    // Effectue l'addition des deux nombres
+    const resultat = n1 + n2;
+
+    // Affiche le résultat dans l'élément <span> ayant l'ID "resultat"
+    document.getElementById('resultat').textContent = resultat;
+  }
+</script>
+
+<body>
+  <!-- Titre principal de la page -->
   <h2>Addition de deux nombres</h2>
 
+  <!-- Champ de saisie pour le premier nombre (type number = saisie uniquement de chiffres) -->
   <input type="number" id="nombre1" placeholder="Nombre 1">
+
+  <!-- Champ de saisie pour le second nombre -->
   <input type="number" id="nombre2" placeholder="Nombre 2">
+
+  <!-- Bouton qui appelle la fonction "addition()" quand on clique dessus -->
   <button onclick="addition()">Additionner</button>
 
+  <!-- Zone où le résultat de l’addition sera affiché -->
   <p>Résultat : <span id="resultat">0</span></p>
 
+  <!-- Lien pour revenir à la page de consigne de l’exercice -->
   <p><a href="exo-02_consignes.html">← Retour à la consigne</a></p>
-
-  <script>
-    function addition() {
-      const n1 = parseFloat(document.getElementById('nombre1').value);
-      const n2 = parseFloat(document.getElementById('nombre2').value);
-      const resultat = n1 + n2;
-      document.getElementById('resultat').textContent = resultat;
-    }
-  </script>
-
 </body>
 </html>
