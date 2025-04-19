@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu de dés</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .dice {
+      font-size: 80px;
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #resultat {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎲 Jeu de dés</h1>
+  <div class="dice" id="de1">⚀</div>
+  <div class="dice" id="de2">⚀</div>
+  <button onclick="lancerDes()">Lancer les dés</button>
+
+  <div id="resultat"></div>
+
+  <script>
+    const symbolesDes = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+
+    function lancerDes() {
+      const lancer1 = Math.floor(Math.random() * 6);
+      const lancer2 = Math.floor(Math.random() * 6);
+
+      document.getElementById("de1").textContent = symbolesDes[lancer1];
+      document.getElementById("de2").textContent = symbolesDes[lancer2];
+
+      const total = lancer1 + lancer2 + 2;
+      document.getElementById("resultat").textContent = `Total : ${total}`;
+    }
+  </script>
+
+</body>
+</html>
