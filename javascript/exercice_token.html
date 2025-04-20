@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercice Token JS</title>
+</head>
+<body>
+  <h1>Connexion</h1>
+  <input type="text" id="username" placeholder="Nom d'utilisateur">
+  <input type="password" id="password" placeholder="Mot de passe">
+  <button onclick="login()">Se connecter</button>
+
+  <h2>Zone protégée</h2>
+  <button onclick="accessProtectedData()">Accéder aux données</button>
+  <p id="result"></p>
+
+  <script>
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      // Simuler une authentification
+      if (user === "admin" && pass === "1234") {
+        const token = generateToken();
+        localStorage.setItem("authToken", token);
+        alert("Connexion réussie ! Token généré et stocké.");
+      } else {
+        alert("Identifiants invalides.");
+      }
+    }
+
+    function generateToken() {
+      return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
+
+    function accessProtectedData() {
+      const token = localStorage.getItem("authToken");
+
+      if (token) {
+        document.getElementById("result").textContent = "✅ Données secrètes : Voici le contenu protégé !";
+      } else {
+        document.getElementById("result").textContent = "❌ Accès refusé. Veuillez vous connecter.";
+      }
+    }
+  </script>
+</body>
+</html>
