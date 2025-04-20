@@ -1,10 +1,12 @@
+# Création du contenu HTML avec effet "Matrix / Top Secret"
+html_content = """
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>Exercice Token JS</title>
 </head>
-<body>
+<body style="font-family: monospace; background-color: #000; color: #0f0; padding: 20px;">
   <h1>Connexion</h1>
   <input type="text" id="username" placeholder="Nom d'utilisateur">
   <input type="password" id="password" placeholder="Mot de passe">
@@ -12,14 +14,13 @@
 
   <h2>Zone protégée</h2>
   <button onclick="accessProtectedData()">Accéder aux données</button>
-  <p id="result"></p>
+  <pre id="result"></pre>
 
   <script>
     function login() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
 
-      // Simuler une authentification
       if (user === "admin" && pass === "1234") {
         const token = generateToken();
         localStorage.setItem("authToken", token);
@@ -37,11 +38,26 @@
       const token = localStorage.getItem("authToken");
 
       if (token) {
-        document.getElementById("result").textContent = "✅ Données secrètes : Voici le contenu protégé !";
+        document.getElementById("result").textContent =
+          "🕶️ Données secrètes récupérées :\\n" +
+          "Nom: Neo\\n" +
+          "Mission: Trouver l'Élu\\n" +
+          "Code d'accès: Z10N-0110\\n" +
+          "Transmission chiffrée : 01101001 01100001 01100100\\n" +
+          "📡 Connexion à la Matrice établie...";
       } else {
-        document.getElementById("result").textContent = "❌ Accès refusé. Veuillez vous connecter.";
+        document.getElementById("result").textContent = 
+          "❌ Accès refusé. Veuillez vous connecter.";
       }
     }
   </script>
 </body>
 </html>
+"""
+
+# Sauvegarder dans un fichier HTML
+file_path = "/mnt/data/exercice_auth_token.html"
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+file_path
