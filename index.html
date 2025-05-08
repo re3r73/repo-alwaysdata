@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Accès cours N3 – Les Hydronautes</title>
+  <title>Les Hydronautes – Cours N3</title>
   <style>
     body {
       background-color: #eaf6fb;
@@ -10,18 +10,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      flex-direction: column;
+      min-height: 100vh;
       margin: 0;
+      padding: 20px;
     }
 
-    .login-container {
+    .container {
       background: white;
-      padding: 40px;
+      padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       text-align: center;
-      max-width: 400px;
-      width: 90%;
+      max-width: 600px;
+      width: 100%;
     }
 
     .logo {
@@ -40,34 +42,47 @@
       margin-top: 0;
     }
 
-    p {
-      color: #333;
-      font-style: italic;
-      margin-bottom: 20px;
-    }
-
     input[type="password"] {
       padding: 10px;
-      margin: 10px 0;
+      margin-top: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
-      width: 100%;
-      box-sizing: border-box;
+      width: 80%;
+      max-width: 300px;
     }
 
     button {
+      margin-top: 15px;
       padding: 10px 20px;
       background-color: #007B8A;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
     }
 
     button:hover {
       background-color: #005f6b;
+    }
+
+    ul {
+      margin-top: 30px;
+      text-align: left;
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #005b99;
+    }
+
+    a:hover {
+      color: #003f6f;
     }
 
     .error {
@@ -77,24 +92,63 @@
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <img src="https://jeremiepoujol.alwaysdata.net/HYDRO/logo_hydronautes.jpg" alt="Logo Les Hydronautes" class="logo">
+  <div class="container">
+    <img src="logo_hydronautes.jpg" alt="Logo Hydronautes" class="logo">
     <h1>Les Hydronautes</h1>
     <h2>Cours N3 – Saison 2024/2025</h2>
-    <p>Prépare-toi à plonger dans les profondeurs de la connaissance 🌊</p>
+    <p>Merci d’entrer le mot de passe pour accéder aux documents pédagogiques :</p>
 
     <input type="password" id="password" placeholder="Mot de passe" />
-    <button onclick="checkPassword()">Entrer</button>
+    <br>
+    <button onclick="checkPassword()">Afficher les fichiers</button>
     <p class="error" id="error-msg"></p>
+
+    <ul id="file-list" style="display: none;">
+      <!-- Liens statiques injectés si mot de passe correct -->
+    </ul>
   </div>
 
   <script>
+    const files = [
+      "2_-_Flottabilite_Pression_et_Volumes_-_N3_(2024)_-_Eleves.pdf",
+      "3-1_Accidents_de_plongee_-_Baro_-_N3_(2024).pdf",
+      "3-2_Accidents_de_plongee_-_ADD_-_N3_(2024).pdf",
+      "3-3_Accidents_de_plongee_-_Fr-Ess-Narcose_-_N3_(2024).pdf",
+      "3-4_Accidents_de_plongee_-_OPI_-_N3_(2024).pdf",
+      "4-1_-_Gestion_desaturation_-_les_tables_federales_-_N3_(2024).pdf",
+      "4-2_-_Gestion_desaturation_-_les_ordinateurs_-_N3_(2024).pdf",
+      "5_-_Orientation_subaquatique_-_N3_(2024).pdf",
+      "6_-_Planification_-_Organisation_sans_DP_-_N3_(2024).pdf",
+      "7_-_Introduction-aux-detendeurs_-_N3_(2024).pdf",
+      "8-_Introduction_modeles_de_desaturation_N3_(2024).pdf",
+      "Exercices_autonomie_(Corriges).pptx",
+      "Exercices_tables_(corrige).pptx",
+      "Point-cles_Autonomie.pdf"
+    ];
+
     function checkPassword() {
-      const password = document.getElementById("password").value;
+      const password = document.getElementById("password").value.trim();
+      const list = document.getElementById("file-list");
+      const errorMsg = document.getElementById("error-msg");
+
       if (password === "HYDRO") {
-        window.location.href = "HYDRO/index.php";
+        errorMsg.textContent = "";
+        list.style.display = "block";
+        list.innerHTML = "";
+        const baseURL = window.location.href;
+
+        files.forEach(file => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = baseURL + file;
+          a.textContent = file;
+          a.target = "_blank";
+          li.appendChild(a);
+          list.appendChild(li);
+        });
       } else {
-        document.getElementById("error-msg").textContent = "Mot de passe incorrect.";
+        errorMsg.textContent = "Mot de passe incorrect.";
+        list.style.display = "none";
       }
     }
   </script>
