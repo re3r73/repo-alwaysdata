@@ -29,12 +29,22 @@
   </style>
 </head>
 <body>
-  <h1>📘 Cours N3 – Saison 2024/2025</h1>
+  <h1>📚 Cours N3 – Saison 2024/2025</h1>
   <ul>
     <?php
-      $files = glob("*.pdf");
+      $extensions = ['pdf', 'pptx', 'ppt'];
+      $files = [];
+
+      foreach ($extensions as $ext) {
+          foreach (glob("*.$ext") as $file) {
+              $files[] = $file;
+          }
+      }
+
+      sort($files); // optionnel : trie alphabétique
+
       if (empty($files)) {
-          echo "<li>Aucun fichier PDF trouvé.</li>";
+          echo "<li>Aucun fichier trouvé.</li>";
       } else {
           foreach ($files as $file) {
               $name = basename($file);
