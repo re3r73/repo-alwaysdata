@@ -26,6 +26,13 @@
     a:hover {
       color: #003f6f;
     }
+    .back {
+      margin-top: 40px;
+      display: inline-block;
+      text-decoration: none;
+      color: #007B8A;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -33,25 +40,33 @@
   <ul>
     <?php
       $extensions = ['pdf', 'pptx', 'ppt'];
+      $ignored = ['logo_hydronautes.jpg', 'index.php'];
       $files = [];
 
       foreach ($extensions as $ext) {
           foreach (glob("*.$ext") as $file) {
-              $files[] = $file;
+              if (!in_array($file, $ignored)) {
+                  $files[] = $file;
+              }
           }
       }
 
-      sort($files); // optionnel : trie alphabétique
+      sort($files);
 
       if (empty($files)) {
           echo "<li>Aucun fichier trouvé.</li>";
       } else {
           foreach ($files as $file) {
-              $name = basename($file);
-              echo "<li><a href=\"$name\" target=\"_blank\">$name</a></li>";
+              $icon = '📄';
+              if (preg_match('/\.pptx?$/i', $file)) {
+                  $icon = '📊';
+              }
+              echo "<li>$icon <a href=\"$file\" target=\"_blank\">$file</a></li>";
           }
       }
     ?>
   </ul>
+
+  <a class="back" href="/">← Retour à la page d’accueil</a>
 </body>
 </html>
