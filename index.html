@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Accès cours N3</title>
+  <style>
+    body {
+      background-color: #eaf6fb;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input[type="password"] {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007B8A;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f6b;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Accès aux cours N3</h2>
+    <p>Veuillez entrer le mot de passe :</p>
+    <input type="password" id="password" placeholder="Mot de passe" />
+    <br>
+    <button onclick="checkPassword()">Entrer</button>
+    <p class="error" id="error-msg"></p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      if (password === "HYDRO") {
+        window.location.href = "LHDP/";
+      } else {
+        document.getElementById("error-msg").textContent = "Mot de passe incorrect.";
+      }
+    }
+  </script>
+</body>
+</html>
