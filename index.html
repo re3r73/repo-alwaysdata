@@ -65,6 +65,26 @@
       background-color: #005f6b;
     }
 
+    ul {
+      margin-top: 30px;
+      text-align: left;
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #005b99;
+    }
+
+    a:hover {
+      color: #003f6f;
+    }
+
     .error {
       color: red;
       margin-top: 10px;
@@ -80,19 +100,53 @@
 
     <input type="password" id="password" placeholder="Mot de passe" />
     <br>
-    <button onclick="checkPassword()">Entrer</button>
+    <button onclick="checkPassword()">Afficher les fichiers</button>
     <p class="error" id="error-msg"></p>
+
+    <ul id="file-list" style="display: none;"></ul>
   </div>
 
   <script>
+    const files = [
+      "2_-_Flottabilite_Pression_et_Volumes_-_N3_(2024)_-_Eleves.pdf",
+      "3-1_Accidents_de_plongee_-_Baro_-_N3_(2024).pdf",
+      "3-2_Accidents_de_plongee_-_ADD_-_N3_(2024).pdf",
+      "3-3_Accidents_de_plongee_-_Fr-Ess-Narcose_-_N3_(2024).pdf",
+      "3-4_Accidents_de_plongee_-_OPI_-_N3_(2024).pdf",
+      "4-1_-_Gestion_desaturation_-_les_tables_federales_-_N3_(2024).pdf",
+      "4-2_-_Gestion_desaturation_-_les_ordinateurs_-_N3_(2024).pdf",
+      "5_-_Orientation_subaquatique_-_N3_(2024).pdf",
+      "6_-_Planification_-_Organisation_sans_DP_-_N3_(2024).pdf",
+      "7_-_Introduction-aux-detendeurs_-_N3_(2024).pdf",
+      "8-_Introduction_modeles_de_desaturation_N3_(2024).pdf",
+      "Exercices_autonomie_(Corriges).pptx",
+      "Exercices_tables_(corrige).pptx",
+      "Point-cles_Autonomie.pdf"
+    ];
+
     function checkPassword() {
       const password = document.getElementById("password").value.trim();
+      const list = document.getElementById("file-list");
       const errorMsg = document.getElementById("error-msg");
 
       if (password === "HYDRO") {
-        window.location.href = "/HYDRO/index.php";
+        errorMsg.textContent = "";
+        list.style.display = "block";
+        list.innerHTML = "";
+        const baseURL = window.location.origin + "/HYDRO/";
+
+        files.forEach(file => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = baseURL + file;
+          a.textContent = file;
+          a.target = "_blank";
+          li.appendChild(a);
+          list.appendChild(li);
+        });
       } else {
         errorMsg.textContent = "Mot de passe incorrect.";
+        list.style.display = "none";
       }
     }
   </script>
