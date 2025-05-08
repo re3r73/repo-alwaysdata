@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -94,7 +93,7 @@
 </head>
 <body>
   <div class="container">
-    <img src="logo_hydronautes.jpg" alt="Logo Hydronautes" class="logo">
+    <img src="./logo_hydronautes.jpg" alt="Logo Hydronautes" class="logo">
     <h1>Les Hydronautes</h1>
     <h2>Cours N3 – Saison 2024/2025</h2>
     <p>Merci d’entrer le mot de passe pour accéder aux documents pédagogiques :</p>
@@ -104,9 +103,7 @@
     <button onclick="checkPassword()">Afficher les fichiers</button>
     <p class="error" id="error-msg"></p>
 
-    <ul id="file-list" style="display: none;">
-      <!-- Liens statiques injectés si mot de passe correct -->
-    </ul>
+    <ul id="file-list" style="display: none;"></ul>
   </div>
 
   <script>
@@ -136,7 +133,7 @@
         errorMsg.textContent = "";
         list.style.display = "block";
         list.innerHTML = "";
-        const baseURL = window.location.href;
+        const baseURL = window.location.origin + "/HYDRO/";
 
         files.forEach(file => {
           const li = document.createElement("li");
