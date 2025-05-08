@@ -1,35 +1,28 @@
 name: Industrialisation continue sur le serveur Alwaysdata
+
 on: push
+
 jobs:
-  Connexion:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Connexion SSH avec le serveur
+      - name: Connexion SSH et déploiement
         uses: appleboy/ssh-action@master
         with:
           host: "ssh-${{ secrets.alwaydata_username }}.alwaysdata.net"
           username: ${{ secrets.alwaydata_username }}
           password: ${{ secrets.alwaydata_password }}
           script: |
-            cd $HOME/www/
-  Copy:
-    needs: Connexion
-    runs-on: ubuntu-latest
-    steps:
-      - name: Connexion SSH avec le serveur
-        uses: appleboy/ssh-action@master
-        with:
-          host: "ssh-${{ secrets.alwaydata_username }}.alwaysdata.net"
-          username: ${{ secrets.alwaydata_username }}
-          password: ${{ secrets.alwaydata_password }}
-          script: |
-            last_directory=$(basename ${{ runner.workspace }})
-            cd $HOME/
-            git clone https://github.com/${{ github.repository }}.git
-            if [ "$(ls -A ./www)" ]; then
-              rsync -r ./$last_directory/ ./www
-              rm -rf ./$last_directory
-            else
-              echo "Le répertoire flask de destination sur votre serveur n'existe pas"
-              exit 1
-            fi
+            cd $HOME
+            rm -rf temp_deploy
+            git clone --depth=1 https://github.com/${{ github.repository }}.git temp_deploy
+
+            # Supprime .git, .github, etc.
+            rm -rf temp_deploy/.git temp_deploy/.github
+
+            # Synchronise dans www/
+            rsync -av --delete temp_deploy/ $HOME/www/
+
+            # Nettoyage temporaire
+            rm -rf temp_deploy
