@@ -17,55 +17,77 @@
     .pa20-header { background-color: #B1B8CB; color: black; font-weight: bold; text-align: left; padding-left: 10px; }
     button { padding: 10px 20px; font-size: 16px; }
     #studentSelect { font-size: 16px; margin-bottom: 20px; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
-    .modal-content { background: white; padding: 20px; border-radius: 8px; width: 600px; max-height: 90%; overflow-y: auto; }
-    .modal h3 { margin-top: 0; }
-    .btn-ipd { cursor: pointer; color: blue; text-decoration: underline; font-size: 0.9em; }
+    select.ipd-note { width: 50px; }
+    .readonly-score { background-color: #eee; padding: 4px 8px; border-radius: 4px; }
   </style>
-<script>
-function ouvrirModalIPD(nomIPD) {
-  const criteres = [
-    { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-    { nom: "Vitesse de réaction", poids: 4 },
-    { nom: "Communication décollage", poids: 2 },
-    { nom: "Prise sécurisante", poids: 2 },
-    { nom: "Rectitude & vitesse de remontée", poids: 4 },
-    { nom: "Décollage tonique", poids: 2 },
-    { nom: "Stop franc entre 5m et 3m", poids: 1 },
-    { nom: "Tour d'horizon", poids: 1 },
-    { nom: "Regard & présence lors de la remontée", poids: 1 },
-    { nom: "Ralentissement marqué à 5m", poids: 1 },
-  ];
+  <script>
+    const criteresIPD = [
+      { nom: "Interprétation du signe et comportement adapté", poids: 2 },
+      { nom: "Vitesse de réaction", poids: 4 },
+      { nom: "Communication décollage", poids: 2 },
+      { nom: "Prise sécurisante", poids: 2 },
+      { nom: "Décollage tonique", poids: 2 },
+      { nom: "Rectitude & vitesse de remontée", poids: 4 },
+      { nom: "Ralentissement marqué à 5m", poids: 1 },
+      { nom: "Stop franc entre 5m et 3m", poids: 1 },
+      { nom: "Tour d'horizon", poids: 1 },
+      { nom: "Regard & présence lors de la remontée", poids: 1 }
+    ];
 
-  let html = `<h3>Détail de l’évaluation : ${nomIPD}</h3><form id='form_${nomIPD}'>`;
-  criteres.forEach((crit, idx) => {
-    html += `<label>${crit.nom} (sur ${crit.poids} pts)</label><br>`;
-    html += `<input type='number' name='crit_${idx}' min='0' max='${crit.poids}' required><br><br>`;
-  });
-  html += `<button type='submit'>✅ Valider</button>`;
-  html += `</form>`;
+    function genererTableauIPD(nom) {
+      const div = document.getElementById("contenuTableau");
+      const bloc = document.createElement("div");
+      let html = `<h3>${nom}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
+      criteresIPD.forEach((c, idx) => {
+        html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-ipd='${nom}' onchange='majTotalIPD("${nom}")'>`;
+        for (let i = 0; i <= c.poids; i++) {
+          html += `<option value='${i}'>${i}</option>`;
+        }
+        html += `</select></td></tr>`;
+      });
+      html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${nom}'>0</span></td></tr></table>`;
+      bloc.innerHTML = html;
+      div.appendChild(bloc);
+    }
 
-  const modal = document.getElementById("modalIPD");
-  modal.querySelector(".modal-content").innerHTML = html;
-  modal.style.display = "flex";
+    function majTotalIPD(nom) {
+      const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${nom}']`);
+      let total = 0;
+      notes.forEach(s => total += parseInt(s.value));
+      document.getElementById(`total_${nom}`).innerText = total;
+    }
 
-  document.getElementById(`form_${nomIPD}`).onsubmit = (e) => {
-    e.preventDefault();
-    const inputs = e.target.querySelectorAll("input");
-    let total = 0;
-    inputs.forEach((input, i) => {
-      total += parseFloat(input.value || 0);
-    });
-    alert(`Total IPD évalué : ${total}/20`);
-    modal.style.display = "none";
-  };
-}
+    function genererEtCharger() {
+      const select = document.getElementById("studentSelect");
+      if (select.value) {
+        document.getElementById("contenuTableau").innerHTML = "";
+        genererTableauIPD("IPD1");
+        genererTableauIPD("IPD2");
+      }
+    }
 
-window.onclick = function(event) {
-  const modal = document.getElementById("modalIPD");
-  if (event.target === modal) modal.style.display = "none";
-};
-</script>
+    // Sauvegarde automatique toutes les 30 secondes
+    setInterval(() => {
+      const select = document.getElementById("studentSelect");
+      if (!select || !select.value) return;
+      const plongeurId = select.value;
+      const evaluations = {};
+
+      ["IPD1", "IPD2"].forEach(ipd => {
+        const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${ipd}']`);
+        evaluations[ipd] = [];
+        notes.forEach((note, i) => {
+          evaluations[ipd].push({ critere: criteresIPD[i].nom, note: parseInt(note.value) });
+        });
+      });
+
+      fetch('save_eval.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plongeur_id: plongeurId, ipd: evaluations })
+      });
+    }, 30000);
+  </script>
 </head>
 <body>
 
@@ -87,14 +109,6 @@ window.onclick = function(event) {
 
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 <div id="contenuTableau"></div>
-
-<!-- Exemple de bouton IPD dans un tableau -->
-<p><span class="btn-ipd" onclick="ouvrirModalIPD('IPD1')">⚙️ Évaluer IPD1</span></p>
-<p><span class="btn-ipd" onclick="ouvrirModalIPD('IPD2')">⚙️ Évaluer IPD2</span></p>
-
-<div id="modalIPD" class="modal">
-  <div class="modal-content"></div>
-</div>
 
 </body>
 </html>
