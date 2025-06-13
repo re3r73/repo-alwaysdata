@@ -198,16 +198,45 @@
 
 <script>
 const criteresIPD = [
-  { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-  { nom: "Vitesse de réaction", poids: 2 },
-  { nom: "Communication décollage", poids: 1 },
-  { nom: "Prise sécurisante", poids: 3 },
-  { nom: "Rectitude & vitesse de remontée", poids: 5 },
-  { nom: "Décollage tonique", poids: 2 },
-  { nom: "Stop franc entre 5m et 3m", poids: 2 },
-  { nom: "Tour d'horizon", poids: 1 },
-  { nom: "Regard & présence lors de la remontée", poids: 1 },
-  { nom: "Ralentissement marqué à 5m", poids: 1 }
+  {
+    famille: "🟩 Réaction initiale (4 pts)",
+    criteres: [
+      { nom: "Interprétation du signe", poids: 1 },
+      { nom: "Vitesse de réaction", poids: 1 },
+      { nom: "Communication au décollage", poids: 1 },
+      { nom: "Décollage maîtrisé", poids: 1 }
+    ]
+  },
+  {
+    famille: "🟦 Prise en charge (3 pts)",
+    criteres: [
+      { nom: "Prise sécurisante", poids: 1 },
+      { nom: "Regard & présence durant la remontée", poids: 1 },
+      { nom: "Assiette / confort de l’équipier", poids: 1 }
+    ]
+  },
+  {
+    famille: "🟧 Contrôle de la remontée (5 pts)",
+    criteres: [
+      { nom: "Trajectoire stable", poids: 1 },
+      { nom: "Vitesse de remontée", poids: 4 }
+    ]
+  },
+  {
+    famille: "🟨 Arrêts & repères (4 pts)",
+    criteres: [
+      { nom: "Ralentissement marqué zone des 5 m", poids: 1 },
+      { nom: "Stop franc entre 5 m et 3 m", poids: 2 },
+      { nom: "Tour d’horizon + regard", poids: 1 }
+    ]
+  },
+  {
+    famille: "🟥 Profil & cohérence temporelle (4 pts)",
+    criteres: [
+      { nom: "Profil de remontée", poids: 2 },
+      { nom: "Cohérence temporelle de la remontée", poids: 2 }
+    ]
+  }
 ];
 
 function toggleIPDModal(ref) {
@@ -219,12 +248,15 @@ function toggleIPDModal(ref) {
   let html = `<h3>Évaluation IPD - ${ref}</h3>`;
   html += `<table><tr><th>Critère</th><th>Note /</th></tr>`;
 
-  criteresIPD.forEach((c, idx) => {
-    html += `<tr><td>${c.nom} (/ ${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
-    for (let i = 0; i <= c.poids; i++) {
-      html += `<option value='${i}'>${i}</option>`;
-    }
-    html += `</select></td></tr>`;
+  criteresIPD.forEach((famille, fIdx) => {
+    html += `<tr><td colspan='2' style='font-weight:bold; padding-top:8px;'>${famille.famille}</td></tr>`;
+    famille.criteres.forEach((c, idx) => {
+      html += `<tr><td>${c.nom} (/ ${c.poids})</td><td><select class='ipd-note' data-famille='${fIdx}' data-idx='${idx}' onchange='majTotalIPD()'>`;
+      for (let i = 0; i <= c.poids; i++) {
+        html += `<option value='${i}'>${i}</option>`;
+      }
+      html += `</select></td></tr>`;
+    });
   });
 
   html += `</table>`;
@@ -253,8 +285,6 @@ function toggleIPDModal(ref) {
 
   content.innerHTML = html;
 }
-
-
 
 function majTotalIPD() {
   const notWorked = document.getElementById("ipdNotWorked").checked;
