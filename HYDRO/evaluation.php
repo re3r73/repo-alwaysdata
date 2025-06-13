@@ -23,11 +23,11 @@
   <script>
     const criteresIPD = [
       { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-      { nom: "Vitesse de réaction", poids: 4 },
+      { nom: "Vitesse de réaction", poids: 2 },
       { nom: "Communication décollage", poids: 2 },
-      { nom: "Prise sécurisante", poids: 2 },
+      { nom: "Prise sécurisante", poids: 3 },
       { nom: "Décollage tonique", poids: 2 },
-      { nom: "Rectitude & vitesse de remontée", poids: 4 },
+      { nom: "Rectitude & vitesse de remontée", poids: 5 },
       { nom: "Ralentissement marqué à 5m", poids: 1 },
       { nom: "Stop franc entre 5m et 3m", poids: 1 },
       { nom: "Tour d'horizon", poids: 1 },
