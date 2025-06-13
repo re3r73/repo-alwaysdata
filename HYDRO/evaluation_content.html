@@ -8,77 +8,98 @@
     table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
     th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
     th { background-color: #f0f0f0; }
-    td.state-A { background-color: #b6f1c2; }
-    td.state-ECA { background-color: #f9b5b5; }
-    td.state-NT { background-color: #ddd; }
     td.label-left { text-align: left; font-weight: bold; color: #004466; background: #e0e0e0; }
     .pe40-header { background-color: #0F4166; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .commune-header { background-color: #546B8D; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .pa20-header { background-color: #B1B8CB; color: black; font-weight: bold; text-align: left; padding-left: 10px; }
-    textarea { width: 98%; height: 4em; resize: vertical; }
-    select { font-size: 0.9em; }
+    td.state-A { background-color: #b6f1c2; }
+    td.state-ECA { background-color: #f9b5b5; }
+    td.state-NT { background-color: #ddd; }
+    td.state-orange { background-color: #ffe4b2; }
+    textarea { width: 100%; height: 4em; resize: vertical; }
+    select { font-size: 0.9em; width: 100%; }
     td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
   </style>
 </head>
 <body>
 <h2>Évaluation Niveau 2 - FFESSM</h2>
+
+<select id="studentSelect">
+  <option value="">-- Choisir un élève --</option>
+  <option>AINS Mathieu</option>
+  <option>BARTHELEMY Carole</option>
+  <option>BRAOUDE Dominique</option>
+  <option>DE VITI Gaétan</option>
+  <option>EISNITZ Anne-Laure</option>
+  <option>EHRHARD Virginie</option>
+  <option>LEPARMENTIER Damien</option>
+  <option>MORGAND Claire</option>
+  <option>OPIN Maxime</option>
+  <option>OURSEL Oxana</option>
+  <option>PINHEIRO Tony</option>
+  <option>RONDET Célian</option>
+</select>
+
 <table id="evaluationTable">
   <tr>
     <th>Compétence</th>
     <th>Plongée #1</th><th>Plongée #2</th><th>Plongée #3</th>
     <th>Plongée #4</th><th>Plongée #5</th><th>Plongée #6</th><th>Plongée #7</th>
   </tr>
-  <tr class="date-row">
-    <td>Date</td>
+  <tr class="date-row"><td>Date</td>
     <td><input type="date"></td><td><input type="date"></td><td><input type="date"></td>
     <td><input type="date"></td><td><input type="date"></td><td><input type="date"></td><td><input type="date"></td>
   </tr>
-  <tr class="evaluateur-row">
-    <td>Évaluateur</td>
-    <td colspan="7">
-      <select>
-        <option>--</option>
-        <option>POUJOL Jérémie (E3)</option><option>VELLUET Philippe (E3)</option><option>COATMEUR Cyrille (E3)</option>
-        <option>BEURY Didier (E2)</option><option>BONNET Jean-Philippe (E2)</option><option>BRILL Nicolas (E2)</option>
-        <option>GARNIER Laurent (E2)</option><option>MERCIER-GALLAY Jacques (E2)</option><option>MERLE Arthur (E2)</option>
-      </select>
-    </td>
+  <tr class="evaluateur-row"><td>Évaluateur</td>
+    <td><select><option>--</option><option>POUJOL Jérémie (E3)</option><option>VELLUET Philippe (E3)</option><option>COATMEUR Cyrille (E3)</option><option>BEURY Didier (E2)</option><option>BONNET Jean-Philippe (E2)</option><option>BRILL Nicolas (E2)</option><option>GARNIER Laurent (E2)</option><option>MERCIER-GALLAY Jacques (E2)</option><option>MERLE Arthur (E2)</option></select></td>
+    <td><select><option>--</option><option>POUJOL Jérémie (E3)</option><option>VELLUET Philippe (E3)</option><option>COATMEUR Cyrille (E3)</option><option>BEURY Didier (E2)</option><option>BONNET Jean-Philippe (E2)</option><option>BRILL Nicolas (E2)</option><option>GARNIER Laurent (E2)</option><option>MERCIER-GALLAY Jacques (E2)</option><option>MERLE Arthur (E2)</option></select></td>
+    <td colspan="5"></td>
   </tr>
+
   <tr><td colspan="8" class="pe40-header">Compétences spécifiques — PE40</td></tr>
-  <tr><td class='label-left'>Ventilation & consommation</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td>
-<td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td>
-<td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td>
-<td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+  <tr><td class="label-left">Ventilation & consommation</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td></tr>
 
+  <tr><td colspan="8" class="commune-header">Compétences communes —</td></tr>
+  <tr><td class="label-left">Lestage adapté</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td><td class="state-NT" onclick="toggleState(this)">NT</td></tr>
+
+  <tr><td colspan="8" class="pa20-header">Compétences spécifiques — PA20</td></tr>
   <tr><td class='label-left'>Intervenir et porter assistance (IPD1)</td>
-<td class='state-NT' data-ipdcell='IPD1_P1' onclick='toggleIPDModal("IPD1_P1")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P2' onclick='toggleIPDModal("IPD1_P2")'>NT</td>
-<td class='state-NT' data-ipdcell='IPD1_P3' onclick='toggleIPDModal("IPD1_P3")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P4' onclick='toggleIPDModal("IPD1_P4")'>NT</td>
-<td class='state-NT' data-ipdcell='IPD1_P5' onclick='toggleIPDModal("IPD1_P5")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P6' onclick='toggleIPDModal("IPD1_P6")'>NT</td>
-<td class='state-NT' data-ipdcell='IPD1_P7' onclick='toggleIPDModal("IPD1_P7")'>NT</td></tr>
-  <tr><td class='label-left'>Intervenir et porter assistance (IPD2)</td>
-<td class='state-NT' data-ipdcell='IPD2_P1' onclick='toggleIPDModal("IPD2_P1")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P2' onclick='toggleIPDModal("IPD2_P2")'>NT</td>
-<td class='state-NT' data-ipdcell='IPD2_P3' onclick='toggleIPDModal("IPD2_P3")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P4' onclick='toggleIPDModal("IPD2_P4")'>NT</td>
-<td class='state-NT' data-ipdcell='IPD2_P5' onclick='toggleIPDModal("IPD2_P5")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P6' onclick='toggleIPDModal("IPD2_P6")'>NT</td>
-<td class='state-NT' data-ipdcell='IPD2_P7' onclick='toggleIPDModal("IPD2_P7")'>NT</td></tr>
+    <td class='state-NT' data-ipdcell='IPD1_P1' onclick='toggleIPDModal("IPD1_P1")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD1_P2' onclick='toggleIPDModal("IPD1_P2")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD1_P3' onclick='toggleIPDModal("IPD1_P3")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD1_P4' onclick='toggleIPDModal("IPD1_P4")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD1_P5' onclick='toggleIPDModal("IPD1_P5")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD1_P6' onclick='toggleIPDModal("IPD1_P6")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD1_P7' onclick='toggleIPDModal("IPD1_P7")'>NT</td>
+  </tr>
 
-<tr><td class='label-left'>Remarques</td>
-<td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td>
-<td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td>
-</tr>
+  <tr><td class='label-left'>Intervenir et porter assistance (IPD2)</td>
+    <td class='state-NT' data-ipdcell='IPD2_P1' onclick='toggleIPDModal("IPD2_P1")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD2_P2' onclick='toggleIPDModal("IPD2_P2")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD2_P3' onclick='toggleIPDModal("IPD2_P3")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD2_P4' onclick='toggleIPDModal("IPD2_P4")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD2_P5' onclick='toggleIPDModal("IPD2_P5")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD2_P6' onclick='toggleIPDModal("IPD2_P6")'>NT</td>
+    <td class='state-NT' data-ipdcell='IPD2_P7' onclick='toggleIPDModal("IPD2_P7")'>NT</td>
+  </tr>
+
+  <tr><td class='label-left'>Remarques</td>
+    <td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td>
+    <td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td>
+  </tr>
 </table>
 
 <script>
 function toggleState(cell) {
   const states = ["NT", "ECA", "A"];
-  let current = cell.getAttribute("data-state") || "NT";
-  let index = states.indexOf(current);
-  let next = states[(index + 1) % states.length];
-  cell.setAttribute("data-state", next);
-  cell.className = "state-" + next;
+  let current = cell.innerText;
+  let next = states[(states.indexOf(current) + 1) % states.length];
   cell.innerText = next;
+  cell.className = "state-" + next;
 }
+
 function toggleIPDModal(ref) {
-  alert("Grille d'évaluation IPD à implémenter pour " + ref);
+  alert("Ouverture de la grille IPD pour " + ref);
 }
 </script>
 </body>
