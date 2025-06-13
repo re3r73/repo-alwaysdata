@@ -23,7 +23,8 @@
     .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
     .date-row input[type="date"] { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
     .absence-row select { width: 100%; font-size: 0.9em; }
-    .remarks-row input { width: 100%; font-size: 0.9em; box-sizing: border-box; }
+    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 3em; }
+    td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
   </style>
 </head>
 <body>
@@ -76,7 +77,7 @@ function genererEtCharger() {
       for (let i = 1; i <= 7; i++) {
         const cellRef = `${item}_P${i}`;
         if (isIPD) {
-          html += `<td class='cell' data-cell-ref='${cellRef}' onclick='toggleIPDModal("${item}_P${i}", this)'>Non travaillé</td>`;
+          html += `<td class='cell' data-ipdcell='${cellRef}' onclick='toggleIPDModal("${cellRef}", this)'>Non travaillé</td>`;
         } else {
           html += `<td class='cell' onclick='toggleState(this)'></td>`;
         }
@@ -85,7 +86,7 @@ function genererEtCharger() {
     });
   });
   html += `<tr class='remarks-row'><td><strong>Remarques</strong></td>`;
-  for (let i = 1; i <= 7; i++) html += `<td><input type='text' name='remarque_P${i}' placeholder='Remarque'></td>`;
+  for (let i = 1; i <= 7; i++) html += `<td><textarea name='remarque_P${i}' placeholder='Remarque'></textarea></td>`;
   html += `</tr>`;
   html += `</table>`;
   container.innerHTML = html;
@@ -103,6 +104,11 @@ function toggleState(cell) {
     cell.setAttribute("data-state", nextState);
     cell.textContent = nextState;
   }
+}
+function toggleIPDModal(ref, cell) {
+  document.getElementById("ipdModal").style.display = "block";
+  document.getElementById("ipdModal").setAttribute("data-cell-ref", ref);
+  document.getElementById("ipdContent").innerHTML = `<p>Grille de notation pour <strong>${ref}</strong> à venir ici.</p>`;
 }
 </script>
 </body>
