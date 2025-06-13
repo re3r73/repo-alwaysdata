@@ -20,10 +20,9 @@
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
     .modal-content { background: white; padding: 20px; border-radius: 8px; width: 600px; max-height: 90%; overflow-y: auto; }
     .modal h3 { margin-top: 0; }
+    .btn-ipd { cursor: pointer; color: blue; text-decoration: underline; font-size: 0.9em; }
   </style>
 <script>
-// (scripts précédents inchangés ici pour alléger)
-
 function ouvrirModalIPD(nomIPD) {
   const criteres = [
     { nom: "Interprétation du signe et comportement adapté", poids: 2 },
@@ -89,13 +88,13 @@ window.onclick = function(event) {
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 <div id="contenuTableau"></div>
 
+<!-- Exemple de bouton IPD dans un tableau -->
+<p><span class="btn-ipd" onclick="ouvrirModalIPD('IPD1')">⚙️ Évaluer IPD1</span></p>
+<p><span class="btn-ipd" onclick="ouvrirModalIPD('IPD2')">⚙️ Évaluer IPD2</span></p>
+
 <div id="modalIPD" class="modal">
   <div class="modal-content"></div>
 </div>
-
-<script>
-// Attache manuellement les boutons IPD si souhaité plus tard
-</script>
 
 </body>
 </html>
