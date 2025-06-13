@@ -22,8 +22,8 @@
     .ipd-btn { margin-top: 10px; padding: 6px 12px; }
     .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
     .date-row input[type="date"] { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
-    .absence-row select { width: 100%; font-size: 0.9em; }
-    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 3em; }
+    .absence-row select, .evaluator-row select { width: 100%; font-size: 0.9em; }
+    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 4em; }
     td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
   </style>
 </head>
@@ -58,6 +58,9 @@ function genererEtCharger() {
   html += `<tr class='date-row'><td><strong>Date</strong></td>`;
   for (let i = 1; i <= 7; i++) html += `<td><input type='date' name='date_P${i}'></td>`;
   html += `</tr>`;
+  html += `<tr class='evaluator-row'><td><strong>Évaluateur</strong></td>`;
+  for (let i = 1; i <= 7; i++) html += `<td><select name='eval_P${i}'><option value=''>--</option><option>Encadrant 1</option><option>Encadrant 2</option><option>Encadrant 3</option></select></td>`;
+  html += `</tr>`;
   html += `<tr class='absence-row'><td><strong>Statut</strong></td>`;
   for (let i = 1; i <= 7; i++) html += `<td><select name='absent_P${i}'><option value=''>OK</option><option>Absent</option><option>Annulée</option></select></td>`;
   html += `</tr>`;
@@ -65,7 +68,7 @@ function genererEtCharger() {
     { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: [
       "Ventilation & consommation", "Propulsion & équilibrage", "Communication avec GP", "Intervenir en relai sur un équipier en difficulté"] },
     { titre: "Compétences communes —", classes: "commune-header", items: [
-      "S’équiper & mise à l’eau", "Immersion & propulsion", "Respect du milieu", "Vidage de masque", "Retour surface (cohésion de la palanquée & vitesse)", "Respect durée & profondeur annoncées par le DP", "Lestage adapté"] },
+      "Lestage adapté", "S’équiper & mise à l’eau", "Immersion & propulsion", "Respect du milieu", "Vidage de masque", "Retour surface (cohésion de la palanquée & vitesse)", "Respect durée & profondeur annoncées par le DP"] },
     { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: [
       "Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)", "Parachute", "IPD1", "IPD2"] }
   ];
@@ -77,7 +80,7 @@ function genererEtCharger() {
       for (let i = 1; i <= 7; i++) {
         const cellRef = `${item}_P${i}`;
         if (isIPD) {
-          html += `<td class='cell' data-ipdcell='${cellRef}' onclick='toggleIPDModal("${cellRef}", this)'>Non travaillé</td>`;
+          html += `<td class='cell' data-ipdcell='${cellRef}' onclick='toggleIPDModal("${cellRef}", this)'>Noter IPD</td>`;
         } else {
           html += `<td class='cell' onclick='toggleState(this)'></td>`;
         }
