@@ -19,35 +19,40 @@
     #studentSelect { font-size: 16px; margin-bottom: 20px; }
     select.ipd-note { width: 50px; }
     .readonly-score { background-color: #eee; padding: 4px 8px; border-radius: 4px; }
+    .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
   </style>
   <script>
     const criteresIPD = [
       { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-      { nom: "Vitesse de réaction", poids: 2 },
       { nom: "Communication décollage", poids: 2 },
-      { nom: "Prise sécurisante", poids: 3 },
       { nom: "Décollage tonique", poids: 2 },
+      { nom: "Prise sécurisante et confort", poids: 3 },
       { nom: "Rectitude & vitesse de remontée", poids: 5 },
       { nom: "Ralentissement marqué à 5m", poids: 1 },
       { nom: "Stop franc entre 5m et 3m", poids: 1 },
       { nom: "Tour d'horizon", poids: 1 },
-      { nom: "Regard & présence lors de la remontée", poids: 1 }
+      { nom: "Regard & présence lors de la remontée", poids: 1 },
+      { nom: "Vitesse de réaction", poids: 2 }
     ];
 
-    function genererTableauIPD(nom) {
-      const div = document.getElementById("contenuIPD");
-      const bloc = document.createElement("div");
-      let html = `<h3>${nom}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
+    let currentIPD = null;
+
+    function toggleIPDModal(ipd) {
+      currentIPD = ipd;
+      const modal = document.getElementById("ipdModal");
+      const contenu = document.getElementById("ipdContent");
+      let html = `<h3>${ipd}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
       criteresIPD.forEach((c, idx) => {
-        html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-ipd='${nom}' onchange='majTotalIPD("${nom}")'>`;
+        html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-ipd='${ipd}' onchange='majTotalIPD("${ipd}")'>`;
         for (let i = 0; i <= c.poids; i++) {
           html += `<option value='${i}'>${i}</option>`;
         }
         html += `</select></td></tr>`;
       });
-      html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${nom}'>0</span></td></tr></table>`;
-      bloc.innerHTML = html;
-      div.appendChild(bloc);
+      html += `<tr><td colspan='2'><label><input type='checkbox' id='forceElim_${ipd}'> Intervention de l’évaluateur / redescente &gt; 2m</label></td></tr>`;
+      html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${ipd}'>0</span></td></tr></table>`;
+      contenu.innerHTML = html;
+      modal.style.display = "block";
     }
 
     function majTotalIPD(nom) {
@@ -55,16 +60,16 @@
       let total = 0;
       notes.forEach(s => total += parseInt(s.value));
       document.getElementById(`total_${nom}`).innerText = total;
+      const force = document.getElementById(`forceElim_${nom}`)?.checked;
+      const td = document.querySelector(`td[data-ipdcell='${nom}']`);
+      if (td) td.innerText = (force || total < 10) ? "Éliminatoire" : `${total}/20`;
     }
 
     function genererEtCharger() {
       const select = document.getElementById("studentSelect");
       if (select.value) {
-        document.getElementById("contenuIPD").innerHTML = "";
         document.getElementById("contenuEvaluation").innerHTML = "";
         chargerTableauCompetences();
-        genererTableauIPD("IPD1");
-        genererTableauIPD("IPD2");
       }
     }
 
@@ -74,16 +79,24 @@
       for (let i = 1; i <= 7; i++) html += `<th>P${i}</th>`;
       html += `</tr>`;
       const competences = [
-        { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: ["Utilisation de l'équipement", "Stabilité / flottabilité"] },
-        { titre: "Compétences communes —", classes: "commune-header", items: ["Respect durée & profondeur annoncées par le DP", "Retour surface (cohésion de la palanquée & vitesse)", "Lestage adapté"] },
-        { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: ["Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)", "Intervenir et porter assistance (IPD1)", "Intervenir et porter assistance (IPD2)", "Parachute"] }
+        { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: [
+          "Ventilation & consommation", "Propulsion & équilibrage", "Communication avec GP", "Intervenir en relai sur un équipier en difficulté"] },
+        { titre: "Compétences communes —", classes: "commune-header", items: [
+          "S’équiper & mise à l’eau", "Immersion & propulsion", "Respect du milieu", "Vidage de masque", "Retour surface (cohésion de la palanquée & vitesse)", "Respect durée & profondeur annoncées par le DP", "Lestage adapté"] },
+        { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: [
+          "Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)",
+          "<span class='ipd-toggle' onclick=\"toggleIPDModal('IPD1')\">Noter IPD1</span>",
+          "<span class='ipd-toggle' onclick=\"toggleIPDModal('IPD2')\">Noter IPD2</span>",
+          "Parachute"] }
       ];
       competences.forEach(block => {
         html += `<tr><td colspan='8' class='${block.classes}'>${block.titre}</td></tr>`;
         block.items.forEach(item => {
+          const isIPD = item.includes("Noter IPD");
+          const ipdKey = isIPD ? item.match(/IPD\d/)[0] : null;
           html += `<tr><td class='label-left'>${item}</td>`;
           for (let i = 1; i <= 7; i++) {
-            html += `<td class='cell' onclick='toggleState(this)' data-state=''></td>`;
+            html += `<td class='cell' ${isIPD ? `data-ipdcell='${ipdKey}'` : ""} onclick='${isIPD ? `toggleIPDModal("${ipdKey}")` : "toggleState(this)"}'></td>`;
           }
           html += `</tr>`;
         });
@@ -106,31 +119,9 @@
         cell.textContent = nextState;
       }
     }
-
-    setInterval(() => {
-      const select = document.getElementById("studentSelect");
-      if (!select || !select.value) return;
-      const plongeurId = select.value;
-      const evaluations = {};
-
-      ["IPD1", "IPD2"].forEach(ipd => {
-        const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${ipd}']`);
-        evaluations[ipd] = [];
-        notes.forEach((note, i) => {
-          evaluations[ipd].push({ critere: criteresIPD[i].nom, note: parseInt(note.value) });
-        });
-      });
-
-      fetch('save_eval.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plongeur_id: plongeurId, ipd: evaluations })
-      });
-    }, 30000);
   </script>
 </head>
 <body>
-
 <select id="studentSelect" onchange="genererEtCharger()">
   <option value="">-- Choisir un élève --</option>
   <option value="1">AINS Mathieu</option>
@@ -146,10 +137,11 @@
   <option value="11">PINHEIRO Tony</option>
   <option value="12">RONDET Célian</option>
 </select>
-
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 <div id="contenuEvaluation"></div>
-<div id="contenuIPD"></div>
-
+<div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)">
+  <div id="ipdContent"></div>
+  <button onclick="document.getElementById('ipdModal').style.display='none'">Fermer</button>
+</div>
 </body>
 </html>
