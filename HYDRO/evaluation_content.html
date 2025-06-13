@@ -21,7 +21,9 @@
     .readonly-score { background-color: #eee; padding: 4px 8px; border-radius: 4px; }
     .ipd-btn { margin-top: 10px; padding: 6px 12px; }
     .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
-    .date-row input { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
+    .date-row input[type="date"] { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
+    .absence-row select { width: 100%; font-size: 0.9em; }
+    .remarks-row input { width: 100%; font-size: 0.9em; box-sizing: border-box; }
   </style>
 </head>
 <body>
@@ -55,6 +57,9 @@ function genererEtCharger() {
   html += `<tr class='date-row'><td><strong>Date</strong></td>`;
   for (let i = 1; i <= 7; i++) html += `<td><input type='date' name='date_P${i}'></td>`;
   html += `</tr>`;
+  html += `<tr class='absence-row'><td><strong>Statut</strong></td>`;
+  for (let i = 1; i <= 7; i++) html += `<td><select name='absent_P${i}'><option value=''>OK</option><option>Absent</option><option>Annulée</option></select></td>`;
+  html += `</tr>`;
   const competences = [
     { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: [
       "Ventilation & consommation", "Propulsion & équilibrage", "Communication avec GP", "Intervenir en relai sur un équipier en difficulté"] },
@@ -79,8 +84,25 @@ function genererEtCharger() {
       html += `</tr>`;
     });
   });
+  html += `<tr class='remarks-row'><td><strong>Remarques</strong></td>`;
+  for (let i = 1; i <= 7; i++) html += `<td><input type='text' name='remarque_P${i}' placeholder='Remarque'></td>`;
+  html += `</tr>`;
   html += `</table>`;
   container.innerHTML = html;
+}
+function toggleState(cell) {
+  const states = ["", "A", "ECA", "NT"];
+  let current = cell.getAttribute("data-state") || "";
+  let nextIndex = (states.indexOf(current) + 1) % states.length;
+  let nextState = states[nextIndex];
+  cell.classList.remove("state-A", "state-ECA", "state-NT");
+  cell.removeAttribute("data-state");
+  cell.textContent = "";
+  if (nextState) {
+    cell.classList.add("state-" + nextState);
+    cell.setAttribute("data-state", nextState);
+    cell.textContent = nextState;
+  }
 }
 </script>
 </body>
