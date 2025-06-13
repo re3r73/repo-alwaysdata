@@ -292,7 +292,28 @@ function toggleIPDModal(ref) {
   content.innerHTML = html;
 }
 
+function majTotalIPD() {
+  let total = 0;
 
+  // Prendre en compte les notes par famille
+  document.querySelectorAll(".ipd-note-famille").forEach(select => {
+    total += parseInt(select.value) || 0;
+  });
+
+  // Appliquer la pénalité
+  const penalite = parseInt(document.getElementById("penalite").value) || 0;
+
+  // Si "non travaillée" est coché => total forcé à 0
+  if (document.getElementById("ipdNotWorked").checked) {
+    total = 0;
+  } else {
+    total = Math.max(total + penalite, 0); // on applique la pénalité ici
+  }
+
+  document.getElementById("ipdTotal").innerText = total;
+}
+
+  
 function enregistrerIPD(ref) {
   const total = parseInt(document.getElementById("ipdTotal").innerText);
   const elimCheck = document.querySelectorAll(".elimCheckbox:checked").length > 0;
