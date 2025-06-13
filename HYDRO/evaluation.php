@@ -23,27 +23,35 @@
 
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 
-<label for="studentSelect"><strong>Élève :</strong></label>
-<select id="studentSelect">
-  <option value="">-- Sélectionner un élève --</option>
-  <option value="1">AINS Mathieu</option>
-  <option value="2">BRAOUDE Dominique</option>
-  <option value="3">DE VITI Gaétan</option>
-  <option value="4">EISNITZ Anne-Laure</option>
-  <option value="5">EHRHARD Virginie</option>
-  <option value="6">LEPARMENTIER Damien</option>
-  <option value="7">MORGAND Claire</option>
-  <option value="8">OPIN Maxime</option>
-  <option value="9">OURSEL Oxana</option>
-  <option value="10">PINHEIRO Tony</option>
-  <option value="11">RONDET Célian</option>
-  <option value="12">BARTHELEMY Carole</option>
-</select>
+$1
+<button onclick="chargerFiche()">📄 Consulter la fiche enregistrée</button>
 
 <!-- Le tableau ne s'affiche pas encore ici -->
 <div id="contenuTableau"></div>
 
-<script>
+$1
+
+  function chargerFiche() {
+    const studentSelect = document.getElementById("studentSelect");
+    const plongeurId = studentSelect.value;
+    if (!plongeurId) {
+      alert("Veuillez d'abord sélectionner un élève.");
+      return;
+    }
+    const fichier = `data/fiche_${plongeurId}.json`;
+
+    fetch(fichier)
+      .then(resp => {
+        if (!resp.ok) throw new Error("Fiche non trouvée");
+        return resp.json();
+      })
+      .then(data => {
+        alert("Fiche trouvée et chargée. (affichage à implémenter)");
+        remplirDepuisJSON(data);
+      })
+      .catch(err => alert("Aucune fiche enregistrée pour cet élève."));
+  }
+
   const states = ["", "A", "ECA", "NT"];
   const evaluateurs = [
     "", 
@@ -136,7 +144,33 @@
     .catch(error => alert("Erreur lors de l'enregistrement."));
   }
 
-  window.onload = initEvaluateurs;
+  function remplirDepuisJSON(data) {
+  const table = document.getElementById("evaluationTable");
+  if (!table) return;
+  data.evaluations.forEach(evalItem => {
+    const { competence_id, session, etat, evaluateur } = evalItem;
+    const row = table.querySelector(`[data-id='${competence_id}']`);
+    if (!row) return;
+    const colNum = parseInt(session.replace("P", ""));
+    const cell = row.cells[colNum];
+    if (cell) {
+      cell.classList.remove("state-A", "state-ECA", "state-NT");
+      cell.classList.add("state-" + etat);
+      cell.setAttribute("data-state", etat);
+      cell.textContent = etat;
+    }
+  });
+  // remplissage des évaluateurs
+  Object.entries(data.evaluations.reduce((acc, curr) => {
+    acc[curr.session] = curr.evaluateur;
+    return acc;
+  }, {})).forEach(([session, ev]) => {
+    const selector = document.querySelector(`select.eval-selector[data-session='${session}']`);
+    if (selector) selector.value = ev;
+  });
+}
+
+$1
 </script>
 
 </body>
