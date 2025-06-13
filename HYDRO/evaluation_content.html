@@ -1,7 +1,5 @@
-# Recréons le fichier HTML complet demandé par l'utilisateur, en tenant compte de toutes les modifications et fonctionnalités discutées.
-from pathlib import Path
 
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -19,20 +17,14 @@ html_content = """<!DOCTYPE html>
     .pe40-header { background-color: #0F4166; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .commune-header { background-color: #546B8D; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .pa20-header { background-color: #B1B8CB; color: black; font-weight: bold; text-align: left; padding-left: 10px; }
-    button { padding: 10px 20px; font-size: 16px; }
-    #studentSelect { font-size: 16px; margin-bottom: 20px; }
-    .ipd-note { width: 50px; }
-    .readonly-score { background-color: #eee; padding: 4px 8px; border-radius: 4px; }
-    .ipd-btn { margin-top: 10px; padding: 6px 12px; }
-    .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
-    .date-row input[type="date"] { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
-    .absence-row select, .evaluateur-row select { width: 100%; font-size: 0.9em; }
-    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 6em; }
+    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 8em; }
     td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
+    .date-row input[type="date"], .evaluateur-row select { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
   </style>
 </head>
 <body>
-<select id="studentSelect" onchange="genererEtCharger()">
+<h1>Évaluation FFESSM</h1>
+<select id="studentSelect">
   <option value="">-- Choisir un élève --</option>
   <option value="1">AINS Mathieu</option>
   <option value="2">BARTHELEMY Carole</option>
@@ -47,11 +39,28 @@ html_content = """<!DOCTYPE html>
   <option value="11">PINHEIRO Tony</option>
   <option value="12">RONDET Célian</option>
 </select>
-<h2>Évaluation Niveau 2 - FFESSM</h2>
-<div id="contenuEvaluation"></div>
+
+<!-- Tableau d'évaluation fictif simplifié pour illustration -->
+<table>
+  <tr><th>Compétence</th><th>P1</th><th>P2</th><th>P3</th></tr>
+  <tr class="pe40-header"><td colspan="4">Compétences PE40</td></tr>
+  <tr><td class="label-left">Ventilation & consommation</td><td></td><td></td><td></td></tr>
+  <tr><td class="label-left">Intervention sur équipier</td><td></td><td></td><td></td></tr>
+
+  <tr class="commune-header"><td colspan="4">Compétences Communes</td></tr>
+  <tr><td class="label-left">Lestage adapté</td><td></td><td></td><td></td></tr>
+  <tr><td class="label-left">Vidage de masque</td><td></td><td></td><td></td></tr>
+
+  <tr class="pa20-header"><td colspan="4">Compétences PA20</td></tr>
+  <tr><td class="label-left">Parachute</td><td></td><td></td><td></td></tr>
+  <tr><td class="label-left">IPD1 - Intervenir en relai</td><td data-ipdcell="IPD1-P1">Noter IPD</td><td data-ipdcell="IPD1-P2">Noter IPD</td><td data-ipdcell="IPD1-P3">Noter IPD</td></tr>
+</table>
+
+<!-- Modale IPD -->
 <div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)" data-cell-ref="">
   <div id="ipdContent"></div>
 </div>
+
 <script>
 const criteresIPD = [
   { nom: "Interprétation du signe et comportement adapté", poids: 2 },
@@ -59,71 +68,67 @@ const criteresIPD = [
   { nom: "Communication décollage", poids: 2 },
   { nom: "Décollage tonique", poids: 2 },
   { nom: "Prise sécurisante et confort", poids: 3 },
-  { nom: "Rectitude & vitesse de remontée", poids: 5 },
-  { nom: "Ralentissement marqué à 5m", poids: 1 },
-  { nom: "Stop franc entre 5m et 3m", poids: 3 },
-  { nom: "Tour d'horizon", poids: 1 },
-  { nom: "Regard & présence lors de la remontée", poids: 1 }
+  { nom: "Vitesse de remontée", poids: 5 },
+  { nom: "Ralentissement à 5m", poids: 1 },
+  { nom: "Stop franc 5-3m", poids: 3 },
+  { nom: "Tour d’horizon", poids: 1 },
+  { nom: "Regard et présence", poids: 1 }
 ];
+
+document.querySelectorAll("td[data-ipdcell]").forEach(td => {
+  td.addEventListener("click", () => toggleIPDModal(td.getAttribute("data-ipdcell")));
+});
 
 function toggleIPDModal(ref) {
   const modal = document.getElementById("ipdModal");
   const content = document.getElementById("ipdContent");
   modal.style.display = "block";
   modal.setAttribute("data-cell-ref", ref);
-  let html = `<h3>${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
-  criteresIPD.forEach((c, idx) => {
-    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
-    for (let i = 0; i <= c.poids; i++) html += `<option value='${i}'>${i}</option>`;
-    html += `</select></td></tr>`;
+
+  let html = `<h3>Notation IPD : ${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
+  criteresIPD.forEach((c, i) => {
+    html += `<tr><td>${c.nom} (/ ${c.poids})</td><td><select data-poids="${c.poids}" onchange="majTotalIPD()">${[...Array(c.poids + 1).keys()].map(n => `<option value="${n}">${n}</option>`).join('')}</select></td></tr>`;
   });
-  html += `</table>`;
-  html += `<p><strong>Critères éliminatoires :</strong></p>`;
+  html += `</table><br>`;
   html += `<label><input type='checkbox' class='elimCheckbox'> Intervention du moniteur</label><br>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Redescente > 2m</label><br>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Percer la surface</label><br><br>`;
-  html += `<label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée sur cette plongée</label><br><br>`;
-  html += `<p><strong>Total</strong> : <span id='ipdTotal'>0</span> / 20</p>`;
-  html += `<button onclick='enregistrerIPD("${ref}")'>Enregistrer</button>`;
+  html += `<label><input type='checkbox' class='elimCheckbox'> Descente > 2m</label><br>`;
+  html += `<label><input type='checkbox' class='elimCheckbox'> Percée de surface</label><br>`;
+  html += `<br><label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée</label><br><br>`;
+  html += `Total : <span id='ipdTotal'>0</span>/20<br><br>`;
+  html += `<button onclick="enregistrerIPD('${ref}')">Enregistrer</button>`;
   content.innerHTML = html;
 }
 
 function majTotalIPD() {
-  const notes = document.querySelectorAll(".ipd-note");
   let total = 0;
-  notes.forEach(s => total += parseInt(s.value));
+  document.querySelectorAll("#ipdContent select").forEach(sel => {
+    total += parseInt(sel.value || 0);
+  });
   document.getElementById("ipdTotal").innerText = total;
 }
 
 function enregistrerIPD(ref) {
+  const cell = document.querySelector(`[data-ipdcell="${ref}"]`);
   const total = parseInt(document.getElementById("ipdTotal").innerText);
-  const elimCheck = document.querySelectorAll(".elimCheckbox:checked").length > 0;
+  const elim = document.querySelectorAll(".elimCheckbox:checked").length > 0;
   const notWorked = document.getElementById("ipdNotWorked").checked;
-  const cell = document.querySelector(`[data-ipdcell='${ref}']`);
-  cell.classList.remove("state-A", "state-ECA", "state-orange", "state-NT");
+  cell.className = "";
+
   if (notWorked) {
-    cell.classList.add("state-NT");
     cell.innerText = "NT";
-  } else if (elimCheck) {
-    cell.classList.add("state-ECA");
+    cell.classList.add("state-NT");
+  } else if (elim) {
     cell.innerText = "Éliminatoire";
-  } else if (total < 10) {
     cell.classList.add("state-ECA");
-    cell.innerText = `${total}/20`;
-  } else if (total < 15) {
-    cell.classList.add("state-orange");
-    cell.innerText = `${total}/20`;
   } else {
-    cell.classList.add("state-A");
     cell.innerText = `${total}/20`;
+    if (total < 10) cell.classList.add("state-ECA");
+    else if (total < 15) cell.classList.add("state-orange");
+    else cell.classList.add("state-A");
   }
+
   document.getElementById("ipdModal").style.display = "none";
 }
 </script>
 </body>
 </html>
-"""
-
-output_path = Path("/mnt/data/evaluation_php_complet_ffessm_20250613.html")
-output_path.write_text(html_content, encoding="utf-8")
-output_path.name
