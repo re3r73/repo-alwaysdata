@@ -55,25 +55,32 @@
         { id: 'co6', label: 'Respect durée & profondeur' },
       ]},
       { group: 'PA20', color: '#B1B8CB', items: [
-        { id: 'pa1', label: 'Parachute' },
-        { id: 'pa2', label: 'Planifier la plongée' },
-        { id: 'pa3', label: 'Vérif matériel équipiers' },
+        { id: 'pa2', label: 'Planifier la plongée (sur le bateau)' },
+        { id: 'pa3', label: 'Vérif matériel équipiers (buddy check)' },
         { id: 'pa4', label: 'Autonomie (Orientation)' },
         { id: 'pa5', label: 'Autonomie (Conso & Déco)' },
-        { id: 'pa6', label: 'IPD 1' },
-        { id: 'pa7', label: 'IPD 2' },
-        { id: 'pa8', label: 'IPD 3' },
-        { id: 'pa9', label: 'IPD 4' }
+        { id: 'pa6', label: 'Intervenir et porter assistance (IPD1)' },
+        { id: 'pa7', label: 'Intervenir et porter assistance (IPD2)' },
+        { id: 'pa1', label: 'Parachute' }
       ]},
     ];
 
     let html = '<table id="evaluationTable">';
+    html += '<tr><td><strong>Évaluateur</strong></td>';
+    for (let i = 1; i <= 7; i++) {
+      html += `<td><select class='eval-selector' data-session='P${i}'></select></td>`;
+    }
+    html += '</tr>';
+
     html += '<tr><th>Compétences</th>';
     for (let i = 1; i <= 7; i++) html += `<th>P${i}</th>`;
     html += '</tr>';
 
     lignes.forEach(groupe => {
-      html += `<tr><td class='${groupe.group.toLowerCase()}-header' colspan='8'>${groupe.group}</td></tr>`;
+      const titre = groupe.group === 'PE40' ? "Compétences<br>spécifiques —<br>PE40" :
+                    groupe.group === 'PA20' ? "Compétences<br>spécifiques —<br>PA20" :
+                    "Compétences<br>communes —";
+      html += `<tr><td class='${groupe.group.toLowerCase()}-header' colspan='8'>${titre}</td></tr>`;
       groupe.items.forEach(item => {
         html += `<tr data-id='${item.id}'><td class='label-left'>${item.label}</td>`;
         for (let i = 1; i <= 7; i++) html += `<td onclick='toggleState(this)'></td>`;
@@ -81,13 +88,8 @@
       });
     });
 
-    html += '<tr><td><strong>Évaluateur</strong></td>';
-    for (let i = 1; i <= 7; i++) {
-      html += `<td><select class='eval-selector' data-session='P${i}'></select></td>`;
-    }
-    html += '</tr>';
     html += '</table>';
-    html += `<button onclick='envoyerEvaluation()'>💾 Enregistrer la fiche</button>`;
+    html += `<button onclick='envoyerEvaluation()'>📂 Enregistrer la fiche</button>`;
 
     contenu.innerHTML = html;
     initEvaluateurs();
