@@ -40,8 +40,8 @@
   <option value="12">BARTHELEMY Carole</option>
 </select>
 
-<!-- tableau d'évaluation ici -->
-<!-- (le tableau complet reste inchangé et suit) -->
+<!-- Le tableau ne s'affiche pas encore ici -->
+<div id="contenuTableau"></div>
 
 <script>
   const states = ["", "A", "ECA", "NT"];
