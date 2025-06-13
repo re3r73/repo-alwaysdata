@@ -37,32 +37,44 @@
 
     let currentIPD = null;
 
-    function toggleIPDModal(ipd) {
+    function toggleIPDModal(ipd, cell) {
       currentIPD = ipd;
       const modal = document.getElementById("ipdModal");
       const contenu = document.getElementById("ipdContent");
       let html = `<h3>${ipd}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
       criteresIPD.forEach((c, idx) => {
-        html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-ipd='${ipd}' onchange='majTotalIPD("${ipd}")'>`;
+        html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-ipd='${ipd}' onchange='majTotalIPD("${ipd}", this.closest("td"))'>`;
+        html += `<option value='NT'>NT</option>`;
         for (let i = 0; i <= c.poids; i++) {
           html += `<option value='${i}'>${i}</option>`;
         }
         html += `</select></td></tr>`;
       });
       html += `<tr><td colspan='2'><label><input type='checkbox' id='forceElim_${ipd}'> Intervention de l’évaluateur / redescente &gt; 2m</label></td></tr>`;
-      html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${ipd}'>0</span></td></tr></table>`;
+      html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${ipd}'>Non travaillé</span></td></tr></table>`;
       contenu.innerHTML = html;
+      modal.dataset.cellRef = cell ? cell.dataset.cellRef : "";
       modal.style.display = "block";
     }
 
-    function majTotalIPD(nom) {
+    function majTotalIPD(nom, td) {
       const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${nom}']`);
       let total = 0;
-      notes.forEach(s => total += parseInt(s.value));
-      document.getElementById(`total_${nom}`).innerText = total;
+      let worked = false;
+      notes.forEach(s => {
+        if (s.value !== 'NT') {
+          worked = true;
+          total += parseInt(s.value);
+        }
+      });
       const force = document.getElementById(`forceElim_${nom}`)?.checked;
-      const td = document.querySelector(`td[data-ipdcell='${nom}']`);
-      if (td) td.innerText = (force || total < 10) ? "Éliminatoire" : `${total}/20`;
+      let txt = "Non travaillé";
+      if (worked) txt = (force || total < 10) ? "Éliminatoire" : `${total}/20`;
+      document.getElementById(`total_${nom}`).innerText = txt;
+      if (modal.dataset.cellRef) {
+        const tdCell = document.querySelector(`td[data-cell-ref='${modal.dataset.cellRef}']`);
+        if (tdCell) tdCell.innerText = txt;
+      }
     }
 
     function genererEtCharger() {
@@ -84,19 +96,20 @@
         { titre: "Compétences communes —", classes: "commune-header", items: [
           "S’équiper & mise à l’eau", "Immersion & propulsion", "Respect du milieu", "Vidage de masque", "Retour surface (cohésion de la palanquée & vitesse)", "Respect durée & profondeur annoncées par le DP", "Lestage adapté"] },
         { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: [
-          "Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)",
-          "<span class='ipd-toggle' onclick=\"toggleIPDModal('IPD1')\">Noter IPD1</span>",
-          "<span class='ipd-toggle' onclick=\"toggleIPDModal('IPD2')\">Noter IPD2</span>",
-          "Parachute"] }
+          "Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)", "Parachute", "IPD1", "IPD2"] }
       ];
       competences.forEach(block => {
         html += `<tr><td colspan='8' class='${block.classes}'>${block.titre}</td></tr>`;
         block.items.forEach(item => {
-          const isIPD = item.includes("Noter IPD");
-          const ipdKey = isIPD ? item.match(/IPD\d/)[0] : null;
+          const isIPD = item.startsWith("IPD");
           html += `<tr><td class='label-left'>${item}</td>`;
           for (let i = 1; i <= 7; i++) {
-            html += `<td class='cell' ${isIPD ? `data-ipdcell='${ipdKey}'` : ""} onclick='${isIPD ? `toggleIPDModal("${ipdKey}")` : "toggleState(this)"}'></td>`;
+            const cellRef = `${item}_P${i}`;
+            if (isIPD) {
+              html += `<td class='cell' data-cell-ref='${cellRef}' onclick='toggleIPDModal("${item}", this)'>Non travaillé</td>`;
+            } else {
+              html += `<td class='cell' onclick='toggleState(this)'></td>`;
+            }
           }
           html += `</tr>`;
         });
@@ -139,7 +152,7 @@
 </select>
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 <div id="contenuEvaluation"></div>
-<div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)">
+<div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)" data-cell-ref="">
   <div id="ipdContent"></div>
   <button onclick="document.getElementById('ipdModal').style.display='none'">Fermer</button>
 </div>
