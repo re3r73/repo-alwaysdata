@@ -14,6 +14,9 @@
     .evaluator-row td { text-align: left; background: #f9f9f9; }
     button { padding: 10px 20px; font-size: 16px; }
     td.label-left { text-align: left; font-weight: bold; color: #004466; background: #e0e0e0; }
+    .pe40 { background-color: #dbe8f1; width: 20px; }
+    .commune { background-color: #d6e1eb; width: 20px; }
+    .pa20 { background-color: #dad8e5; width: 20px; }
   </style>
 </head>
 <body>
@@ -23,6 +26,7 @@
 <table id="evaluationTable">
   <thead>
     <tr>
+      <th></th>
       <th>Compétence</th>
       <th>J1-PM</th>
       <th>J2-AM</th>
@@ -33,30 +37,30 @@
   </thead>
   <tbody>
     <!-- Compétences PE40 -->
-    <tr data-id="1"><td class="label-left">Ventiler et gestion de la consommation</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="2"><td class="label-left">Se propulser et s'équilibrer</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="3"><td class="label-left">Communiquer avec le GP</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="4"><td class="label-left">Retourner en surface</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="5"><td class="label-left">Intervenir en relai sur un équipier</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="6"><td class="label-left">Respect durée et profondeur</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="1"><td class="pe40"></td><td class="label-left">Ventiler et gestion de la consommation</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="2"><td class="pe40"></td><td class="label-left">Se propulser et s'équilibrer</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="3"><td class="pe40"></td><td class="label-left">Communiquer avec le GP</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="4"><td class="pe40"></td><td class="label-left">Retourner en surface</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="5"><td class="pe40"></td><td class="label-left">Intervenir en relai sur un équipier</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="6"><td class="pe40"></td><td class="label-left">Respect durée et profondeur</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
 
     <!-- Compétences communes -->
-    <tr data-id="7"><td class="label-left">S’équiper et se mettre à l’eau</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="8"><td class="label-left">S’immerger et se propulser</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="9"><td class="label-left">Respecter le milieu et l’environnement</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="10"><td class="label-left">Vidage de masque</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="7"><td class="commune"></td><td class="label-left">S’équiper et se mettre à l’eau</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="8"><td class="commune"></td><td class="label-left">S’immerger et se propulser</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="9"><td class="commune"></td><td class="label-left">Respecter le milieu et l’environnement</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="10"><td class="commune"></td><td class="label-left">Vidage de masque</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
 
     <!-- Compétences PA20 -->
-    <tr data-id="11"><td class="label-left">Parachute</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="12"><td class="label-left">Planifier la plongée</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="13"><td class="label-left">Être attentif au matériel des équipiers</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="14"><td class="label-left">Évoluer en autonomie</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="15"><td class="label-left">Intervenir et porter assistance (IPD 1)</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
-    <tr data-id="16"><td class="label-left">Intervenir et porter assistance (IPD 2)</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="11"><td class="pa20"></td><td class="label-left">Parachute</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="12"><td class="pa20"></td><td class="label-left">Planifier la plongée</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="13"><td class="pa20"></td><td class="label-left">Être attentif au matériel des équipiers</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="14"><td class="pa20"></td><td class="label-left">Évoluer en autonomie</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="15"><td class="pa20"></td><td class="label-left">Intervenir et porter assistance (IPD 1)</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="16"><td class="pa20"></td><td class="label-left">Intervenir et porter assistance (IPD 2)</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
 
     <!-- Encadrant -->
     <tr class="evaluator-row">
-      <td colspan="6">
+      <td colspan="7">
         <label for="evaluatorSelect"><strong>Évaluateur :</strong></label>
         <select id="evaluatorSelect">
           <option value="">-- Choisir --</option>
@@ -99,7 +103,7 @@
     for (let r = 1; r < table.rows.length - 1; r++) {
       const row = table.rows[r];
       const competenceId = row.getAttribute("data-id");
-      for (let c = 1; c < row.cells.length; c++) {
+      for (let c = 2; c < row.cells.length; c++) {
         const cell = row.cells[c];
         if (cell.hasAttribute("onclick")) {
           const session = table.rows[0].cells[c].innerText.trim();
