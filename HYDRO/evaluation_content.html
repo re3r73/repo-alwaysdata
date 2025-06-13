@@ -198,15 +198,15 @@
 <script>
 const criteresIPD = [
   { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-  { nom: "Vitesse de réaction", poids: 2 },
+  { nom: "Vitesse de réaction", poids: 4 },
   { nom: "Communication décollage", poids: 2 },
+  { nom: "Prise sécurisante", poids: 2 },
+  { nom: "Rectitude & vitesse de remontée", poids: 4 },
   { nom: "Décollage tonique", poids: 2 },
-  { nom: "Prise sécurisante et confort", poids: 3 },
-  { nom: "Rectitude & vitesse de remontée", poids: 5 },
-  { nom: "Ralentissement marqué à 5m", poids: 1 },
-  { nom: "Stop franc entre 5m et 3m", poids: 3 },
+  { nom: "Stop franc entre 5m et 3m", poids: 1 },
   { nom: "Tour d'horizon", poids: 1 },
-  { nom: "Regard & présence lors de la remontée", poids: 1 }
+  { nom: "Regard & présence lors de la remontée", poids: 1 },
+  { nom: "Ralentissement marqué à 5m", poids: 1 }
 ];
 
 function toggleIPDModal(ref) {
@@ -215,11 +215,11 @@ function toggleIPDModal(ref) {
   modal.style.display = "block";
   modal.setAttribute("data-cell-ref", ref);
 
-  let html = `<h3>Évaluation ${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
+  let html = `<h3>${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
   criteresIPD.forEach((c, idx) => {
-    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>` +
-            [...Array(c.poids + 1).keys()].map(i => `<option value="${i}">${i}</option>`).join('') +
-            `</select></td></tr>`;
+    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
+    for (let i = 0; i <= c.poids; i++) html += `<option value='${i}'>${i}</option>`;
+    html += `</select></td></tr>`;
   });
   html += `</table>`;
   html += `<p><strong>Critères éliminatoires :</strong></p>`;
@@ -228,15 +228,14 @@ function toggleIPDModal(ref) {
   html += `<label><input type='checkbox' class='elimCheckbox'> Percer la surface</label><br><br>`;
   html += `<label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée sur cette plongée</label><br><br>`;
   html += `<p><strong>Total</strong> : <span id='ipdTotal'>0</span> / 20</p>`;
-  html += `<button onclick='enregistrerIPD("${ref}")'>✅ Enregistrer</button> `;
-  html += `<button onclick='fermerModalIPD()'>❌ Annuler</button>`;
-
+  html += `<button onclick='enregistrerIPD("${ref}")'>Enregistrer</button>`;
   content.innerHTML = html;
 }
 
 function majTotalIPD() {
+  const notes = document.querySelectorAll(".ipd-note");
   let total = 0;
-  document.querySelectorAll('.ipd-note').forEach(s => total += parseInt(s.value || 0));
+  notes.forEach(s => total += parseInt(s.value));
   document.getElementById("ipdTotal").innerText = total;
 }
 
@@ -245,14 +244,15 @@ function enregistrerIPD(ref) {
   const elimCheck = document.querySelectorAll(".elimCheckbox:checked").length > 0;
   const notWorked = document.getElementById("ipdNotWorked").checked;
   const cell = document.querySelector(`[data-ipdcell='${ref}']`);
+
   cell.classList.remove("state-A", "state-ECA", "state-orange", "state-NT");
 
   if (notWorked) {
     cell.classList.add("state-NT");
-    cell.innerText = "NT";
+    cell.innerText = `⚙️ Évaluer ${ref.includes("IPD1") ? "IPD1" : "IPD2"}`;
   } else if (elimCheck) {
     cell.classList.add("state-ECA");
-    cell.innerText = "Éliminatoire";
+    cell.innerText = `Éliminatoire`;
   } else if (total < 10) {
     cell.classList.add("state-ECA");
     cell.innerText = `${total}/20`;
@@ -264,19 +264,12 @@ function enregistrerIPD(ref) {
     cell.innerText = `${total}/20`;
   }
 
-  fermerModalIPD();
-}
-
-function fermerModalIPD() {
   document.getElementById("ipdModal").style.display = "none";
 }
 </script>
 
-
 <div id="modalIPD" class="modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center;">
   <div class="modal-content" style="background: white; padding: 20px; max-width: 500px; border-radius: 8px;"></div>
 </div>
-
-
 </body>
 </html>
