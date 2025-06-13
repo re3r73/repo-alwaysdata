@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Structure des Tables - Évaluation FFESSM</title>
+  <style>
+    body {
+      font-family: Consolas, monospace;
+      background: #f8f9fa;
+      color: #212529;
+      margin: 40px;
+    }
+
+    h1, h2 {
+      font-family: Arial, sans-serif;
+      color: #2B6984;
+    }
+
+    pre {
+      background-color: #e9ecef;
+      padding: 20px;
+      border-left: 5px solid #2B6984;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    code {
+      color: #d63384;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Documentation SQL - Évaluation FFESSM</h1>
+
+  <h2>Table : <code>evaluations_plongee</code></h2>
+  <pre><code>CREATE TABLE evaluations_plongee (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+
+  plongeur_nom VARCHAR(100) NOT NULL,
+  date_evaluation DATE NOT NULL,
+  numero_plongee INT NOT NULL, -- ex : 1 à 7
+  niveau_cible ENUM('PE40', 'PA20') NOT NULL,
+
+  -- Compétences PE40
+  ventilation_consumption ENUM('NT','ECA','A') DEFAULT 'NT',
+  propulsion_equilibrage ENUM('NT','ECA','A') DEFAULT 'NT',
+  communication_gp ENUM('NT','ECA','A') DEFAULT 'NT',
+  relais_equipier_difficulte ENUM('NT','ECA','A') DEFAULT 'NT',
+
+  -- Compétences communes
+  lestage_adapte ENUM('NT','ECA','A') DEFAULT 'NT',
+  equipement_mise_eau ENUM('NT','ECA','A') DEFAULT 'NT',
+  immersion_propulsion ENUM('NT','ECA','A') DEFAULT 'NT',
+  respect_milieu ENUM('NT','ECA','A') DEFAULT 'NT',
+  vidage_masque ENUM('NT','ECA','A') DEFAULT 'NT',
+  retour_surface ENUM('NT','ECA','A') DEFAULT 'NT',
+  respect_plan_plongee ENUM('NT','ECA','A') DEFAULT 'NT',
+
+  -- Compétences PA20
+  planification_bateau ENUM('NT','ECA','A') DEFAULT 'NT',
+  verif_materiel_equipiers ENUM('NT','ECA','A') DEFAULT 'NT',
+  autonomie_orientation ENUM('NT','ECA','A') DEFAULT 'NT',
+  autonomie_conso_deco ENUM('NT','ECA','A') DEFAULT 'NT',
+  parachute ENUM('NT','ECA','A') DEFAULT 'NT',
+
+  -- IPD
+  ipd1_ref VARCHAR(20), -- lien vers table ipd_evaluations si besoin
+  ipd2_ref VARCHAR(20), -- lien vers table ipd_evaluations si besoin
+
+  -- Remarques
+  remarques TEXT,
+
+  date_enregistrement TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+
+  <h2>Table : <code>evaluations_ipd</code></h2>
+  <pre><code>CREATE TABLE evaluations_ipd (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  plongeur_nom VARCHAR(100) NOT NULL,
+  date_evaluation DATE NOT NULL,
+  reference_cellule VARCHAR(20) NOT NULL, -- ex: IPD1_P3
+
+  note_reaction_initiale TINYINT,     -- /4
+  note_prise_en_charge TINYINT,       -- /3
+  note_controle_remontee TINYINT,     -- /5
+  note_arrets_repere TINYINT,         -- /4
+  note_profil_coherence TINYINT,      -- /4
+
+  penalite TINYINT DEFAULT 0,         -- -1 à -3
+  elim_intervention BOOLEAN DEFAULT FALSE,
+  elim_redescente BOOLEAN DEFAULT FALSE,
+  elim_surface BOOLEAN DEFAULT FALSE,
+  ipd_non_travaillee BOOLEAN DEFAULT FALSE,
+
+  total_note INT,                     -- note calculée
+  date_enregistrement TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+
+</body>
+</html>
