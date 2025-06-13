@@ -19,6 +19,19 @@
     #studentSelect { font-size: 16px; margin-bottom: 20px; }
   </style>
 <script>
+  let autoSaveInterval = null;
+
+  function genererEtCharger() {
+    genererTableau();
+    chargerFiche();
+
+    if (autoSaveInterval) clearInterval(autoSaveInterval);
+    autoSaveInterval = setInterval(() => {
+      console.log("Sauvegarde automatique en cours...");
+      envoyerEvaluation();
+    }, 30000);
+  }
+
   function genererTableau() {
     const contenu = document.getElementById("contenuTableau");
     const studentSelect = document.getElementById("studentSelect");
@@ -79,80 +92,21 @@
     contenu.innerHTML = html;
     initEvaluateurs();
   }
-</script>
-</head>
-<body>
-
-<select id="studentSelect" onchange="genererTableau()">
-  <option value="">-- Choisir un élève --</option>
-  <option value="1">AINS Mathieu</option>
-  <option value="2">BARTHELEMY Carole</option>
-  <option value="3">BRAOUDE Dominique</option>
-  <option value="4">DE VITI Gaétan</option>
-  <option value="5">EHRHARD Virginie</option>
-  <option value="6">EISNITZ Anne-Laure</option>
-  <option value="7">LEPARMENTIER Damien</option>
-  <option value="8">MORGAND Claire</option>
-  <option value="9">OPIN Maxime</option>
-  <option value="10">OURSEL Oxana</option>
-  <option value="11">PINHEIRO Tony</option>
-  <option value="12">RONDET Célian</option>
-</select>
-
-<h2>Évaluation Niveau 2 - FFESSM</h2>
-
-
-<button onclick="chargerFiche()">📄 Consulter la fiche enregistrée</button>
-
-<!-- Le tableau ne s'affiche pas encore ici -->
-<div id="contenuTableau"></div>
-
-
-
-  function chargerFiche() {
-    const studentSelect = document.getElementById("studentSelect");
-    const plongeurId = studentSelect.value;
-    if (!plongeurId) {
-      alert("Veuillez d'abord sélectionner un élève.");
-      return;
-    }
-    const fichier = `data/fiche_${plongeurId}.json`;
-
-    fetch(fichier)
-      .then(resp => {
-        if (!resp.ok) throw new Error("Fiche non trouvée");
-        return resp.json();
-      })
-      .then(data => {
-        alert("Fiche trouvée et chargée. (affichage à implémenter)");
-        remplirDepuisJSON(data);
-      })
-      .catch(err => alert("Aucune fiche enregistrée pour cet élève."));
-  }
 
   const states = ["", "A", "ECA", "NT"];
   const evaluateurs = [
-    "", 
-    "POUJOL Jérémie (E3)", 
-    "VELLUET Philippe (E3)", 
-    "COATMEUR Cyrille (E3)", 
-    "BEURY Didier (E2)", 
-    "BONNET Jean-Philippe (E2)", 
-    "BRILL Nicolas (E2)", 
-    "GARNIER Laurent (E2)", 
-    "MERCIER-GALLAY Jacques (E2)", 
-    "MERLE Arthur (E2)"
+    "", "POUJOL Jérémie (E3)", "VELLUET Philippe (E3)", "COATMEUR Cyrille (E3)",
+    "BEURY Didier (E2)", "BONNET Jean-Philippe (E2)", "BRILL Nicolas (E2)",
+    "GARNIER Laurent (E2)", "MERCIER-GALLAY Jacques (E2)", "MERLE Arthur (E2)"
   ];
 
   function toggleState(cell) {
     let current = cell.getAttribute("data-state") || "";
     let nextIndex = (states.indexOf(current) + 1) % states.length;
     let nextState = states[nextIndex];
-
     cell.classList.remove("state-A", "state-ECA", "state-NT");
     cell.removeAttribute("data-state");
     cell.textContent = "";
-
     if (nextState) {
       cell.classList.add("state-" + nextState);
       cell.setAttribute("data-state", nextState);
@@ -174,14 +128,10 @@
   function envoyerEvaluation() {
     const studentSelect = document.getElementById("studentSelect");
     const plongeurId = studentSelect.value;
-    if (!plongeurId) {
-      alert("Veuillez sélectionner un élève.");
-      return;
-    }
+    if (!plongeurId) return;
 
     const evaluations = [];
     const table = document.getElementById("evaluationTable");
-    const headers = table.rows[0].cells;
     const evaluateurParSession = {};
 
     document.querySelectorAll('.eval-selector').forEach(select => {
@@ -199,12 +149,7 @@
           const session = "P" + c;
           const state = cell.getAttribute("data-state") || "";
           const evaluateur = evaluateurParSession[session] || "";
-          evaluations.push({
-            competence_id: competenceId,
-            session: session,
-            etat: state,
-            evaluateur: evaluateur
-          });
+          evaluations.push({ competence_id: competenceId, session, etat: state, evaluateur });
         }
       }
     }
@@ -212,44 +157,75 @@
     fetch('save_eval.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        plongeur_id: plongeurId,
-        evaluations: evaluations
-      })
+      body: JSON.stringify({ plongeur_id: plongeurId, evaluations })
     })
     .then(response => response.json())
-    .then(data => alert("Évaluation enregistrée avec succès."))
-    .catch(error => alert("Erreur lors de l'enregistrement."));
+    .then(data => console.log("✅ Sauvegarde OK"))
+    .catch(error => console.warn("❌ Erreur de sauvegarde", error));
+  }
+
+  function chargerFiche() {
+    const studentSelect = document.getElementById("studentSelect");
+    const plongeurId = studentSelect.value;
+    if (!plongeurId) return;
+
+    const fichier = `data/fiche_${plongeurId}.json`;
+    fetch(fichier)
+      .then(resp => { if (!resp.ok) throw new Error("Fiche non trouvée"); return resp.json(); })
+      .then(data => remplirDepuisJSON(data))
+      .catch(err => console.warn("Aucune fiche trouvée."));
   }
 
   function remplirDepuisJSON(data) {
-  const table = document.getElementById("evaluationTable");
-  if (!table) return;
-  data.evaluations.forEach(evalItem => {
-    const { competence_id, session, etat, evaluateur } = evalItem;
-    const row = table.querySelector(`[data-id='${competence_id}']`);
-    if (!row) return;
-    const colNum = parseInt(session.replace("P", ""));
-    const cell = row.cells[colNum];
-    if (cell) {
-      cell.classList.remove("state-A", "state-ECA", "state-NT");
-      cell.classList.add("state-" + etat);
-      cell.setAttribute("data-state", etat);
-      cell.textContent = etat;
-    }
-  });
-  // remplissage des évaluateurs
-  Object.entries(data.evaluations.reduce((acc, curr) => {
-    acc[curr.session] = curr.evaluateur;
-    return acc;
-  }, {})).forEach(([session, ev]) => {
-    const selector = document.querySelector(`select.eval-selector[data-session='${session}']`);
-    if (selector) selector.value = ev;
-  });
-}
+    const table = document.getElementById("evaluationTable");
+    if (!table) return;
 
+    data.evaluations.forEach(evalItem => {
+      const { competence_id, session, etat } = evalItem;
+      const row = table.querySelector(`[data-id='${competence_id}']`);
+      if (!row) return;
+      const colNum = parseInt(session.replace("P", ""));
+      const cell = row.cells[colNum];
+      if (cell) {
+        cell.classList.remove("state-A", "state-ECA", "state-NT");
+        if (etat) {
+          cell.classList.add("state-" + etat);
+          cell.setAttribute("data-state", etat);
+          cell.textContent = etat;
+        }
+      }
+    });
 
+    Object.entries(data.evaluations.reduce((acc, curr) => {
+      acc[curr.session] = curr.evaluateur;
+      return acc;
+    }, {})).forEach(([session, ev]) => {
+      const selector = document.querySelector(`select.eval-selector[data-session='${session}']`);
+      if (selector) selector.value = ev;
+    });
+  }
 </script>
+</head>
+<body>
+
+<select id="studentSelect" onchange="genererEtCharger()">
+  <option value="">-- Choisir un élève --</option>
+  <option value="1">AINS Mathieu</option>
+  <option value="2">BARTHELEMY Carole</option>
+  <option value="3">BRAOUDE Dominique</option>
+  <option value="4">DE VITI Gaétan</option>
+  <option value="5">EHRHARD Virginie</option>
+  <option value="6">EISNITZ Anne-Laure</option>
+  <option value="7">LEPARMENTIER Damien</option>
+  <option value="8">MORGAND Claire</option>
+  <option value="9">OPIN Maxime</option>
+  <option value="10">OURSEL Oxana</option>
+  <option value="11">PINHEIRO Tony</option>
+  <option value="12">RONDET Célian</option>
+</select>
+
+<h2>Évaluation Niveau 2 - FFESSM</h2>
+<div id="contenuTableau"></div>
 
 </body>
 </html>
