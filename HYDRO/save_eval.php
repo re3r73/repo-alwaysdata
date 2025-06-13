@@ -1,4 +1,8 @@
 <?php
+
+$dir = __DIR__ . '/evaluations_ipd';
+if (!is_dir($dir)) mkdir($dir, 0775, true);
+
 header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents('php://input'), true);
