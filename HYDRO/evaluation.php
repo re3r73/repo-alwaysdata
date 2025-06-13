@@ -43,7 +43,6 @@
         { id: 'pe1', label: 'Ventilation & consommation' },
         { id: 'pe2', label: 'Propulsion & équilibrage' },
         { id: 'pe3', label: 'Communication avec GP' },
-        { id: 'pe4', label: 'Retour surface' },
         { id: 'pe5', label: 'Intervention sur équipier' },
       ]},
       { group: 'Commune', color: '#546B8D', items: [
@@ -51,8 +50,9 @@
         { id: 'co2', label: 'Immersion & propulsion' },
         { id: 'co3', label: 'Respect du milieu' },
         { id: 'co4', label: 'Vidage de masque' },
-        { id: 'co5', label: 'Retour surface (palanquée & vitesse)' },
-        { id: 'co6', label: 'Respect durée & profondeur' },
+        { id: 'co5', label: 'Retour surface (cohésion de la palanquée & vitesse)' },
+        { id: 'co6', label: 'Respect durée & profondeur annoncées par le DP' },
+        { id: 'co7', label: 'Gestion du lestage' }
       ]},
       { group: 'PA20', color: '#B1B8CB', items: [
         { id: 'pa2', label: 'Planifier la plongée (sur le bateau)' },
