@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+# Recréons le fichier HTML complet demandé par l'utilisateur, en tenant compte de toutes les modifications et fonctionnalités discutées.
+from pathlib import Path
+
+html_content = """<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -29,19 +32,46 @@
   </style>
 </head>
 <body>
-<!-- CONTENU INCHANGE ... -->
+<select id="studentSelect" onchange="genererEtCharger()">
+  <option value="">-- Choisir un élève --</option>
+  <option value="1">AINS Mathieu</option>
+  <option value="2">BARTHELEMY Carole</option>
+  <option value="3">BRAOUDE Dominique</option>
+  <option value="4">DE VITI Gaétan</option>
+  <option value="5">EHRHARD Virginie</option>
+  <option value="6">EISNITZ Anne-Laure</option>
+  <option value="7">LEPARMENTIER Damien</option>
+  <option value="8">MORGAND Claire</option>
+  <option value="9">OPIN Maxime</option>
+  <option value="10">OURSEL Oxana</option>
+  <option value="11">PINHEIRO Tony</option>
+  <option value="12">RONDET Célian</option>
+</select>
+<h2>Évaluation Niveau 2 - FFESSM</h2>
+<div id="contenuEvaluation"></div>
 <div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)" data-cell-ref="">
   <div id="ipdContent"></div>
 </div>
 <script>
-// ... autres fonctions ...
-function toggleIPDModal(ref, cell) {
+const criteresIPD = [
+  { nom: "Interprétation du signe et comportement adapté", poids: 2 },
+  { nom: "Vitesse de réaction", poids: 2 },
+  { nom: "Communication décollage", poids: 2 },
+  { nom: "Décollage tonique", poids: 2 },
+  { nom: "Prise sécurisante et confort", poids: 3 },
+  { nom: "Rectitude & vitesse de remontée", poids: 5 },
+  { nom: "Ralentissement marqué à 5m", poids: 1 },
+  { nom: "Stop franc entre 5m et 3m", poids: 3 },
+  { nom: "Tour d'horizon", poids: 1 },
+  { nom: "Regard & présence lors de la remontée", poids: 1 }
+];
+
+function toggleIPDModal(ref) {
   const modal = document.getElementById("ipdModal");
   const content = document.getElementById("ipdContent");
   modal.style.display = "block";
   modal.setAttribute("data-cell-ref", ref);
   let html = `<h3>${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
-  let total = 0;
   criteresIPD.forEach((c, idx) => {
     html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
     for (let i = 0; i <= c.poids; i++) html += `<option value='${i}'>${i}</option>`;
@@ -55,9 +85,16 @@ function toggleIPDModal(ref, cell) {
   html += `<label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée sur cette plongée</label><br><br>`;
   html += `<p><strong>Total</strong> : <span id='ipdTotal'>0</span> / 20</p>`;
   html += `<button onclick='enregistrerIPD("${ref}")'>Enregistrer</button>`;
-  html += `</div>`;
   content.innerHTML = html;
 }
+
+function majTotalIPD() {
+  const notes = document.querySelectorAll(".ipd-note");
+  let total = 0;
+  notes.forEach(s => total += parseInt(s.value));
+  document.getElementById("ipdTotal").innerText = total;
+}
+
 function enregistrerIPD(ref) {
   const total = parseInt(document.getElementById("ipdTotal").innerText);
   const elimCheck = document.querySelectorAll(".elimCheckbox:checked").length > 0;
@@ -85,3 +122,8 @@ function enregistrerIPD(ref) {
 </script>
 </body>
 </html>
+"""
+
+output_path = Path("/mnt/data/evaluation_php_complet_ffessm_20250613.html")
+output_path.write_text(html_content, encoding="utf-8")
+output_path.name
