@@ -11,6 +11,7 @@
     td.state-A { background-color: #b6f1c2; }
     td.state-ECA { background-color: #f9b5b5; }
     td.state-NT { background-color: #ddd; }
+    td.state-orange { background-color: #ffe4b2; }
     td.label-left { text-align: left; font-weight: bold; color: #004466; background: #e0e0e0; }
     .pe40-header { background-color: #0F4166; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .commune-header { background-color: #546B8D; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
@@ -22,8 +23,8 @@
     .ipd-btn { margin-top: 10px; padding: 6px 12px; }
     .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
     .date-row input[type="date"] { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
-    .absence-row select, .evaluator-row select { width: 100%; font-size: 0.9em; }
-    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 4em; }
+    .absence-row select, .evaluateur-row select { width: 100%; font-size: 0.9em; }
+    .remarks-row textarea { width: 100%; font-size: 0.9em; box-sizing: border-box; resize: vertical; height: 3em; }
     td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
   </style>
 </head>
@@ -47,9 +48,25 @@
 <div id="contenuEvaluation"></div>
 <div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)" data-cell-ref="">
   <div id="ipdContent"></div>
-  <button onclick="document.getElementById('ipdModal').style.display='none'">Fermer</button>
 </div>
 <script>
+const criteresIPD = [
+  { nom: "Interprétation du signe et comportement adapté", poids: 2 },
+  { nom: "Vitesse de réaction", poids: 2 },
+  { nom: "Communication décollage", poids: 2 },
+  { nom: "Décollage tonique", poids: 2 },
+  { nom: "Prise sécurisante et confort", poids: 3 },
+  { nom: "Rectitude & vitesse de remontée", poids: 5 },
+  { nom: "Ralentissement marqué à 5m", poids: 1 },
+  { nom: "Stop franc entre 5m et 3m", poids: 3 },
+  { nom: "Tour d'horizon", poids: 1 },
+  { nom: "Regard & présence lors de la remontée", poids: 1 }
+];
+const evaluateurs = [
+  "", "POUJOL Jérémie (E3)", "VELLUET Philippe (E3)", "COATMEUR Cyrille (E3)", "BEURY Didier (E2)",
+  "BONNET Jean-Philippe (E2)", "BRILL Nicolas (E2)", "GARNIER Laurent (E2)",
+  "MERCIER-GALLAY Jacques (E2)", "MERLE Arthur (E2)"
+];
 function genererEtCharger() {
   const container = document.getElementById("contenuEvaluation");
   let html = `<h3>Suivi des compétences</h3><table><tr><th>Compétences</th>`;
@@ -58,11 +75,12 @@ function genererEtCharger() {
   html += `<tr class='date-row'><td><strong>Date</strong></td>`;
   for (let i = 1; i <= 7; i++) html += `<td><input type='date' name='date_P${i}'></td>`;
   html += `</tr>`;
-  html += `<tr class='evaluator-row'><td><strong>Évaluateur</strong></td>`;
-  for (let i = 1; i <= 7; i++) html += `<td><select name='eval_P${i}'><option value=''>--</option><option>Encadrant 1</option><option>Encadrant 2</option><option>Encadrant 3</option></select></td>`;
-  html += `</tr>`;
-  html += `<tr class='absence-row'><td><strong>Statut</strong></td>`;
-  for (let i = 1; i <= 7; i++) html += `<td><select name='absent_P${i}'><option value=''>OK</option><option>Absent</option><option>Annulée</option></select></td>`;
+  html += `<tr class='evaluateur-row'><td><strong>Évaluateur</strong></td>`;
+  for (let i = 1; i <= 7; i++) {
+    html += `<td><select name='eval_P${i}'>`;
+    evaluateurs.forEach(ev => html += `<option>${ev}</option>`);
+    html += `</select></td>`;
+  }
   html += `</tr>`;
   const competences = [
     { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: [
@@ -82,7 +100,7 @@ function genererEtCharger() {
         if (isIPD) {
           html += `<td class='cell' data-ipdcell='${cellRef}' onclick='toggleIPDModal("${cellRef}", this)'>Noter IPD</td>`;
         } else {
-          html += `<td class='cell' onclick='toggleState(this)'></td>`;
+          html += `<td class='cell' onclick='toggleState(this)'>NT</td>`;
         }
       }
       html += `</tr>`;
@@ -99,7 +117,7 @@ function toggleState(cell) {
   let current = cell.getAttribute("data-state") || "";
   let nextIndex = (states.indexOf(current) + 1) % states.length;
   let nextState = states[nextIndex];
-  cell.classList.remove("state-A", "state-ECA", "state-NT");
+  cell.classList.remove("state-A", "state-ECA", "state-NT", "state-orange");
   cell.removeAttribute("data-state");
   cell.textContent = "";
   if (nextState) {
@@ -109,9 +127,48 @@ function toggleState(cell) {
   }
 }
 function toggleIPDModal(ref, cell) {
-  document.getElementById("ipdModal").style.display = "block";
-  document.getElementById("ipdModal").setAttribute("data-cell-ref", ref);
-  document.getElementById("ipdContent").innerHTML = `<p>Grille de notation pour <strong>${ref}</strong> à venir ici.</p>`;
+  const modal = document.getElementById("ipdModal");
+  const content = document.getElementById("ipdContent");
+  modal.style.display = "block";
+  modal.setAttribute("data-cell-ref", ref);
+  let html = `<h3>${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
+  let total = 0;
+  criteresIPD.forEach((c, idx) => {
+    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
+    for (let i = 0; i <= c.poids; i++) html += `<option value='${i}'>${i}</option>`;
+    html += `</select></td></tr>`;
+  });
+  html += `<tr><td colspan='2'><label><input type='checkbox' id='elimMoniteur'> Intervention du moniteur (descente &gt; 2m)</label></td></tr>`;
+  html += `<tr><td><strong>Total</strong></td><td><span id='ipdTotal'>0</span> / 20</td></tr>`;
+  html += `<tr><td colspan='2'><button onclick='enregistrerIPD("${ref}")'>Enregistrer</button></td></tr>`;
+  html += `</table>`;
+  content.innerHTML = html;
+}
+function majTotalIPD() {
+  const notes = document.querySelectorAll(".ipd-note");
+  let total = 0;
+  notes.forEach(s => total += parseInt(s.value));
+  document.getElementById("ipdTotal").innerText = total;
+}
+function enregistrerIPD(ref) {
+  const total = parseInt(document.getElementById("ipdTotal").innerText);
+  const elim = document.getElementById("elimMoniteur").checked;
+  const cell = document.querySelector(`[data-ipdcell='${ref}']`);
+  cell.classList.remove("state-A", "state-ECA", "state-orange", "state-NT");
+  if (elim) {
+    cell.classList.add("state-ECA");
+    cell.innerText = "Éliminatoire";
+  } else if (total < 10) {
+    cell.classList.add("state-ECA");
+    cell.innerText = `${total}/20`;
+  } else if (total < 15) {
+    cell.classList.add("state-orange");
+    cell.innerText = `${total}/20`;
+  } else {
+    cell.classList.add("state-A");
+    cell.innerText = `${total}/20`;
+  }
+  document.getElementById("ipdModal").style.display = "none";
 }
 </script>
 </body>
