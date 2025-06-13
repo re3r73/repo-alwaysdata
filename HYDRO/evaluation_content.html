@@ -20,19 +20,20 @@
     select.ipd-note { width: 50px; }
     .readonly-score { background-color: #eee; padding: 4px 8px; border-radius: 4px; }
     .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
+    .ipd-btn { margin-top: 10px; padding: 6px 12px; }
   </style>
   <script>
     const criteresIPD = [
       { nom: "Interprétation du signe et comportement adapté", poids: 2 },
+      { nom: "Vitesse de réaction", poids: 2 },
       { nom: "Communication décollage", poids: 2 },
       { nom: "Décollage tonique", poids: 2 },
       { nom: "Prise sécurisante et confort", poids: 3 },
       { nom: "Rectitude & vitesse de remontée", poids: 5 },
       { nom: "Ralentissement marqué à 5m", poids: 1 },
-      { nom: "Stop franc entre 5m et 3m", poids: 1 },
+      { nom: "Stop franc entre 5m et 3m", poids: 3 },
       { nom: "Tour d'horizon", poids: 1 },
-      { nom: "Regard & présence lors de la remontée", poids: 1 },
-      { nom: "Vitesse de réaction", poids: 2 }
+      { nom: "Regard & présence lors de la remontée", poids: 1 }
     ];
 
     let currentIPD = null;
@@ -52,6 +53,7 @@
       });
       html += `<tr><td colspan='2'><label><input type='checkbox' id='forceElim_${ipd}'> Intervention de l’évaluateur / redescente &gt; 2m</label></td></tr>`;
       html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${ipd}'>Non travaillé</span></td></tr></table>`;
+      html += `<button class='ipd-btn' onclick='validerIPD("${ipd}")'>Enregistrer l’IPD</button>`;
       contenu.innerHTML = html;
       modal.dataset.cellRef = cell ? cell.dataset.cellRef : "";
       modal.style.display = "block";
@@ -61,6 +63,7 @@
       const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${nom}']`);
       let total = 0;
       let worked = false;
+      let max = criteresIPD.reduce((s, c) => s + c.poids, 0);
       notes.forEach(s => {
         if (s.value !== 'NT') {
           worked = true;
@@ -69,11 +72,46 @@
       });
       const force = document.getElementById(`forceElim_${nom}`)?.checked;
       let txt = "Non travaillé";
-      if (worked) txt = (force || total < 10) ? "Éliminatoire" : `${total}/20`;
+      if (worked) {
+        const score20 = Math.round((total / max) * 20);
+        txt = (force || score20 < 10) ? "Éliminatoire" : `${score20}/20`;
+      }
       document.getElementById(`total_${nom}`).innerText = txt;
-      if (modal.dataset.cellRef) {
-        const tdCell = document.querySelector(`td[data-cell-ref='${modal.dataset.cellRef}']`);
-        if (tdCell) tdCell.innerText = txt;
+    }
+
+    function validerIPD(nom) {
+      const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${nom}']`);
+      let total = 0;
+      let worked = false;
+      let max = criteresIPD.reduce((s, c) => s + c.poids, 0);
+      notes.forEach(s => {
+        if (s.value !== 'NT') {
+          worked = true;
+          total += parseInt(s.value);
+        }
+      });
+      const force = document.getElementById(`forceElim_${nom}`)?.checked;
+      const tdCell = document.querySelector(`td[data-cell-ref='${nom}_P1']`); // Ex : IPD1_P1
+      if (!tdCell) return;
+      if (!worked) {
+        tdCell.innerText = "NT";
+        tdCell.className = "state-NT";
+        tdCell.setAttribute("data-state", "NT");
+        return;
+      }
+      const score20 = Math.round((total / max) * 20);
+      tdCell.innerText = force || score20 < 10 ? "ECA" : "A";
+      tdCell.setAttribute("data-state", force ? "ECA" : (score20 < 15 ? "ECA" : "A"));
+      tdCell.classList.remove("state-A", "state-ECA", "state-NT");
+      if (force || score20 < 10) {
+        tdCell.classList.add("state-ECA");
+        tdCell.style.backgroundColor = "#f55"; // Rouge vif = éliminatoire
+      } else if (score20 < 15) {
+        tdCell.classList.add("state-ECA");
+        tdCell.style.backgroundColor = "#ffc266"; // Orange = juste
+      } else {
+        tdCell.classList.add("state-A");
+        tdCell.style.backgroundColor = "#b6f1c2"; // Vert clair
       }
     }
 
