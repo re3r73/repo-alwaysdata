@@ -175,6 +175,47 @@ function toggleState(cell) {
 function toggleIPDModal(ref) {
   alert("Grille d'évaluation IPD à implémenter pour " + ref);
 }
+function ouvrirModalIPD(nomIPD) {
+  const criteres = [
+    { nom: "Interprétation du signe et comportement adapté", poids: 2 },
+    { nom: "Vitesse de réaction", poids: 4 },
+    { nom: "Communication décollage", poids: 2 },
+    { nom: "Prise sécurisante", poids: 2 },
+    { nom: "Rectitude & vitesse de remontée", poids: 4 },
+    { nom: "Décollage tonique", poids: 2 },
+    { nom: "Stop franc entre 5m et 3m", poids: 1 },
+    { nom: "Tour d'horizon", poids: 1 },
+    { nom: "Regard & présence lors de la remontée", poids: 1 },
+    { nom: "Ralentissement marqué à 5m", poids: 1 }
+  ];
+  let html = `<h3>Détail de l’évaluation : ${nomIPD}</h3><form id='form_${nomIPD}'>`;
+  criteres.forEach((crit, idx) => {
+    html += `<label>${crit.nom} (sur ${crit.poids} pts)</label><br>`;
+    html += `<input type='number' name='crit_${idx}' min='0' max='${crit.poids}' required><br><br>`;
+  });
+  html += `<button type='submit'>✅ Valider</button>`;
+  html += `</form>`;
+
+  const modal = document.getElementById("modalIPD");
+  modal.querySelector(".modal-content").innerHTML = html;
+  modal.style.display = "flex";
+
+  document.getElementById(`form_${nomIPD}`).onsubmit = (e) => {
+    e.preventDefault();
+    const inputs = e.target.querySelectorAll("input");
+    let total = 0;
+    inputs.forEach((input) => {
+      total += parseFloat(input.value || 0);
+    });
+    alert(`Total IPD évalué : ${total}/20`);
+    modal.style.display = "none";
+  };
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById("modalIPD");
+  if (event.target === modal) modal.style.display = "none";
+};
 </script>
 </body>
 </html>
