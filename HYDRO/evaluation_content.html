@@ -29,21 +29,31 @@
   </style>
 </head>
 <body>
-<!-- CONTENU INCHANGE ... -->
 <div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)" data-cell-ref="">
   <div id="ipdContent"></div>
 </div>
 <script>
-// ... autres fonctions ...
+const criteresIPD = [
+  { nom: "Interprétation du signe et comportement adapté", poids: 2 },
+  { nom: "Vitesse de réaction", poids: 2 },
+  { nom: "Communication décollage", poids: 2 },
+  { nom: "Décollage tonique", poids: 2 },
+  { nom: "Prise sécurisante et confort", poids: 3 },
+  { nom: "Vitesse de remontée", poids: 5 },
+  { nom: "Ralentissement marqué à 5m", poids: 1 },
+  { nom: "Stop franc entre 5m et 3m", poids: 3 },
+  { nom: "Tour d'horizon", poids: 1 },
+  { nom: "Regard & présence lors de la remontée", poids: 1 }
+];
+
 function toggleIPDModal(ref, cell) {
   const modal = document.getElementById("ipdModal");
   const content = document.getElementById("ipdContent");
   modal.style.display = "block";
   modal.setAttribute("data-cell-ref", ref);
   let html = `<h3>${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
-  let total = 0;
   criteresIPD.forEach((c, idx) => {
-    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
+    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-idx='${idx}' onchange='majTotalIPD()'>`;
     for (let i = 0; i <= c.poids; i++) html += `<option value='${i}'>${i}</option>`;
     html += `</select></td></tr>`;
   });
@@ -55,9 +65,16 @@ function toggleIPDModal(ref, cell) {
   html += `<label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée sur cette plongée</label><br><br>`;
   html += `<p><strong>Total</strong> : <span id='ipdTotal'>0</span> / 20</p>`;
   html += `<button onclick='enregistrerIPD("${ref}")'>Enregistrer</button>`;
-  html += `</div>`;
   content.innerHTML = html;
 }
+
+function majTotalIPD() {
+  const notes = document.querySelectorAll(".ipd-note");
+  let total = 0;
+  notes.forEach(note => total += parseInt(note.value));
+  document.getElementById("ipdTotal").innerText = total;
+}
+
 function enregistrerIPD(ref) {
   const total = parseInt(document.getElementById("ipdTotal").innerText);
   const elimCheck = document.querySelectorAll(".elimCheckbox:checked").length > 0;
