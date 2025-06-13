@@ -6,7 +6,7 @@
   <style>
     body { font-family: Arial, sans-serif; }
     table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
     th { background-color: #f0f0f0; }
     td.state-A { background-color: #b6f1c2; }
     td.state-ECA { background-color: #f9b5b5; }
@@ -16,102 +16,59 @@
     .pe40-header { background-color: #0F4166; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .commune-header { background-color: #546B8D; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .pa20-header { background-color: #B1B8CB; color: black; font-weight: bold; text-align: left; padding-left: 10px; }
-    .ipd-toggle { cursor: pointer; text-decoration: underline; color: blue; }
-    #ipdModal { display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5) }
-    #ipdContent table { width:100%; margin-top: 10px; }
-    .readonly-score { background:#eee; padding:4px 10px; display:inline-block; }
-    .ipd-note { width:50px; }
+    .remarks-row textarea { width: 100%; height: 5em; resize: vertical; }
+    .date-row input, .eval-row select { width: 100%; box-sizing: border-box; }
+    td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
+    .ipd-modal { display:none; position:fixed; top:10%; left:15%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:70%; box-shadow:0 0 15px rgba(0,0,0,0.5); }
   </style>
 </head>
 <body>
+
+<select id="studentSelect">
+  <option value="">-- Choisir un élève --</option>
+  <option>AINS Mathieu</option><option>BARTHELEMY Carole</option><option>BRAOUDE Dominique</option>
+  <option>DE VITI Gaétan</option><option>EISNITZ Anne-Laure</option><option>EHRHARD Virginie</option>
+  <option>LEPARMENTIER Damien</option><option>MORGAND Claire</option><option>OPIN Maxime</option>
+  <option>OURSEL Oxana</option><option>PINHEIRO Tony</option><option>RONDET Célian</option>
+</select>
+
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 
-<table>
-<tr><th>Compétence</th><th>Plongée #1</th><th>Plongée #2</th><th>Plongée #3</th><th>Plongée #4</th><th>Plongée #5</th><th>Plongée #6</th><th>Plongée #7</th></tr>
-<tr><td colspan='8' class='pa20-header'>Compétences spécifiques — PA20</td></tr>
-<tr><td class='label-left'>Intervenir et porter assistance (IPD1)</td><td class='state-NT' data-ipdcell='IPD1_P1' onclick='openIPDModal("IPD1_P1")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P2' onclick='openIPDModal("IPD1_P2")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P3' onclick='openIPDModal("IPD1_P3")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P4' onclick='openIPDModal("IPD1_P4")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P5' onclick='openIPDModal("IPD1_P5")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P6' onclick='openIPDModal("IPD1_P6")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P7' onclick='openIPDModal("IPD1_P7")'>NT</td></tr><tr><td class='label-left'>Intervenir et porter assistance (IPD2)</td><td class='state-NT' data-ipdcell='IPD2_P1' onclick='openIPDModal("IPD2_P1")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P2' onclick='openIPDModal("IPD2_P2")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P3' onclick='openIPDModal("IPD2_P3")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P4' onclick='openIPDModal("IPD2_P4")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P5' onclick='openIPDModal("IPD2_P5")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P6' onclick='openIPDModal("IPD2_P6")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P7' onclick='openIPDModal("IPD2_P7")'>NT</td></tr>
+<table id="evaluationTable">
+  <tr>
+    <th>Compétence</th>
+    <th>Plongée #1</th><th>Plongée #2</th><th>Plongée #3</th><th>Plongée #4</th>
+    <th>Plongée #5</th><th>Plongée #6</th><th>Plongée #7</th>
+  </tr>
+  <tr class="date-row"><td>Date</td><td><input type="date"></td><td><input type="date"></td><td><input type="date"></td><td><input type="date"></td><td><input type="date"></td><td><input type="date"></td><td><input type="date"></td></tr>
+  <tr class="eval-row"><td>Évaluateur</td>
+    <td><select><option>--</option><option>POUJOL Jérémie</option><option>VELLUET Philippe</option><option>COATMEUR Cyrille</option><option>BEURY Didier</option><option>BONNET Jean-Philippe</option><option>BRILL Nicolas</option><option>GARNIER Laurent</option><option>MERCIER-GALLAY Jacques</option><option>MERLE Arthur</option></select></td>
+    <td><select><option>--</option><option>POUJOL Jérémie</option><option>VELLUET Philippe</option><option>COATMEUR Cyrille</option><option>BEURY Didier</option><option>BONNET Jean-Philippe</option><option>BRILL Nicolas</option><option>GARNIER Laurent</option><option>MERCIER-GALLAY Jacques</option><option>MERLE Arthur</option></select></td>
+    <td colspan="5">...</td>
+  </tr>
+
+  <tr><td colspan="8" class="pe40-header">Compétences spécifiques — PE40</td></tr>
+  <tr><td class="label-left">Ventilation & consommation</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">Propulsion & équilibrage</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">Communication avec GP</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">Intervenir en relai sur un équipier en difficulté</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+
+  <tr><td colspan="8" class="commune-header">Compétences communes —</td></tr>
+  <tr><td class="label-left">Lestage adapté</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">S’équiper & mise à l’eau</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">Immersion & propulsion</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">Respect du milieu</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+
+  <tr><td colspan="8" class="pa20-header">Compétences spécifiques — PA20</td></tr>
+  <tr><td class="label-left">Planifier la plongée (sur le bateau)</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td><td class="state-NT">NT</td></tr>
+  <tr><td class="label-left">Intervenir et porter assistance (IPD1)</td>
+    <td class="state-NT" data-ipdcell="IPD1_P1" onclick="openIPDModal('IPD1_P1')">Évaluer</td>
+    <td class="state-NT" data-ipdcell="IPD1_P2" onclick="openIPDModal('IPD1_P2')">Évaluer</td>
+    <td class="state-NT" data-ipdcell="IPD1_P3" onclick="openIPDModal('IPD1_P3')">Évaluer</td>
+    <td class="state-NT" data-ipdcell="IPD1_P4" onclick="openIPDModal('IPD1_P4')">Évaluer</td>
+    <td class="state-NT" data-ipdcell="IPD1_P5" onclick="openIPDModal('IPD1_P5')">Évaluer</td>
+    <td class="state-NT" data-ipdcell="IPD1_P6" onclick="openIPDModal('IPD1_P6')">Évaluer</td>
+    <td class="state-NT" data-ipdcell="IPD1_P7" onclick="openIPDModal('IPD1_P7')">Évaluer</td></tr>
 </table>
-
-<div id="ipdModal" data-ref="">
-  <div id="ipdContent"></div>
-</div>
-
-<script>
-const criteresIPD = [
-  { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-  { nom: "Vitesse de réaction", poids: 2 },
-  { nom: "Communication décollage", poids: 2 },
-  { nom: "Décollage tonique", poids: 2 },
-  { nom: "Prise sécurisante et confort", poids: 3 },
-  { nom: "Rectitude & vitesse de remontée", poids: 5 },
-  { nom: "Ralentissement marqué à 5m", poids: 1 },
-  { nom: "Stop franc entre 5m et 3m", poids: 3 },
-  { nom: "Tour d'horizon", poids: 1 },
-  { nom: "Regard & présence lors de la remontée", poids: 1 }
-];
-
-function openIPDModal(ref) {
-  const modal = document.getElementById("ipdModal");
-  const content = document.getElementById("ipdContent");
-  modal.style.display = "block";
-  modal.setAttribute("data-ref", ref);
-
-  let html = `<h3>Notation ${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
-  criteresIPD.forEach((c, idx) => {
-    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' data-poids='${c.poids}' onchange='majTotalIPD()'>` +
-            [...Array(c.poids + 1).keys()].map(i => `<option value="${i}">${i}</option>`).join('') +
-            `</select></td></tr>`;
-  });
-  html += `</table>`;
-  html += `<p><strong>Critères éliminatoires :</strong></p>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Intervention du moniteur</label><br>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Redescente > 2m</label><br>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Percer la surface</label><br>`;
-  html += `<label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée sur cette plongée</label><br><br>`;
-  html += `<strong>Total :</strong> <span id='ipdTotal'>0</span> / 20<br><br>`;
-  html += `<button onclick='enregistrerIPD()'>Enregistrer</button> <button onclick='fermerIPDModal()'>Annuler</button>`;
-  content.innerHTML = html;
-}
-
-function majTotalIPD() {
-  let total = 0;
-  document.querySelectorAll('.ipd-note').forEach(select => {
-    total += parseInt(select.value || 0);
-  });
-  document.getElementById('ipdTotal').innerText = total;
-}
-
-function enregistrerIPD() {
-  const ref = document.getElementById("ipdModal").getAttribute("data-ref");
-  const cell = document.querySelector(`[data-ipdcell='${ref}']`);
-  const total = parseInt(document.getElementById("ipdTotal").innerText);
-  const elim = document.querySelectorAll(".elimCheckbox:checked").length > 0;
-  const nt = document.getElementById("ipdNotWorked").checked;
-
-  cell.classList.remove("state-A", "state-ECA", "state-orange", "state-NT");
-  if (nt) {
-    cell.classList.add("state-NT");
-    cell.innerText = "NT";
-  } else if (elim) {
-    cell.classList.add("state-ECA");
-    cell.innerText = "Éliminatoire";
-  } else if (total < 10) {
-    cell.classList.add("state-ECA");
-    cell.innerText = `${total}/20`;
-  } else if (total < 15) {
-    cell.classList.add("state-orange");
-    cell.innerText = `${total}/20`;
-  } else {
-    cell.classList.add("state-A");
-    cell.innerText = `${total}/20`;
-  }
-
-  fermerIPDModal();
-}
-
-function fermerIPDModal() {
-  document.getElementById("ipdModal").style.display = "none";
-}
-</script>
 </body>
 </html>
