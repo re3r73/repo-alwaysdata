@@ -8,11 +8,12 @@
     table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
     th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
     th { background-color: #f0f0f0; }
-    td.state-A { background-color: #b6f1c2; }       /* Vert clair */
-    td.state-ECA { background-color: #f9b5b5; }     /* Rouge pâle */
-    td.state-NT { background-color: #ddd; }         /* Gris clair */
+    td.state-A { background-color: #b6f1c2; }
+    td.state-ECA { background-color: #f9b5b5; }
+    td.state-NT { background-color: #ddd; }
     .evaluator-row td { text-align: left; background: #f9f9f9; }
     button { padding: 10px 20px; font-size: 16px; }
+    td.label-left { text-align: left; font-weight: bold; color: #004466; background: #e0e0e0; }
   </style>
 </head>
 <body>
@@ -31,58 +32,29 @@
     </tr>
   </thead>
   <tbody>
-    <tr data-id="1">
-      <td>Communiquer avec le GP</td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-    </tr>
-    <tr data-id="2">
-      <td>Ventiler et s'équilibrer</td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-    </tr>
-    <tr data-id="3">
-      <td>Vidage de masque</td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-    </tr>
-    <tr data-id="4">
-      <td>Respect des consignes du DP</td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-      <td onclick="toggleState(this)"></td>
-    </tr>
-    <tr data-id="5">
-      <td>IPD1</td>
-      <td onclick="toggleState(this)"></td>
-      <td colspan="4"></td>
-    </tr>
-    <tr data-id="6">
-      <td>IPD2</td>
-      <td onclick="toggleState(this)"></td>
-      <td colspan="4"></td>
-    </tr>
-    <tr data-id="7">
-      <td>IPD3</td>
-      <td onclick="toggleState(this)"></td>
-      <td colspan="4"></td>
-    </tr>
-    <tr data-id="8">
-      <td>IPD4</td>
-      <td onclick="toggleState(this)"></td>
-      <td colspan="4"></td>
-    </tr>
+    <!-- Compétences PE40 -->
+    <tr data-id="1"><td class="label-left">Ventiler et gestion de la consommation</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="2"><td class="label-left">Se propulser et s'équilibrer</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="3"><td class="label-left">Communiquer avec le GP</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="4"><td class="label-left">Retourner en surface</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="5"><td class="label-left">Intervenir en relai sur un équipier</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="6"><td class="label-left">Respect durée et profondeur</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+
+    <!-- Compétences communes -->
+    <tr data-id="7"><td class="label-left">S’équiper et se mettre à l’eau</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="8"><td class="label-left">S’immerger et se propulser</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="9"><td class="label-left">Respecter le milieu et l’environnement</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="10"><td class="label-left">Vidage de masque</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+
+    <!-- Compétences PA20 -->
+    <tr data-id="11"><td class="label-left">Parachute</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="12"><td class="label-left">Planifier la plongée</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="13"><td class="label-left">Être attentif au matériel des équipiers</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="14"><td class="label-left">Évoluer en autonomie</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="15"><td class="label-left">Intervenir et porter assistance (IPD 1)</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+    <tr data-id="16"><td class="label-left">Intervenir et porter assistance (IPD 2)</td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td><td onclick="toggleState(this)"></td></tr>
+
+    <!-- Encadrant -->
     <tr class="evaluator-row">
       <td colspan="6">
         <label for="evaluatorSelect"><strong>Évaluateur :</strong></label>
@@ -119,7 +91,7 @@
   }
 
   function envoyerEvaluation() {
-    const plongeurId = 1; // exemple statique
+    const plongeurId = 1;
     const evaluations = [];
     const table = document.getElementById("evaluationTable");
     const evaluator = document.getElementById("evaluatorSelect").value;
