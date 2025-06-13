@@ -18,18 +18,96 @@
     button { padding: 10px 20px; font-size: 16px; }
     #studentSelect { font-size: 16px; margin-bottom: 20px; }
   </style>
+<script>
+  function genererTableau() {
+    const contenu = document.getElementById("contenuTableau");
+    const studentSelect = document.getElementById("studentSelect");
+    const plongeurId = studentSelect.value;
+    if (!plongeurId) return;
+
+    const lignes = [
+      { group: 'PE40', color: '#0F4166', items: [
+        { id: 'pe1', label: 'Ventilation & consommation' },
+        { id: 'pe2', label: 'Propulsion & équilibrage' },
+        { id: 'pe3', label: 'Communication avec GP' },
+        { id: 'pe4', label: 'Retour surface' },
+        { id: 'pe5', label: 'Intervention sur équipier' },
+      ]},
+      { group: 'Commune', color: '#546B8D', items: [
+        { id: 'co1', label: 'S’équiper & mise à l’eau' },
+        { id: 'co2', label: 'Immersion & propulsion' },
+        { id: 'co3', label: 'Respect du milieu' },
+        { id: 'co4', label: 'Vidage de masque' },
+        { id: 'co5', label: 'Retour surface (palanquée & vitesse)' },
+        { id: 'co6', label: 'Respect durée & profondeur' },
+      ]},
+      { group: 'PA20', color: '#B1B8CB', items: [
+        { id: 'pa1', label: 'Parachute' },
+        { id: 'pa2', label: 'Planifier la plongée' },
+        { id: 'pa3', label: 'Vérif matériel équipiers' },
+        { id: 'pa4', label: 'Autonomie (Orientation)' },
+        { id: 'pa5', label: 'Autonomie (Conso & Déco)' },
+        { id: 'pa6', label: 'IPD 1' },
+        { id: 'pa7', label: 'IPD 2' },
+        { id: 'pa8', label: 'IPD 3' },
+        { id: 'pa9', label: 'IPD 4' }
+      ]},
+    ];
+
+    let html = '<table id="evaluationTable">';
+    html += '<tr><th>Compétences</th>';
+    for (let i = 1; i <= 7; i++) html += `<th>P${i}</th>`;
+    html += '</tr>';
+
+    lignes.forEach(groupe => {
+      html += `<tr><td class='${groupe.group.toLowerCase()}-header' colspan='8'>${groupe.group}</td></tr>`;
+      groupe.items.forEach(item => {
+        html += `<tr data-id='${item.id}'><td class='label-left'>${item.label}</td>`;
+        for (let i = 1; i <= 7; i++) html += `<td onclick='toggleState(this)'></td>`;
+        html += '</tr>';
+      });
+    });
+
+    html += '<tr><td><strong>Évaluateur</strong></td>';
+    for (let i = 1; i <= 7; i++) {
+      html += `<td><select class='eval-selector' data-session='P${i}'></select></td>`;
+    }
+    html += '</tr>';
+    html += '</table>';
+    html += `<button onclick='envoyerEvaluation()'>💾 Enregistrer la fiche</button>`;
+
+    contenu.innerHTML = html;
+    initEvaluateurs();
+  }
+</script>
 </head>
 <body>
 
+<select id="studentSelect" onchange="genererTableau()">
+  <option value="">-- Choisir un élève --</option>
+  <option value="1">AINS Mathieu</option>
+  <option value="2">BARTHELEMY Carole</option>
+  <option value="3">BRAOUDE Dominique</option>
+  <option value="4">DE VITI Gaétan</option>
+  <option value="5">EHRHARD Virginie</option>
+  <option value="6">EISNITZ Anne-Laure</option>
+  <option value="7">LEPARMENTIER Damien</option>
+  <option value="8">MORGAND Claire</option>
+  <option value="9">OPIN Maxime</option>
+  <option value="10">OURSEL Oxana</option>
+  <option value="11">PINHEIRO Tony</option>
+  <option value="12">RONDET Célian</option>
+</select>
+
 <h2>Évaluation Niveau 2 - FFESSM</h2>
 
-$1
+
 <button onclick="chargerFiche()">📄 Consulter la fiche enregistrée</button>
 
 <!-- Le tableau ne s'affiche pas encore ici -->
 <div id="contenuTableau"></div>
 
-$1
+
 
   function chargerFiche() {
     const studentSelect = document.getElementById("studentSelect");
@@ -170,7 +248,7 @@ $1
   });
 }
 
-$1
+
 </script>
 
 </body>
