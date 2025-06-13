@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,124 +12,167 @@
     td.state-A { background-color: #b6f1c2; }
     td.state-ECA { background-color: #f9b5b5; }
     td.state-NT { background-color: #ddd; }
-    td.state-orange { background-color: #ffe4b2; }
     td.label-left { text-align: left; font-weight: bold; color: #004466; background: #e0e0e0; }
     .pe40-header { background-color: #0F4166; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .commune-header { background-color: #546B8D; color: white; font-weight: bold; text-align: left; padding-left: 10px; }
     .pa20-header { background-color: #B1B8CB; color: black; font-weight: bold; text-align: left; padding-left: 10px; }
-    .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
+    textarea { width: 98%; height: 4em; resize: vertical; }
+    select { font-size: 0.9em; }
+    td[data-ipdcell] { cursor: pointer; text-decoration: underline; color: darkblue; }
   </style>
 </head>
 <body>
 <h2>Évaluation Niveau 2 - FFESSM</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Compétence</th>
-      <th>Plongée #1</th>
-      <th>Plongée #2</th>
-      <th>Plongée #3</th>
-      <th>Plongée #4</th>
-      <th>Plongée #5</th>
-    </tr><tr class='date-row'><td><strong>Date</strong></td><td><input type='date' name='date_p1'></td><td><input type='date' name='date_p2'></td><td><input type='date' name='date_p3'></td><td><input type='date' name='date_p4'></td><td><input type='date' name='date_p5'></td><td><input type='date' name='date_p6'></td><td><input type='date' name='date_p7'></td></tr><tr class='evaluateur-row'><td><strong>Évaluateur</strong></td><td><select name='eval_p1'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td><td><select name='eval_p2'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td><td><select name='eval_p3'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td><td><select name='eval_p4'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td><td><select name='eval_p5'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td><td><select name='eval_p6'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td><td><select name='eval_p7'><option value=''>--</option><option value='POUJOL Jérémie (E3)'>POUJOL Jérémie (E3)</option><option value='VELLUET Philippe (E3)'>VELLUET Philippe (E3)</option><option value='COATMEUR Cyrille (E3)'>COATMEUR Cyrille (E3)</option><option value='BEURY Didier (E2)'>BEURY Didier (E2)</option><option value='BONNET Jean-Philippe (E2)'>BONNET Jean-Philippe (E2)</option><option value='BRILL Nicolas (E2)'>BRILL Nicolas (E2)</option><option value='GARNIER Laurent (E2)'>GARNIER Laurent (E2)</option><option value='MERCIER-GALLAY Jacques (E2)'>MERCIER-GALLAY Jacques (E2)</option><option value='MERLE Arthur (E2)'>MERLE Arthur (E2)</option></select></td></tr>
-  </thead>
-  <tbody id="competenceTable">
-    <tr><td class="pe40-header" colspan="6">Compétences spécifiques — PE40</td></tr>
-    <tr><td class="label-left">Ventilation & consommation</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Propulsion & équilibrage</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Communication avec GP</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Intervenir en relai sur un équipier en difficulté</td><td colspan="5"></td></tr>
+<table id="evaluationTable">
+  <tr>
+    <th>Compétence</th>
+    <th>Plongée #1</th>
+<th>Plongée #2</th>
+<th>Plongée #3</th>
+<th>Plongée #4</th>
+<th>Plongée #5</th>
+<th>Plongée #6</th>
+<th>Plongée #7</th>
+  </tr>
+  <tr class="date-row">
+    <td>Date</td>
+    <td><input type="date"></td>
+<td><input type="date"></td>
+<td><input type="date"></td>
+<td><input type="date"></td>
+<td><input type="date"></td>
+<td><input type="date"></td>
+<td><input type="date"></td>
+  </tr>
+  <tr class="evaluateur-row">
+    <td>Évaluateur</td>
+    <td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+<td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+<td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+<td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+<td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+<td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+<td><select>
+      <option>--</option>
+      <option>POUJOL Jérémie (E3)</option>
+      <option>VELLUET Philippe (E3)</option>
+      <option>COATMEUR Cyrille (E3)</option>
+      <option>BEURY Didier (E2)</option>
+      <option>BONNET Jean-Philippe (E2)</option>
+      <option>BRILL Nicolas (E2)</option>
+      <option>GARNIER Laurent (E2)</option>
+      <option>MERCIER-GALLAY Jacques (E2)</option>
+      <option>MERLE Arthur (E2)</option>
+    </select></td>
+  </tr>
+  <tr><td colspan="8" class="pe40-header">Compétences spécifiques — PE40</td></tr>
+<tr><td class='label-left'>Ventilation & consommation</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Propulsion & équilibrage</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Communication avec GP</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Intervenir en relai sur un équipier en difficulté</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td colspan="8" class="commune-header">Compétences communes —</td></tr>
+<tr><td class='label-left'>Lestage adapté</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>S’équiper & mise à l’eau</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Immersion & propulsion</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Respect du milieu</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Vidage de masque</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Retour surface (cohésion de la palanquée & vitesse)</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Respect durée & profondeur annoncées par le DP</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td colspan="8" class="pa20-header">Compétences spécifiques — PA20</td></tr>
+<tr><td class='label-left'>Planifier la plongée (sur le bateau)</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Vérif matériel équipiers (buddy check)</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Autonomie (Orientation)</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Autonomie (Conso & Déco)</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Parachute</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td><td class='state-NT' onclick='toggleState(this)' data-state='NT'>NT</td></tr>
+<tr><td class='label-left'>Intervenir et porter assistance (IPD1)</td>
+<td class='state-NT' data-ipdcell='IPD1_P1' onclick='toggleIPDModal("IPD1_P1")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P2' onclick='toggleIPDModal("IPD1_P2")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P3' onclick='toggleIPDModal("IPD1_P3")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P4' onclick='toggleIPDModal("IPD1_P4")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P5' onclick='toggleIPDModal("IPD1_P5")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P6' onclick='toggleIPDModal("IPD1_P6")'>NT</td><td class='state-NT' data-ipdcell='IPD1_P7' onclick='toggleIPDModal("IPD1_P7")'>NT</td></tr>
 
-    <tr><td class="commune-header" colspan="6">Compétences communes —</td></tr>
-    <tr><td class="label-left">S’équiper & mise à l’eau</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Immersion & propulsion</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Respect du milieu</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Vidage de masque</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Retour surface (cohésion de la palanquée & vitesse)</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Respect durée & profondeur annoncées par le DP</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Lestage adapté</td><td colspan="5"></td></tr>
+<tr><td class='label-left'>Intervenir et porter assistance (IPD2)</td>
+<td class='state-NT' data-ipdcell='IPD2_P1' onclick='toggleIPDModal("IPD2_P1")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P2' onclick='toggleIPDModal("IPD2_P2")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P3' onclick='toggleIPDModal("IPD2_P3")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P4' onclick='toggleIPDModal("IPD2_P4")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P5' onclick='toggleIPDModal("IPD2_P5")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P6' onclick='toggleIPDModal("IPD2_P6")'>NT</td><td class='state-NT' data-ipdcell='IPD2_P7' onclick='toggleIPDModal("IPD2_P7")'>NT</td></tr>
 
-    <tr><td class="pa20-header" colspan="6">Compétences spécifiques — PA20</td></tr>
-    <tr><td class="label-left">Planifier la plongée (sur le bateau)</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Vérif matériel équipiers (buddy check)</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Autonomie (Orientation)</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Autonomie (Conso & Déco)</td><td colspan="5"></td></tr>
-    <tr><td class="label-left">Parachute</td><td colspan="5"></td></tr>
-    <tr><td class="label-left"><span class="ipd-toggle" onclick="toggleIPDModal('IPD1')">Intervenir et porter assistance (IPD1)</span></td><td colspan="5" data-ipdcell="IPD1">NT</td></tr>
-    <tr><td class="label-left"><span class="ipd-toggle" onclick="toggleIPDModal('IPD2')">Intervenir et porter assistance (IPD2)</span></td><td colspan="5" data-ipdcell="IPD2">NT</td></tr>
-  </tbody>
-<tr class='remarks-row'><td><strong>Remarques</strong></td><td colspan='1'><textarea name='remarque_p1' rows='5'></textarea></td><td colspan='1'><textarea name='remarque_p2' rows='5'></textarea></td><td colspan='1'><textarea name='remarque_p3' rows='5'></textarea></td><td colspan='1'><textarea name='remarque_p4' rows='5'></textarea></td><td colspan='1'><textarea name='remarque_p5' rows='5'></textarea></td><td colspan='1'><textarea name='remarque_p6' rows='5'></textarea></td><td colspan='1'><textarea name='remarque_p7' rows='5'></textarea></td></tr></table>
-
-<div id="ipdModal" style="display:none; position:fixed; top:10%; left:20%; background:#fff; border:2px solid #ccc; padding:20px; z-index:9999; max-width:60%; box-shadow:0 0 15px rgba(0,0,0,0.5)" data-cell-ref="">
-  <div id="ipdContent"></div>
-</div>
+<tr><td class='label-left'>Remarques</td>
+<td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td><td><textarea></textarea></td>
+</tr>
+</table>
 
 <script>
-const criteresIPD = [
-  { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-  { nom: "Vitesse de réaction", poids: 2 },
-  { nom: "Communication décollage", poids: 2 },
-  { nom: "Décollage tonique", poids: 2 },
-  { nom: "Prise sécurisante et confort", poids: 3 },
-  { nom: "Rectitude & vitesse de remontée", poids: 5 },
-  { nom: "Ralentissement marqué à 5m", poids: 1 },
-  { nom: "Stop franc entre 5m et 3m", poids: 3 },
-  { nom: "Tour d'horizon", poids: 1 },
-  { nom: "Regard & présence lors de la remontée", poids: 1 }
-];
-
+function toggleState(cell) {
+  const states = ["NT", "ECA", "A"];
+  let current = cell.getAttribute("data-state") || "NT";
+  let index = states.indexOf(current);
+  let next = states[(index + 1) % states.length];
+  cell.setAttribute("data-state", next);
+  cell.className = "state-" + next;
+  cell.innerText = next;
+}
 function toggleIPDModal(ref) {
-  const modal = document.getElementById("ipdModal");
-  const content = document.getElementById("ipdContent");
-  modal.style.display = "block";
-  modal.setAttribute("data-cell-ref", ref);
-  let html = `<h3>${ref}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
-  criteresIPD.forEach((c, idx) => {
-    html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-idx='${idx}' onchange='majTotalIPD()'>`;
-    for (let i = 0; i <= c.poids; i++) html += `<option value='${i}'>${i}</option>`;
-    html += `</select></td></tr>`;
-  });
-  html += `</table>`;
-  html += `<p><strong>Critères éliminatoires :</strong></p>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Intervention du moniteur</label><br>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Redescente > 2m</label><br>`;
-  html += `<label><input type='checkbox' class='elimCheckbox'> Percer la surface</label><br><br>`;
-  html += `<label><input type='checkbox' id='ipdNotWorked'> IPD non travaillée sur cette plongée</label><br><br>`;
-  html += `<p><strong>Total</strong> : <span id='ipdTotal'>0</span> / 20</p>`;
-  html += `<button onclick='enregistrerIPD("${ref}")'>Enregistrer</button>`;
-  content.innerHTML = html;
-}
-
-function majTotalIPD() {
-  const notes = document.querySelectorAll(".ipd-note");
-  let total = 0;
-  notes.forEach(s => total += parseInt(s.value));
-  document.getElementById("ipdTotal").innerText = total;
-}
-
-function enregistrerIPD(ref) {
-  const total = parseInt(document.getElementById("ipdTotal").innerText);
-  const elimCheck = document.querySelectorAll(".elimCheckbox:checked").length > 0;
-  const notWorked = document.getElementById("ipdNotWorked").checked;
-  const cell = document.querySelector(`[data-ipdcell='${ref}']`);
-  cell.classList.remove("state-A", "state-ECA", "state-orange", "state-NT");
-  if (notWorked) {
-    cell.classList.add("state-NT");
-    cell.innerText = "NT";
-  } else if (elimCheck) {
-    cell.classList.add("state-ECA");
-    cell.innerText = "Éliminatoire";
-  } else if (total < 10) {
-    cell.classList.add("state-ECA");
-    cell.innerText = `${total}/20`;
-  } else if (total < 15) {
-    cell.classList.add("state-orange");
-    cell.innerText = `${total}/20`;
-  } else {
-    cell.classList.add("state-A");
-    cell.innerText = `${total}/20`;
-  }
-  document.getElementById("ipdModal").style.display = "none";
+  alert("Grille d'évaluation IPD à implémenter pour " + ref);
 }
 </script>
 </body>
