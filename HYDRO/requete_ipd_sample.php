@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données AlwaysData
 $host = 'mysql-jeremiepoujol.alwaysdata.net';
-$db   = 'jeremiepoujol_evaluationffessm';
-$user = 'jeremiepoujol';
+$dbname = 'jeremiepoujol_evaluationffessm';
+$user = '404366';
 $pass = '$wC0H2^XG45S'; // Remplace par ton vrai mot de passe
 $charset = 'utf8mb4';
 
