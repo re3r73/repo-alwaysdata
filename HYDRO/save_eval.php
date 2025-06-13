@@ -1,21 +1,30 @@
 <?php
-$input = json_decode(file_get_contents("php://input"), true);
-$eleveId = $input['eleve_id'] ?? null;
-if (!$eleveId) {
-  http_response_code(400);
-  echo json_encode(["error" => "ID élève manquant"]);
-  exit;
+header('Content-Type: application/json');
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($data['eleve']) || !isset($data['ref']) || !isset($data['scores'])) {
+    http_response_code(400);
+    echo json_encode(["error" => "Données manquantes."]);
+    exit;
 }
 
-$dataFile = __DIR__ . "/data/fiche_{$eleveId}.json";
-$existing = file_exists($dataFile) ? json_decode(file_get_contents($dataFile), true) : [];
+$eleve = preg_replace('/[^a-zA-Z0-9_-]/', '_', $data['eleve']); // Nom sécurisé
+$ref = preg_replace('/[^a-zA-Z0-9_-]/', '_', $data['ref']);
+$filename = "evaluations_ipd/$eleve.json";
 
-if (!isset($existing['ipd'])) {
-  $existing['ipd'] = [];
+$existing = [];
+if (file_exists($filename)) {
+    $json = file_get_contents($filename);
+    $existing = json_decode($json, true) ?? [];
 }
-$ref = $input['ipd']['ref'];
-$existing['ipd'][$ref] = $input['ipd'];
 
-file_put_contents($dataFile, json_encode($existing, JSON_PRETTY_PRINT));
+$existing[$ref] = [
+    "scores" => $data['scores'],
+    "elim" => $data['elim'],
+    "notWorked" => $data['notWorked'],
+    "total" => $data['total']
+];
+
+file_put_contents($filename, json_encode($existing, JSON_PRETTY_PRINT));
 echo json_encode(["success" => true]);
-?>
