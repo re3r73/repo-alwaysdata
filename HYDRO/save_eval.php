@@ -30,5 +30,10 @@ $existing[$ref] = [
     "total" => $data['total']
 ];
 
-file_put_contents($filename, json_encode($existing, JSON_PRETTY_PRINT));
+if (@file_put_contents($filename, json_encode($existing, JSON_PRETTY_PRINT)) === false) {
+    http_response_code(500);
+    echo json_encode(["error" => "Échec d'enregistrement (droits manquants ?)"]);
+    exit;
+}
+
 echo json_encode(["success" => true]);
