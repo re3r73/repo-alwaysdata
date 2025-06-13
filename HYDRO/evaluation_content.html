@@ -17,160 +17,12 @@
     .pa20-header { background-color: #B1B8CB; color: black; font-weight: bold; text-align: left; padding-left: 10px; }
     button { padding: 10px 20px; font-size: 16px; }
     #studentSelect { font-size: 16px; margin-bottom: 20px; }
-    select.ipd-note { width: 50px; }
+    .ipd-note { width: 50px; }
     .readonly-score { background-color: #eee; padding: 4px 8px; border-radius: 4px; }
-    .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
     .ipd-btn { margin-top: 10px; padding: 6px 12px; }
+    .ipd-toggle { color: blue; text-decoration: underline; cursor: pointer; }
+    .date-row input { width: 100%; box-sizing: border-box; font-size: 0.9em; text-align: center; }
   </style>
-  <script>
-    const criteresIPD = [
-      { nom: "Interprétation du signe et comportement adapté", poids: 2 },
-      { nom: "Vitesse de réaction", poids: 2 },
-      { nom: "Communication décollage", poids: 2 },
-      { nom: "Décollage tonique", poids: 2 },
-      { nom: "Prise sécurisante et confort", poids: 3 },
-      { nom: "Rectitude & vitesse de remontée", poids: 5 },
-      { nom: "Ralentissement marqué à 5m", poids: 1 },
-      { nom: "Stop franc entre 5m et 3m", poids: 3 },
-      { nom: "Tour d'horizon", poids: 1 },
-      { nom: "Regard & présence lors de la remontée", poids: 1 }
-    ];
-
-    let currentIPD = null;
-
-    function toggleIPDModal(ipd, cell) {
-      currentIPD = ipd;
-      const modal = document.getElementById("ipdModal");
-      const contenu = document.getElementById("ipdContent");
-      let html = `<h3>${ipd}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
-      criteresIPD.forEach((c, idx) => {
-        html += `<tr><td>${c.nom} (/${c.poids})</td><td><select class='ipd-note' data-poids='${c.poids}' data-ipd='${ipd}' onchange='majTotalIPD("${ipd}", this.closest("td"))'>`;
-        html += `<option value='NT'>NT</option>`;
-        for (let i = 0; i <= c.poids; i++) {
-          html += `<option value='${i}'>${i}</option>`;
-        }
-        html += `</select></td></tr>`;
-      });
-      html += `<tr><td colspan='2'><label><input type='checkbox' id='forceElim_${ipd}'> Intervention de l’évaluateur / redescente &gt; 2m</label></td></tr>`;
-      html += `<tr><td><strong>Total sur 20</strong></td><td><span class='readonly-score' id='total_${ipd}'>Non travaillé</span></td></tr></table>`;
-      html += `<button class='ipd-btn' onclick='validerIPD("${ipd}")'>Enregistrer l’IPD</button>`;
-      contenu.innerHTML = html;
-      modal.dataset.cellRef = cell ? cell.dataset.cellRef : "";
-      modal.style.display = "block";
-    }
-
-    function majTotalIPD(nom, td) {
-      const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${nom}']`);
-      let total = 0;
-      let worked = false;
-      let max = criteresIPD.reduce((s, c) => s + c.poids, 0);
-      notes.forEach(s => {
-        if (s.value !== 'NT') {
-          worked = true;
-          total += parseInt(s.value);
-        }
-      });
-      const force = document.getElementById(`forceElim_${nom}`)?.checked;
-      let txt = "Non travaillé";
-      if (worked) {
-        const score20 = Math.round((total / max) * 20);
-        txt = (force || score20 < 10) ? "Éliminatoire" : `${score20}/20`;
-      }
-      document.getElementById(`total_${nom}`).innerText = txt;
-    }
-
-    function validerIPD(nom) {
-      const notes = document.querySelectorAll(`select.ipd-note[data-ipd='${nom}']`);
-      let total = 0;
-      let worked = false;
-      let max = criteresIPD.reduce((s, c) => s + c.poids, 0);
-      notes.forEach(s => {
-        if (s.value !== 'NT') {
-          worked = true;
-          total += parseInt(s.value);
-        }
-      });
-      const force = document.getElementById(`forceElim_${nom}`)?.checked;
-      const tdCell = document.querySelector(`td[data-cell-ref='${nom}_P1']`); // Ex : IPD1_P1
-      if (!tdCell) return;
-      if (!worked) {
-        tdCell.innerText = "NT";
-        tdCell.className = "state-NT";
-        tdCell.setAttribute("data-state", "NT");
-        return;
-      }
-      const score20 = Math.round((total / max) * 20);
-      tdCell.innerText = force || score20 < 10 ? "ECA" : "A";
-      tdCell.setAttribute("data-state", force ? "ECA" : (score20 < 15 ? "ECA" : "A"));
-      tdCell.classList.remove("state-A", "state-ECA", "state-NT");
-      if (force || score20 < 10) {
-        tdCell.classList.add("state-ECA");
-        tdCell.style.backgroundColor = "#f55"; // Rouge vif = éliminatoire
-      } else if (score20 < 15) {
-        tdCell.classList.add("state-ECA");
-        tdCell.style.backgroundColor = "#ffc266"; // Orange = juste
-      } else {
-        tdCell.classList.add("state-A");
-        tdCell.style.backgroundColor = "#b6f1c2"; // Vert clair
-      }
-    }
-
-    function genererEtCharger() {
-      const select = document.getElementById("studentSelect");
-      if (select.value) {
-        document.getElementById("contenuEvaluation").innerHTML = "";
-        chargerTableauCompetences();
-      }
-    }
-
-    function chargerTableauCompetences() {
-      const container = document.getElementById("contenuEvaluation");
-      let html = `<h3>Suivi des compétences</h3><table><tr><th>Compétences</th>`;
-      for (let i = 1; i <= 7; i++) html += `<th>P${i}</th>`;
-      html += `</tr>`;
-      const competences = [
-        { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: [
-          "Ventilation & consommation", "Propulsion & équilibrage", "Communication avec GP", "Intervenir en relai sur un équipier en difficulté"] },
-        { titre: "Compétences communes —", classes: "commune-header", items: [
-          "S’équiper & mise à l’eau", "Immersion & propulsion", "Respect du milieu", "Vidage de masque", "Retour surface (cohésion de la palanquée & vitesse)", "Respect durée & profondeur annoncées par le DP", "Lestage adapté"] },
-        { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: [
-          "Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)", "Parachute", "IPD1", "IPD2"] }
-      ];
-      competences.forEach(block => {
-        html += `<tr><td colspan='8' class='${block.classes}'>${block.titre}</td></tr>`;
-        block.items.forEach(item => {
-          const isIPD = item.startsWith("IPD");
-          html += `<tr><td class='label-left'>${item}</td>`;
-          for (let i = 1; i <= 7; i++) {
-            const cellRef = `${item}_P${i}`;
-            if (isIPD) {
-              html += `<td class='cell' data-cell-ref='${cellRef}' onclick='toggleIPDModal("${item}", this)'>Non travaillé</td>`;
-            } else {
-              html += `<td class='cell' onclick='toggleState(this)'></td>`;
-            }
-          }
-          html += `</tr>`;
-        });
-      });
-      html += `</table>`;
-      container.innerHTML = html;
-    }
-
-    function toggleState(cell) {
-      const states = ["", "A", "ECA", "NT"];
-      let current = cell.getAttribute("data-state") || "";
-      let nextIndex = (states.indexOf(current) + 1) % states.length;
-      let nextState = states[nextIndex];
-      cell.classList.remove("state-A", "state-ECA", "state-NT");
-      cell.removeAttribute("data-state");
-      cell.textContent = "";
-      if (nextState) {
-        cell.classList.add("state-" + nextState);
-        cell.setAttribute("data-state", nextState);
-        cell.textContent = nextState;
-      }
-    }
-  </script>
 </head>
 <body>
 <select id="studentSelect" onchange="genererEtCharger()">
@@ -194,5 +46,42 @@
   <div id="ipdContent"></div>
   <button onclick="document.getElementById('ipdModal').style.display='none'">Fermer</button>
 </div>
+<script>
+function genererEtCharger() {
+  const container = document.getElementById("contenuEvaluation");
+  let html = `<h3>Suivi des compétences</h3><table><tr><th>Compétences</th>`;
+  for (let i = 1; i <= 7; i++) html += `<th>P${i}</th>`;
+  html += `</tr>`;
+  html += `<tr class='date-row'><td><strong>Date</strong></td>`;
+  for (let i = 1; i <= 7; i++) html += `<td><input type='date' name='date_P${i}'></td>`;
+  html += `</tr>`;
+  const competences = [
+    { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: [
+      "Ventilation & consommation", "Propulsion & équilibrage", "Communication avec GP", "Intervenir en relai sur un équipier en difficulté"] },
+    { titre: "Compétences communes —", classes: "commune-header", items: [
+      "S’équiper & mise à l’eau", "Immersion & propulsion", "Respect du milieu", "Vidage de masque", "Retour surface (cohésion de la palanquée & vitesse)", "Respect durée & profondeur annoncées par le DP", "Lestage adapté"] },
+    { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: [
+      "Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)", "Parachute", "IPD1", "IPD2"] }
+  ];
+  competences.forEach(block => {
+    html += `<tr><td colspan='8' class='${block.classes}'>${block.titre}</td></tr>`;
+    block.items.forEach(item => {
+      const isIPD = item.startsWith("IPD");
+      html += `<tr><td class='label-left'>${item}</td>`;
+      for (let i = 1; i <= 7; i++) {
+        const cellRef = `${item}_P${i}`;
+        if (isIPD) {
+          html += `<td class='cell' data-cell-ref='${cellRef}' onclick='toggleIPDModal("${item}_P${i}", this)'>Non travaillé</td>`;
+        } else {
+          html += `<td class='cell' onclick='toggleState(this)'></td>`;
+        }
+      }
+      html += `</tr>`;
+    });
+  });
+  html += `</table>`;
+  container.innerHTML = html;
+}
+</script>
 </body>
 </html>
