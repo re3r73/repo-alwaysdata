@@ -35,7 +35,7 @@
     ];
 
     function genererTableauIPD(nom) {
-      const div = document.getElementById("contenuTableau");
+      const div = document.getElementById("contenuIPD");
       const bloc = document.createElement("div");
       let html = `<h3>${nom}</h3><table><tr><th>Critère</th><th>Note</th></tr>`;
       criteresIPD.forEach((c, idx) => {
@@ -60,13 +60,53 @@
     function genererEtCharger() {
       const select = document.getElementById("studentSelect");
       if (select.value) {
-        document.getElementById("contenuTableau").innerHTML = "";
+        document.getElementById("contenuIPD").innerHTML = "";
+        document.getElementById("contenuEvaluation").innerHTML = "";
+        chargerTableauCompetences();
         genererTableauIPD("IPD1");
         genererTableauIPD("IPD2");
       }
     }
 
-    // Sauvegarde automatique toutes les 30 secondes
+    function chargerTableauCompetences() {
+      const container = document.getElementById("contenuEvaluation");
+      let html = `<h3>Suivi des compétences</h3><table><tr><th>Compétences</th>`;
+      for (let i = 1; i <= 7; i++) html += `<th>P${i}</th>`;
+      html += `</tr>`;
+      const competences = [
+        { titre: "Compétences spécifiques — PE40", classes: "pe40-header", items: ["Utilisation de l'équipement", "Stabilité / flottabilité"] },
+        { titre: "Compétences communes —", classes: "commune-header", items: ["Respect durée & profondeur annoncées par le DP", "Retour surface (cohésion de la palanquée & vitesse)", "Lestage adapté"] },
+        { titre: "Compétences spécifiques — PA20", classes: "pa20-header", items: ["Planifier la plongée (sur le bateau)", "Vérif matériel équipiers (buddy check)", "Autonomie (Orientation)", "Autonomie (Conso & Déco)", "Intervenir et porter assistance (IPD1)", "Intervenir et porter assistance (IPD2)", "Parachute"] }
+      ];
+      competences.forEach(block => {
+        html += `<tr><td colspan='8' class='${block.classes}'>${block.titre}</td></tr>`;
+        block.items.forEach(item => {
+          html += `<tr><td class='label-left'>${item}</td>`;
+          for (let i = 1; i <= 7; i++) {
+            html += `<td class='cell' onclick='toggleState(this)' data-state=''></td>`;
+          }
+          html += `</tr>`;
+        });
+      });
+      html += `</table>`;
+      container.innerHTML = html;
+    }
+
+    function toggleState(cell) {
+      const states = ["", "A", "ECA", "NT"];
+      let current = cell.getAttribute("data-state") || "";
+      let nextIndex = (states.indexOf(current) + 1) % states.length;
+      let nextState = states[nextIndex];
+      cell.classList.remove("state-A", "state-ECA", "state-NT");
+      cell.removeAttribute("data-state");
+      cell.textContent = "";
+      if (nextState) {
+        cell.classList.add("state-" + nextState);
+        cell.setAttribute("data-state", nextState);
+        cell.textContent = nextState;
+      }
+    }
+
     setInterval(() => {
       const select = document.getElementById("studentSelect");
       if (!select || !select.value) return;
@@ -108,7 +148,8 @@
 </select>
 
 <h2>Évaluation Niveau 2 - FFESSM</h2>
-<div id="contenuTableau"></div>
+<div id="contenuEvaluation"></div>
+<div id="contenuIPD"></div>
 
 </body>
 </html>
