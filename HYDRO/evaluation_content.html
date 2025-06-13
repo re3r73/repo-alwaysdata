@@ -200,41 +200,46 @@
 const criteresIPD = [
   {
     famille: "🟩 Réaction initiale (4 pts)",
+    poids: 4,
     criteres: [
-      { nom: "Interprétation du signe", poids: 1 },
-      { nom: "Vitesse de réaction", poids: 1 },
-      { nom: "Communication au décollage", poids: 1 },
-      { nom: "Décollage maîtrisé", poids: 1 }
+      { nom: "Interprétation du signe (1 pt)" },
+      { nom: "Vitesse de réaction (1 pt)" },
+      { nom: "Communication au décollage (1 pt)" },
+      { nom: "Décollage maîtrisé (1 pt)" }
     ]
   },
   {
     famille: "🟦 Prise en charge (3 pts)",
+    poids: 3,
     criteres: [
-      { nom: "Prise sécurisante", poids: 1 },
-      { nom: "Regard & présence durant la remontée", poids: 1 },
-      { nom: "Assiette / confort de l’équipier", poids: 1 }
+      { nom: "Prise sécurisante (1 pt)" },
+      { nom: "Regard & présence durant la remontée (1 pt)" },
+      { nom: "Assiette / confort de l’équipier (1 pt)" }
     ]
   },
   {
     famille: "🟧 Contrôle de la remontée (5 pts)",
+    poids: 5,
     criteres: [
-      { nom: "Trajectoire stable", poids: 1 },
-      { nom: "Vitesse de remontée", poids: 4 }
+      { nom: "Trajectoire stable (1 pt)" },
+      { nom: "Vitesse de remontée (4 pts)" }
     ]
   },
   {
     famille: "🟨 Arrêts & repères (4 pts)",
+    poids: 4,
     criteres: [
-      { nom: "Ralentissement marqué zone des 5 m", poids: 1 },
-      { nom: "Stop franc entre 5 m et 3 m", poids: 2 },
-      { nom: "Tour d’horizon + regard", poids: 1 }
+      { nom: "Ralentissement marqué zone des 5 m (1 pt)" },
+      { nom: "Stop franc entre 5 m et 3 m (2 pts)" },
+      { nom: "Tour d’horizon + regard (1 pt)" }
     ]
   },
   {
     famille: "🟥 Profil & cohérence temporelle (4 pts)",
+    poids: 4,
     criteres: [
-      { nom: "Profil de remontée", poids: 2 },
-      { nom: "Cohérence temporelle de la remontée", poids: 2 }
+      { nom: "Profil de remontée (2 pts)" },
+      { nom: "Cohérence temporelle de la remontée (2 pts)" }
     ]
   }
 ];
@@ -246,17 +251,18 @@ function toggleIPDModal(ref) {
   modal.setAttribute("data-cell-ref", ref);
 
   let html = `<h3>Évaluation IPD - ${ref}</h3>`;
-  html += `<table><tr><th>Critère</th><th>Note /</th></tr>`;
+  html += `<table><tr><th>Famille</th><th>Note /</th></tr>`;
 
   criteresIPD.forEach((famille, fIdx) => {
-    html += `<tr><td colspan='2' style='font-weight:bold; padding-top:8px;'>${famille.famille}</td></tr>`;
-    famille.criteres.forEach((c, idx) => {
-      html += `<tr><td>${c.nom} (/ ${c.poids})</td><td><select class='ipd-note' data-famille='${fIdx}' data-idx='${idx}' onchange='majTotalIPD()'>`;
-      for (let i = 0; i <= c.poids; i++) {
-        html += `<option value='${i}'>${i}</option>`;
-      }
-      html += `</select></td></tr>`;
+    html += `<tr><td style='text-align: left; font-weight: bold;'>${famille.famille}<ul style='list-style-type: disc; padding-left: 20px;'>`;
+    famille.criteres.forEach(c => {
+      html += `<li style='font-weight: normal; padding-bottom: 2px;'>${c.nom}</li>`;
     });
+    html += `</ul></td><td><select class='ipd-note-famille' data-famille='${fIdx}' onchange='majTotalIPD()'>`;
+    for (let i = 0; i <= famille.poids; i++) {
+      html += `<option value='${i}'>${i}</option>`;
+    }
+    html += `</select></td></tr>`;
   });
 
   html += `</table>`;
@@ -286,27 +292,6 @@ function toggleIPDModal(ref) {
   content.innerHTML = html;
 }
 
-function majTotalIPD() {
-  const notWorked = document.getElementById("ipdNotWorked").checked;
-  if (notWorked) {
-    document.getElementById("ipdTotal").innerText = "0";
-    return;
-  }
-
-  const notes = document.querySelectorAll(".ipd-note");
-  let total = 0;
-  notes.forEach(s => total += parseInt(s.value));
-
-  const penalite = parseInt(document.getElementById("penalite").value);
-  total += penalite; // pénalité est négative ou zéro
-
-  // Clamp entre 0 et 20 (pour éviter des notes négatives affichées)
-  total = Math.max(0, Math.min(20, total));
-
-  document.getElementById("ipdTotal").innerText = total;
-}
-
-
 
 function enregistrerIPD(ref) {
   const total = parseInt(document.getElementById("ipdTotal").innerText);
@@ -332,7 +317,6 @@ function enregistrerIPD(ref) {
 
   document.getElementById("ipdModal").style.display = "none";
 }
-
 
 function toggleState(cell) {
   const states = ["NT", "ECA", "A"];
