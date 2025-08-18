@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF‑8">
-  <title>Suivi de colis</title>
+  <meta charset="UTF-8">
+  <title>Suivi du Stepway de Patricia</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-    #monkey { display: none; margin-top: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #monkey {
+      display: none;
+      margin-top: 20px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
   </style>
 </head>
 <body>
-  <h2>Suivi de votre colis</h2>
-  <input type="text" placeholder="Entrez votre numéro de suivi" id="tracking">
-  <button onclick="showMonkey()">Suivre</button>
+  <h2>Suivi en temps réel du Stepway</h2>
+  <p>Sélectionnez le véhicule :</p>
+
+  <select id="vehicle">
+    <option value="patricia">Patricia</option>
+  </select>
+
+  <button onclick="showMonkey()">Localiser</button>
+
   <div id="monkey">
-    <h3>Votre colis est arrivé !</h3>
-    <img src="https://preview.redd.it/big-monke-flips-you-off-what-u-do-v0-861gk9gqka0c1.png?width=320&crop=smart&auto=webp&s=b3da7ce53e59215b9e012615aa93c8fc859479e2" alt="Gorille drôle" width="400">
+    <h3>Véhicule localisé</h3>
+    <p>Patricia a un message pour vous :</p>
+    <img src="https://i.imgur.com/TvZBQX2.jpeg" alt="Gorille insolent" width="400">
+    <p style="margin-top: 10px;">🖕 💋 Avec tout son amour bien sûr.</p>
   </div>
+
   <script>
     function showMonkey() {
       document.getElementById('monkey').style.display = 'block';
