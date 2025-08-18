@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF‑8">
+  <title>Suivi de colis</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    #monkey { display: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Suivi de votre colis</h2>
+  <input type="text" placeholder="Entrez votre numéro de suivi" id="tracking">
+  <button onclick="showMonkey()">Suivre</button>
+  <div id="monkey">
+    <h3>Votre colis est arrivé !</h3>
+    <img src="https://preview.redd.it/big-monke-flips-you-off-what-u-do-v0-861gk9gqka0c1.png?width=320&crop=smart&auto=webp&s=b3da7ce53e59215b9e012615aa93c8fc859479e2" alt="Gorille drôle" width="400">
+  </div>
+  <script>
+    function showMonkey() {
+      document.getElementById('monkey').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
