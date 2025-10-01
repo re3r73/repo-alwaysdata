@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.ALWAYSDATA_PASSWORD }} # Stockez le mot de passe dans les secrets GitHub
           port: 22
           source: "." # Dossier local à copier
-          target: "/home/richies/www/" # Dossier cible sur alwaysdata
+          target: "/home/richies/www/mynextapp1/" # Dossier cible sur alwaysdata
 
       # Optionnel : Exécuter des commandes post-déploiement (ex: installer des dépendances)
       - name: Exécuter des commandes SSH
@@ -30,5 +30,5 @@ jobs:
           password: ${{ secrets.ALWAYSDATA_PASSWORD }}
           port: 22
           script: |
-            cd /home/richies/www/
+            cd /home/richies/www/mynextapp1
             # Exemple : composer install, npm install, etc.
